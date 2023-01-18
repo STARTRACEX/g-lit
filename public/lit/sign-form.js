@@ -33,7 +33,7 @@ export class LabelInput extends LitElement {
   }
 
   get _input() {
-    return (this.___input ??= this.renderRoot?.querySelector('input') ?? null);
+    return (this.__input ??= this.renderRoot?.querySelector('input') ?? null);
   }
 
   render() {
@@ -58,7 +58,6 @@ export class LabelInput extends LitElement {
   }
 
   namevalue() {
-    // console.log("getvalue", this._input);
     return [this.name, this.value];
   }
 }

@@ -29,6 +29,7 @@ export class LabelInput extends LitElement {
   constructor() {
     super();
     this.value = this.def ?? "";
+    this.id = this.label;
   }
 
   get _input() {
@@ -37,11 +38,11 @@ export class LabelInput extends LitElement {
 
   render() {
     return html`
-      <label for=${this.id || this.label}>${this.label}</label>
+      <label for=${this.id || nothing}>${this.label}</label>
       <input
       value=${this.value || this.def || nothing}
       @input=${this.oninput}
-      id=${this.id || this.label} 
+      id=${this.id || nothing} 
       type=${this.type || nothing} 
       placeholder=${this.pla || nothing}
       name=${this.name} />
@@ -57,7 +58,6 @@ export class LabelInput extends LitElement {
   }
 
   namevalue() {
-    // console.log("getvalue", this._input);
     return [this.name, this.value];
   }
 }

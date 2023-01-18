@@ -1,6 +1,6 @@
 # G-lit
 
-G-lit is a set of components based on lit
+G-lit is a set of components based on [lit](https://lit.dev)
 
 ## Quick Start
 
@@ -9,14 +9,17 @@ G-lit is a set of components based on lit
 Import the js file contained in this repository into the page
 
 ```html
-<script type="module" src="..."></script>
-```
+<!-- import one -->
+<script type="module" src="./public/lit/sign-form.js"></script>
+<!-- import all -->
+<script type="module" src="./public/lit.all.js"></script>
 
-**Note** flag `type="module"`
+
+**Note** Don't forget flag `type="module"`
 
 ### Import lit
 
-**Note** the introduction in the js file is corrected (currently lit is in public/core)
+**Note** If use the method of importing external files, change the path of importing lit-core and lit-all in the file (currently lit is in public/core)
 
 ## Components
 
@@ -32,7 +35,7 @@ Import the js file contained in this repository into the page
 |def|string|""|Default value of input|
 |value|string|def|Value of input|
 
-label-input.js contains an adaptive input box
+label-input.js contains an adaptive input
 
 ### sign-form.js
 
@@ -76,3 +79,14 @@ ov-effect.js contains an adaptive gradient background box, a quick generation of
 |name|string|"q"|Search request name|
 
 search-input.js contains a multi-function search box to obtain content through the page or server or network and an additional web search box
+
+### content-group.js
+
+|propties|type|default|desc|
+|---|---|---|---|
+|index|string|first children|Index of content|
+|split|boolean|false|Enable default split|
+|sort|string|""|Basis  for sorting|
+|col|string|"" (or "1fr 1fr")|value of "grid-template-columns"|
+
+content-group.js contains an openable display content box, a content sorted by grid
