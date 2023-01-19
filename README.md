@@ -44,7 +44,7 @@ label-input.js contains an adaptive input
 |method|string|"post"|Form method|
 |reset|boolean|false|Enable reset function|
 
-sign-form.js  contains an easy-to-use  login/registration form and all contents of label-input.js
+sign-form.js  contains an login/registration form and all contents of label-input.js
 
 ### nav-layout.js
 
@@ -64,7 +64,7 @@ nav-layout.js contains a default navigation bar, which can contain the footer
 |t2|string|"Text II.."|second text|
 |t2|string|"Text III..."|third text|
 
-ov-effect.js contains an adaptive gradient background box, a quick generation of gradient text, and a basic button for gradient border
+ov-effect.js contains a gradient background box, a gradient text, and a basic button for gradient border
 
 ### search-input.js
 
@@ -78,7 +78,7 @@ ov-effect.js contains an adaptive gradient background box, a quick generation of
 |method|string|"get"|Form method|
 |name|string|"q"|Search request name|
 
-search-input.js contains a multi-function search box to obtain content through the page or server or network and an additional web search box
+search-input.js contains a multi-function search box to obtain content through the page or server or network and a ms style web search box
 
 ### content-group.js
 

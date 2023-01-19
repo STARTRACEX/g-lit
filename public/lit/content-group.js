@@ -127,10 +127,6 @@ export class ContentGroup extends LitElement {
     col: { type: String },
     inner: { attribute: false },
   };
-  constructor() {
-    super();
-  }
-
   render() {
     return html`<main style=${styleMap({ "grid-template-columns": this.col })}>
     <slot name="loading" style="background-color:inherit;"></slot>
