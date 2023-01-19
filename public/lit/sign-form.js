@@ -64,20 +64,9 @@ export class LabelInput extends LitElement {
 customElements.define('label-input', LabelInput);
 
 export class SignForm extends LitElement {
-
   get _label_input() {
     return (this.__label_input ??= this.renderRoot?.querySelectorAll('label-input') ?? null);
   }
-  /* 
-    get _reset_input() {
-      return (this.__reset_input ??= this.renderRoot?.querySelector('[type="reset"]') ?? null);
-    }
-  */
-  /*
-    get _submit_input() {
-      return (this.__submit_input ??= this.renderRoot?.querySelector('[type="submit"]') ?? null);
-    }
-  */
   static styles = css`
   form {
     display: flex;
@@ -136,9 +125,8 @@ export class SignForm extends LitElement {
       var [name, value] = element.namevalue();
       x[name] = value;
     });
-
     /* ... */
-    console.log(x);
+    console.error("You need to process the acquired data:",x);
     /* ... */
   }
 }
