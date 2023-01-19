@@ -13,7 +13,7 @@ Import the js file contained in this repository into the page
 <script type="module" src="./public/lit/sign-form.js"></script>
 <!-- import all -->
 <script type="module" src="./public/lit.all.js"></script>
-
+```
 
 **Note** Don't forget flag `type="module"`
 
@@ -56,7 +56,7 @@ sign-form.js  contains an easy-to-use  login/registration form and all contents 
 
 nav-layout.js contains a default navigation bar, which can contain the footer
 
-ov-effect.js
+### ov-effect.js
 
 |propties|type|default|desc|
 |---|---|---|---|
