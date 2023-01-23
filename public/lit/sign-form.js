@@ -1,71 +1,8 @@
-import { html, css, LitElement, nothing } from '../core/lit-core.min.js';
-
-export class LabelInput extends LitElement {
-
-  static styles = css`
-  :host {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    }
-  @media screen and (max-width:500px) {
-    :host {
-      justify-content: flex-start;
-      flex-direction: column;
-    }
-  }
-  `;
-
-  static properties = {
-    label: {},
-    name: {},
-    id: {},
-    pla: {},
-    type: {},
-    value: { reflect: true },
-    def: {}
-  };
-
-  constructor() {
-    super();
-    this.value = this.def ?? "";
-    this.id = this.label??"";
-  }
-
-  get _input() {
-    return (this.__input ??= this.renderRoot?.querySelector('input') ?? null);
-  }
-
-  render() {
-    return html`
-    <label for=${this.id}>${this.label}</label>
-    <input
-    value=${this.value}
-    @input=${this.oninput}
-    id=${this.id} 
-    type=${this.type || nothing} 
-    placeholder=${this.pla || nothing}
-    name=${this.name} />
-    `;
-  }
-
-  oninput(i) {
-    this.value = i.target.value;
-  }
-
-  clear() {
-    this._input.value = this.def || null;
-  }
-
-  namevalue() {
-    return [this.name, this.value];
-  }
-}
-customElements.define('label-input', LabelInput);
-
+import { html, css, LitElement } from '../core/lit-core.min.js';
+import './label-input.js';
 export class SignForm extends LitElement {
   get _label_input() {
-    return (this.__label_input ??= this.renderRoot?.querySelectorAll('label-input') ?? null);
+    return this.renderRoot?.querySelectorAll('label-input') ?? null;
   }
   static styles = css`
   form {
@@ -78,46 +15,63 @@ export class SignForm extends LitElement {
     display: flex;
     flex-direction: column;
   }
+  input[type="submit"],input[type="reset"]{
+    --submit: rgb(44, 194, 224);
+    padding: 0.5em 1.8em;
+    border-width: 0;
+    font-size:95%;
+    border-radius: .42em;
+    margin:.25em;
+    background-color: var(--submit);
+    color: inherit;
+  }
+  input[type="submit"]:hover,input[type="reset"]:hover{
+    background-color: var(--hover);
+    transform: scale(1.02);
+  }
   `;
-
   static properties = {
     method: {},
     reset: { type: Boolean },
+    submit: { type: Function },
   };
-
   constructor() {
     super();
     this.method = "post";
+    this.submit = (x) => {
+      console.table(x);
+      console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor element.submit=function(x){...}\n");
+    };
   }
-
   render() {
+    console.log(this);
     return html`
     <form method=${this.method.toLocaleLowerCase()} >
       <main>
         <label-input
-        pla="E-mail"
         label="E-mail"
-        name="email"></label-input>
+        name="email">
+      </label-input>
         <label-input
-        pla="Password"
         label="Password"
-        name="password"></label-input>
+        name="password"
+        type="password"
+        ></label-input>
+        <slot></slot>
       </main>
       <div>
-        ${this.reset ? html`<input type="reset"  @click=${this._reset} />` : ''}
-        <input type="submit" @click=${this._submit} />
+        ${this.reset && html`<input type="reset" @click=${this._reset} style="--hover:rgb(190 35 90)" />`}
+        <input type="submit" @click=${this._submit} style="--hover:rgb(44 194 224 / 85%)" />
       </div>
     
     </form>`;
   }
-
   _reset() {
     this._label_input.forEach(element => {
-      element.value = '';
+      element.value = element.def;
       element.clear();
     });
   }
-
   _submit(e) {
     e.preventDefault();
     let x = {};
@@ -125,9 +79,13 @@ export class SignForm extends LitElement {
       var [name, value] = element.namevalue();
       x[name] = value;
     });
-    /* ... */
-    console.error("You need to process the acquired data:",x);
-    /* ... */
+    this.shadowRoot.querySelector('slot').assignedNodes().forEach((node) => {
+      // 判断node是否含有input
+      if (node.tagName === 'LABEL-INPUT' || 'INPUT' || 'TEXTAREA' || 'SELECT') {
+        x[node.name] = node.value;
+      }
+    });
+    this.submit(x);
   }
 }
 customElements.define('sign-form', SignForm);

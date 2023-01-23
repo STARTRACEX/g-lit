@@ -4,7 +4,7 @@ G-lit is a set of components based on [lit](https://lit.dev)
 
 ## Quick Start
 
-### Import this
+### Import File
 
 Import the js file contained in this repository into the page
 
@@ -15,11 +15,13 @@ Import the js file contained in this repository into the page
 <script type="module" src="./public/lit.all.js"></script>
 ```
 
-**Note** Don't forget flag `type="module"`
+**Note** Don't forget flag `type="module"` 
 
-### Import lit
+### In npm
 
-**Note** If use the method of importing external files, change the path of importing lit-core and lit-all in the file (currently lit is in public/core)
+on branch [npm]
+
+**Note** Unpublished
 
 ## Components
 
@@ -78,7 +80,7 @@ ov-effect.js contains a gradient background box, a gradient text, and a basic bu
 |method|string|"get"|Form method|
 |name|string|"q"|Search request name|
 
-search-input.js contains a multi-function search box to obtain content through the page or server or network and a ms style web search box
+search-input.js contains a multi-function search box to obtain content through the page or server or network and a web search box
 
 ### content-group.js
 

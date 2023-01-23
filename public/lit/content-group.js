@@ -1,5 +1,4 @@
 import { html, css, LitElement, classMap, styleMap, repeat } from '../core/lit-all.min.js';
-
 export class SectionGroup extends LitElement {
   get _main() {
     return this.shadowRoot.querySelector('main');
@@ -31,19 +30,16 @@ export class SectionGroup extends LitElement {
     width:100%;
   }
   `;
-
   static properties = {
     index: {},
     split: { type: Boolean },
   };
-
   constructor() {
     super();
     this.index = this.children[0].slot;
     this.all = this.children.length;
     this.current = 0;
   }
-
   render() {
     return html`<nav>${this.bar()}</nav>
     <main>
@@ -72,7 +68,6 @@ export class SectionGroup extends LitElement {
       [...this.children].forEach(v => v.style.width = '0');
       this.children[this.current].style.width = '100%';
     }
-
   }
   resetindex(name, current) {
     if (this.split) this.index = null;
@@ -89,10 +84,8 @@ export class SectionGroup extends LitElement {
     other.forEach(v => v.style.width = '0');
     this.split = false;
     this.index = name;
-
   }
 }
-
 customElements.define('section-group', SectionGroup);
 export class ContentGroup extends LitElement {
   get _loading() {
@@ -133,11 +126,9 @@ export class ContentGroup extends LitElement {
     ${this.content()}
     </main>`;
   }
-
   firstUpdated() {
     if (this._loading) this._loading.style.display = 'none';
   }
-
   content() {
     if (this.sort) {
       let inner = [];
@@ -150,6 +141,5 @@ export class ContentGroup extends LitElement {
     }
     return html`${repeat(this.children, (el) => html`${el}`)}`;
   }
-
 }
 customElements.define('content-group', ContentGroup);
