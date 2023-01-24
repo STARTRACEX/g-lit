@@ -80,8 +80,7 @@ export class SignForm extends LitElement {
       x[name] = value;
     });
     this.shadowRoot.querySelector('slot').assignedNodes().forEach((node) => {
-      // 判断node是否含有input
-      if (node.tagName === 'LABEL-INPUT' || 'INPUT' || 'TEXTAREA' || 'SELECT') {
+      if (node.name) {
         x[node.name] = node.value;
       }
     });

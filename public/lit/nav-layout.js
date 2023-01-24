@@ -1,5 +1,4 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
-// import './base-layout.js'
 export class AsidenavLayout extends LitElement {
   static properties = {
     m: { type: Number },
@@ -77,7 +76,7 @@ export class NavLayout extends LitElement {
     if (this.foo) return;
     return html`
     <footer>
-      footer
+      <slot> name="footer"</slot>
     </footer>
     `;
   }
