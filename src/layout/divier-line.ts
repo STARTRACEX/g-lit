@@ -14,7 +14,8 @@ export class DivierLine extends LitElement {
       border: 0;
       flex: 1;
       backdrop-filter: invert(0.2);
-      -webkit-backdrop-filter: invert(0.2)
+      -webkit-backdrop-filter: invert(0.2);
+      background-color: rgb(119 136 153);
     }
     .v {
       height: 100%;
@@ -29,7 +30,7 @@ export class DivierLine extends LitElement {
 
   render() {
     var hrstyle = `.before{height:${this.b};max-width:${this.Before}}.after{height:${this.b};max-width:${this.After}}.v .before{width:${this.b};max-height:${this.Before}}.v .after{width:${this.b};max-height:${this.After}}`;
-    return html`<div class=${this.v && "v"}>
+    return html`<div class=${this.v ? "v":""}>
     <style>${hrstyle}</style>
       <hr class="before"/>
       <slot></slot>
@@ -38,7 +39,7 @@ export class DivierLine extends LitElement {
   }
 }
 declare global {
-  interface HTMLElementTagNameMap{
+  interface HTMLElementTagNameMap {
     'divier-line': DivierLine;
   }
 }

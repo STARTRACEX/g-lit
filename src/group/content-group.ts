@@ -14,6 +14,10 @@ export class SectionGroup extends LitElement {
     return this.shadowRoot?.querySelector('.active');
   }
   static styles = css`
+  :host{
+    display: block;
+    background-color: inherit;
+  }
   .active{
     color:#0095ff;
   }
@@ -22,34 +26,68 @@ export class SectionGroup extends LitElement {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+      background-color: inherit;
+  }
+  div{
+    height:100%;
+    background-color: inherit;
+    display: flex;
+    flex-direction: column
+  }
+  .reversal{
+    flex-direction: column-reverse;
+  }
+  .v{
+    flex-direction:row !important;
+  }
+  .v.reversal{
+    flex-direction: row-reverse !important;
+  }
+  .v nav{
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
   }
   a {
-    padding: .625em 1.25em;
+    padding: 0.625em 1.25em;
+    flex: 1 1 0%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .v main{
+    flex-direction: column;
   }
   main{
-    background: rgb(66, 139, 199);
+    background-color: rgb(66, 139, 199);
     display: inline-flex;
     width: 100%;
+    height:100%;
   }
   ::slotted(*[slot]){
     overflow: hidden;
-    transition: width 0.35s;
-    width:100%;
+    transition: all 0.35s;
   }
   `;
   @property() index = this.children[0].slot
   @property({ type: Boolean }) split = false
+  @property({ type: Boolean }) v=false
+  @property({ type: Boolean }) reversal=false
   constructor() {
     super();
     this.current = 0
     this.all = this.children.length;
   }
   render() {
-    return html`<nav>${this.bar()}</nav>
+    return html`
+    <div class=${classMap({ v: this.v, reversal: this.reversal })}>
+      <nav>${this.bar()}</nav>
     <main>
       ${this.slots()}
       <slot></slot>
-    </main>`;
+    </main>
+    </div>
+    `;
   }
   slots() {
     return html`${[...this.children].map((v) => html`<slot name="${v.slot}" ></slot>`)}`;
@@ -69,8 +107,13 @@ export class SectionGroup extends LitElement {
           this.current = i;
         }
       });
-      [...this.children].forEach(v => (<HTMLElement>v).style.width = '0');
-      (<HTMLElement>this.children[this.current]).style.width = '100%';
+      if (this.v) {
+        [...this.children].forEach(v => (<HTMLElement>v).style.height = '0');
+        (<HTMLElement>this.children[this.current]).style.height = '100%';
+      } else {
+        [...this.children].forEach(v => (<HTMLElement>v).style.width = '0');
+        (<HTMLElement>this.children[this.current]).style.width = '100%';
+      }
     }
   }
   resetindex(name, current) {
@@ -78,14 +121,23 @@ export class SectionGroup extends LitElement {
     if (this.index === name) {
       if (this._act) {
         this._act.classList.remove('active');
-        [...this.children].forEach(v => (<HTMLElement>v).style.width = '100%');
+        if (this.v)
+          [...this.children].forEach(v => (<HTMLElement>v).style.height = '100%');
+        else
+          [...this.children].forEach(v => (<HTMLElement>v).style.width = '100%');
         this.index = null;
       }
       return;
     }
+    if (this.v)
+      (<HTMLElement>this.children[current]).style.height = '100%';
+    else
     (<HTMLElement>this.children[current]).style.width = '100%';
     var other = [...this.children].filter((v, i) => i != current);
-    other.forEach(v => (<HTMLElement>v).style.width = '0');
+    if (this.v)
+      other.forEach(v => (<HTMLElement>v).style.height = '0');
+    else
+      other.forEach(v => (<HTMLElement>v).style.width = '0');
     this.split = false;
     this.index = name;
   }
@@ -145,9 +197,9 @@ export class ContentGroup extends LitElement {
     return html`${repeat(this.children, (el) => html`${el}`)}`;
   }
 }
-declare global{
-  interface HTMLElementTagNameMap{
+declare global {
+  interface HTMLElementTagNameMap {
     "section-group": SectionGroup
-    "content-group":ContentGroup
+    "content-group": ContentGroup
   }
 }

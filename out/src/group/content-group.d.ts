@@ -7,6 +7,8 @@ export declare class SectionGroup extends LitElement {
     static styles: import("lit").CSSResult;
     index: string;
     split: boolean;
+    v: boolean;
+    reversal: boolean;
     constructor();
     render(): import("lit-html").TemplateResult<1>;
     slots(): import("lit-html").TemplateResult<1>;
