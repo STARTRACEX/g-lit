@@ -76,7 +76,7 @@ export class NavLayout extends LitElement {
     if (this.foo) return;
     return html`
     <footer>
-      <slot> name="footer"</slot>
+      <slot name="footer"></slot>
     </footer>
     `;
   }
