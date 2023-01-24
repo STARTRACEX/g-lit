@@ -1,6 +1,5 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-type base = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
 @customElement('exp-input')
 export class ExpInput extends LitElement {
   static styles = css`
@@ -165,14 +164,14 @@ export class ExpInput extends LitElement {
   }
   `;
   @property() label = "";
-  @property() name = ""
-  @property() id = ""
-  @property() pla = ""
-  @property() type = "text"
-  @property() value = ""
-  @property() def = ""
-  @property() base = "outline"
-  @property() offset = ""
+  @property() name = "";
+  @property() id = "";
+  @property() pla = "";
+  @property() type = "text";
+  @property() value = "";
+  @property() def = "";
+  @property() base = "outline";
+  @property() offset = "";
   get _input() {
     return this.renderRoot?.querySelector('input') ?? null;
   }

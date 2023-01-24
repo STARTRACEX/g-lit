@@ -8,8 +8,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 let AsidenavLayout = class AsidenavLayout extends LitElement {
     constructor() {
-        super();
-        this.m = 720;
+        super(...arguments);
         this.m = 720;
     }
     render() {
@@ -78,7 +77,7 @@ let NavLayout = class NavLayout extends LitElement {
             return;
         return html `
     <footer>
-      <slot> name="footer"</slot>
+      <slot name="footer"></slot>
     </footer>
     `;
     }

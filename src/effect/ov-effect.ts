@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit'
+import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 const styled = css`:host{
    --text:rgb(240,240,240);
@@ -16,9 +16,9 @@ const styled = css`:host{
 @customElement("ov-text")
 export class OVText extends LitElement {
   static styles = styled;
-  @property() t1 = `Text I.`
-  @property() t2 = `Text II..`
-  @property() t3 = `Text III...`
+  @property() t1 = `Text I.`;
+  @property() t2 = `Text II..`;
+  @property() t3 = `Text III...`;
   render() {
     return html`<div class="overbreath"><span class="overbreathpart"><span class="overbreathroot">${this.t1}</span><span class="overbreathtext">${this.t1}</span></span><span class="overbreathpart"><span class="overbreathroot">${this.t2}</span><span class="overbreathtext">${this.t2}</span></span><span class="overbreathpart"><span class="overbreathroot">${this.t3}</span><span class="overbreathtext">${this.t3}</span></span></div>`;
   }

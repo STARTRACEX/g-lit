@@ -3,12 +3,12 @@ import { customElement, property } from 'lit/decorators.js';
 import { BaseInput } from './base-input';
 @customElement('sign-form')
 export class SignForm extends LitElement {
-  @property({ type: Boolean }) reset = false
-  @property() method = "get"
+  @property({ type: Boolean }) reset = false;
+  @property() method = "get";
   @property() submit = (x) => {
-    console.table(x)
+    console.table(x);
     console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor\nelement.submit=function(x){...}\n");
-  }
+  };
   static styles = css`
   form {
     --hover:rgb(190 35 90);
@@ -51,13 +51,13 @@ export class SignForm extends LitElement {
         <slot></slot>
       </main>
       <div>
-        ${this.reset ? html`<input type="reset" @click=${this._reset} style="--hover:rgb(190 35 90)" />`:""}
+        ${this.reset ? html`<input type="reset" @click=${this._reset} style="--hover:rgb(190 35 90)" />` : ""}
         <input type="submit" @click=${this._submit} style="--hover:rgb(44 194 224 / 85%)" />
       </div>
-    </form>`
+    </form>`;
   }
   get _label_input() {
-    return this.renderRoot?.querySelectorAll('label-input') ?? null
+    return this.renderRoot?.querySelectorAll('label-input') ?? null;
   }
   _reset() {
     this._label_input.forEach(element => {

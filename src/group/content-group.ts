@@ -69,13 +69,13 @@ export class SectionGroup extends LitElement {
     transition: all 0.35s;
   }
   `;
-  @property() index = this.children[0].slot
-  @property({ type: Boolean }) split = false
-  @property({ type: Boolean }) v=false
-  @property({ type: Boolean }) reversal=false
+  @property() index = this.children[0].slot;
+  @property({ type: Boolean }) split = false;
+  @property({ type: Boolean }) v = false;
+  @property({ type: Boolean }) reversal = false;
   constructor() {
     super();
-    this.current = 0
+    this.current = 0;
     this.all = this.children.length;
   }
   render() {
@@ -132,7 +132,7 @@ export class SectionGroup extends LitElement {
     if (this.v)
       (<HTMLElement>this.children[current]).style.height = '100%';
     else
-    (<HTMLElement>this.children[current]).style.width = '100%';
+      (<HTMLElement>this.children[current]).style.width = '100%';
     var other = [...this.children].filter((v, i) => i != current);
     if (this.v)
       other.forEach(v => (<HTMLElement>v).style.height = '0');
@@ -172,9 +172,9 @@ export class ContentGroup extends LitElement {
     align-items: center;
     justify-content: center;
   }`;
-  @property() sort = "sort"
-  @property() col = "1fr 1fr"
-  @property({ attribute: false }) inner = []
+  @property() sort = "sort";
+  @property() col = "1fr 1fr";
+  @property({ attribute: false }) inner = [];
   render() {
     return html`<main style=${styleMap({ "grid-template-columns": this.col })}>
     <slot name="loading" style="background-color:inherit;"></slot>
@@ -199,7 +199,7 @@ export class ContentGroup extends LitElement {
 }
 declare global {
   interface HTMLElementTagNameMap {
-    "section-group": SectionGroup
-    "content-group": ContentGroup
+    "section-group": SectionGroup;
+    "content-group": ContentGroup;
   }
 }

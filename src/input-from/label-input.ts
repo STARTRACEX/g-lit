@@ -1,15 +1,15 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-type base = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image"
+type base = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
 @customElement('label-input')
 export class LabelInput extends LitElement {
-  @property() type: base = "text"
-  @property() label = ""
-  @property() def = ""
-  @property() pla = ""
-  @property() name =  ""
-  @property() id = ""
-  @property() value = ""
+  @property() type: base = "text";
+  @property() label = "";
+  @property() def = "";
+  @property() pla = "";
+  @property() name = "";
+  @property() id = "";
+  @property() value = "";
 
   static styles = css`
   :host{
@@ -74,7 +74,7 @@ export class LabelInput extends LitElement {
   }`;
 
   get _input() {
-    return this.renderRoot?.querySelector('input') ?? null
+    return this.renderRoot?.querySelector('input') ?? null;
   }
 
   render() {

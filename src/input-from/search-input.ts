@@ -3,20 +3,20 @@ import { customElement, property } from 'lit/decorators.js';
 
 @customElement('search-input')
 export class SearchInput extends LitElement {
-  @property() query = ""
-  @property() target = ""
-  @property({ type: Boolean }) infer = false
-  @property({ type: Boolean }) remote = false
-  @property() action = "./"
-  @property() method: "get" | "post" = "get"
-  @property() name = "q"
-  @property() value = ""
-  @property({ type: Array }) list: any[] = null
+  @property() query = "";
+  @property() target = "";
+  @property({ type: Boolean }) infer = false;
+  @property({ type: Boolean }) remote = false;
+  @property() action = "./";
+  @property() method: "get" | "post" = "get";
+  @property() name = "q";
+  @property() value = "";
+  @property({ type: Array }) list: any[] = null;
   @property({ type: Function }) submit = (x) => {
-    console.table(x)
+    console.table(x);
     console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor\nelement.submit=function(x){...}\nreturn a array or null");
-    return ["No function for infer"]
-  }
+    return ["No function for infer"];
+  };
   static styles = css`form{
     --text:rgb(240 240 240);
     --ground:rgb(88 88 88);
@@ -32,7 +32,7 @@ export class SearchInput extends LitElement {
           <li key=${i}>
           ${v}
           </li>`)}
-        </ul>`:""}
+        </ul>`: ""}
     </form>`;
   }
 
@@ -81,10 +81,10 @@ const e = [
 @customElement("search-w")
 export class SearchW extends LitElement {
   static styles = css`form{height: 2.5em;box-sizing:border-box;position:relative}input{height:100%;width:100%;font-size:1rem;margin:0;justify-content:center;outline:none;flex:1;padding-left:1.5em;padding-right:3.5em;border-radius:100px;border:1px solid #1a1a1a;background-color:transparent;color:#1a1a1a;box-shadow:none !important}button:hover{background-color:rgb(20 69 155)}button{margin:0;background:none transparent;border-spacing:0;text-align:left;align-items:center;justify-content:center;outline:none;border:none;display:inline-flex;transition:background-color .2s cubic-bezier(.165,.84,.44,1) 0ms,color .2s cubic-bezier(.165,.84,.44,1) 0ms,border .2s cubic-bezier(.165,.84,.44,1) 0ms,box-shadow .2s cubic-bezier(.165,.84,.44,1) 0ms;box-shadow:0 2px 4px 0 rgba(0,0,0,.2);padding:0 .25em 0 0;border-radius:0 100px 100px 0;font-size:1em;position:absolute;top:0;right:0;height:100%;width:3.5em;background-color:#1a1a1a}svg{text-indent:0;font-size:1em;color:#fafafa;width:1em;height:1em}`;
-  @property() action = ""
-  @property() name = ""
-  @property() pla = ""
-  @property() origin = ""
+  @property() action = "";
+  @property() name = "";
+  @property() pla = "";
+  @property() origin = "";
   constructor() {
     super();
     Object.assign(this, e[Math.floor(Math.random() * e.length)]);

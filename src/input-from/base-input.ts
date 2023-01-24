@@ -10,16 +10,16 @@ export class BaseInput extends LitElement {
     return this.shadowRoot.querySelector('.range i');
   }
   // static properties = {
-  @property() label = ''
-  @property() name = ''
-  @property() id = ''
-  @property() pla = ''
-  @property() type: base = 'text'
-  @property() value: string | number = ''
-  @property() def: string | number = ''
-  @property({ type: Number }) min = 0
-  @property({ type: Number }) max = 100
-  @property({ type: Number }) step = 1
+  @property() label = '';
+  @property() name = '';
+  @property() id = '';
+  @property() pla = '';
+  @property() type: base = 'text';
+  @property() value: string | number = '';
+  @property() def: string | number = '';
+  @property({ type: Number }) min = 0;
+  @property({ type: Number }) max = 100;
+  @property({ type: Number }) step = 1;
   // };
   constructor() {
     super();

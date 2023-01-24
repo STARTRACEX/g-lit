@@ -1,12 +1,8 @@
-import { LitElement, html, css } from 'lit'
+import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 @customElement('asidenav-layout')
 export class AsidenavLayout extends LitElement {
-  @property({ type: Number }) m = 720
-  constructor() {
-    super();
-    this.m = 720;
-  }
+  @property({ type: Number }) m = 720;
   static styles = css`:host{
     --nav: rgb(28  28  31);
     --a: rgb(40 160 150 / 56%);
@@ -34,8 +30,8 @@ export class NavLayout extends LitElement {
   }nav{background-color:var(--nav)}.option{background-color:var(--nav)}.option a:hover{background-color:var(--a)}h1,a{color:var(--txt)}nav{height:48px;z-index:999;display:flex;justify-content:space-between;align-items:center;width:100%;padding:0 2.5%;box-sizing:border-box;margin:0}a{text-decoration:none;color:rgb(240,240,240)}h1{font-weight:normal;margin:0;font-size:145%}nav>div{height:100%;display:flex;flex-direction:row}.personal,.setting{height:40px;margin-top:3px;padding:2.5px 5px;position:relative}.option{width:max-content;visibility:hidden;overflow:hidden;position:absolute;top:44px;z-index:999}.option:hover,.setting:hover>.option,.personal:hover>.option{visibility:visible}.setting .option{right:-15.5%;padding-bottom:0.2px}.personal .option{right:-28.4%}.option a{height:46px;line-height:46px;text-align:center;display:block;padding:0px 18px;text-align:center;transition:background-color 152ms}.option a:hover{transform:scale(1.025)}
   `;
   @property() title = '';
-  @property({ type: Number }) set = 2
-  @property({ type: Boolean }) foo = false
+  @property({ type: Number }) set = 2;
+  @property({ type: Boolean }) foo = false;
   render() {
     return html`<nav>
       <h1>
@@ -70,7 +66,7 @@ export class NavLayout extends LitElement {
     if (this.foo) return;
     return html`
     <footer>
-      <slot> name="footer"</slot>
+      <slot name="footer"></slot>
     </footer>
     `;
   }

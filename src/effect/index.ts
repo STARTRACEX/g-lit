@@ -1,1 +1,1 @@
-export * from './ov-effect'
+export * from './ov-effect';

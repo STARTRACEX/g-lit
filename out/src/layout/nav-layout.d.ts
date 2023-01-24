@@ -1,7 +1,6 @@
 import { LitElement } from 'lit';
 export declare class AsidenavLayout extends LitElement {
     m: number;
-    constructor();
     static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
 }
