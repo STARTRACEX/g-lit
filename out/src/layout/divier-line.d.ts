@@ -7,4 +7,9 @@ export declare class DivierLine extends LitElement {
     b: string;
     render(): import("lit-html").TemplateResult<1>;
 }
+declare global {
+    interface HTMLElementTagNameMap {
+        'divier-line': DivierLine;
+    }
+}
 //# sourceMappingURL=divier-line.d.ts.map

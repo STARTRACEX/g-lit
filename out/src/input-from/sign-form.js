@@ -17,19 +17,24 @@ let SignForm = class SignForm extends LitElement {
         };
     }
     render() {
-        return html `
-    <form>
+        return html `<form method=${this.method.toLocaleLowerCase()} >
       <main>
-        <label-input label="E-mail" name="email" id="email" type="email"></label-input>
-        <label-input label="Password" name="password" id="password" type="password"></label-input>
+        <label-input
+        label="E-mail"
+        name="email">
+      </label-input>
+        <label-input
+        label="Password"
+        name="password"
+        type="password"
+        ></label-input>
         <slot></slot>
       </main>
       <div>
-        ${this.reset ? html `<input type="reset"  @click=${this._reset} />` : ''}
-        <input type="submit" @click=${this._submit} />
+        ${this.reset ? html `<input type="reset" @click=${this._reset} style="--hover:rgb(190 35 90)" />` : ""}
+        <input type="submit" @click=${this._submit} style="--hover:rgb(44 194 224 / 85%)" />
       </div>
-    </form> 
-    `;
+    </form>`;
     }
     get _label_input() {
         var _a, _b;
@@ -48,11 +53,17 @@ let SignForm = class SignForm extends LitElement {
             var [name, value] = element.namevalue();
             x[name] = value;
         });
+        this.shadowRoot.querySelector('slot').assignedNodes().forEach((node) => {
+            if (node.name) {
+                x[node.name] = node.value;
+            }
+        });
         this.submit(x);
     }
 };
 SignForm.styles = css `
   form {
+    --hover:rgb(190 35 90);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -61,6 +72,20 @@ SignForm.styles = css `
   main{
     display: flex;
     flex-direction: column;
+  }
+  input[type="submit"],input[type="reset"]{
+    --submit: rgb(44, 194, 224);
+    padding: 0.5em 1.8em;
+    border-width: 0;
+    font-size:95%;
+    border-radius: .42em;
+    margin:.25em;
+    background-color: var(--submit);
+    color: inherit;
+  }
+  input[type="submit"]:hover,input[type="reset"]:hover{
+    background-color: var(--hover);
+    transform: scale(1.02);
   }
   `;
 __decorate([

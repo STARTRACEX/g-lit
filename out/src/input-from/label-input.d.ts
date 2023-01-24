@@ -11,9 +11,11 @@ export declare class LabelInput extends LitElement {
     static styles: import("lit").CSSResult;
     get _input(): HTMLInputElement;
     render(): import("lit-html").TemplateResult<1>;
-    handleinput(i: any): void;
+    firstUpdated(): void;
+    input(i: any): void;
     clear(): void;
     namevalue(): string[];
+    passwordtype(): void;
 }
 declare global {
     interface HTMLElementTagNameMap {

@@ -1,5 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { BaseInput } from './base-input';
 @customElement('sign-form')
 export class SignForm extends LitElement {
   @property({ type: Boolean }) reset = false
@@ -10,6 +11,7 @@ export class SignForm extends LitElement {
   }
   static styles = css`
   form {
+    --hover:rgb(190 35 90);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,21 +21,40 @@ export class SignForm extends LitElement {
     display: flex;
     flex-direction: column;
   }
+  input[type="submit"],input[type="reset"]{
+    --submit: rgb(44, 194, 224);
+    padding: 0.5em 1.8em;
+    border-width: 0;
+    font-size:95%;
+    border-radius: .42em;
+    margin:.25em;
+    background-color: var(--submit);
+    color: inherit;
+  }
+  input[type="submit"]:hover,input[type="reset"]:hover{
+    background-color: var(--hover);
+    transform: scale(1.02);
+  }
   `;
   render() {
-    return html`
-    <form>
+    return html`<form method=${this.method.toLocaleLowerCase()} >
       <main>
-        <label-input label="E-mail" name="email" id="email" type="email"></label-input>
-        <label-input label="Password" name="password" id="password" type="password"></label-input>
+        <label-input
+        label="E-mail"
+        name="email">
+      </label-input>
+        <label-input
+        label="Password"
+        name="password"
+        type="password"
+        ></label-input>
         <slot></slot>
       </main>
       <div>
-        ${this.reset ? html`<input type="reset"  @click=${this._reset} />` : ''}
-        <input type="submit" @click=${this._submit} />
+        ${this.reset ? html`<input type="reset" @click=${this._reset} style="--hover:rgb(190 35 90)" />`:""}
+        <input type="submit" @click=${this._submit} style="--hover:rgb(44 194 224 / 85%)" />
       </div>
-    </form> 
-    `
+    </form>`
   }
   get _label_input() {
     return this.renderRoot?.querySelectorAll('label-input') ?? null
@@ -50,6 +71,11 @@ export class SignForm extends LitElement {
     this._label_input.forEach(element => {
       var [name, value] = element.namevalue();
       x[name] = value;
+    });
+    this.shadowRoot.querySelector('slot').assignedNodes().forEach((node) => {
+      if ((node as HTMLInputElement).name) {
+        x[(node as HTMLInputElement).name] = (node as HTMLInputElement).value;
+      }
     });
     this.submit(x);
   }

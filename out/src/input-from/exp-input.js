@@ -238,4 +238,3 @@ ExpInput = __decorate([
     customElement('exp-input')
 ], ExpInput);
 export { ExpInput };
-customElements.define('exp-input', ExpInput);

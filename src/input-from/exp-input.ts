@@ -199,4 +199,3 @@ export class ExpInput extends LitElement {
     return [this.name, this.value];
   }
 }
-customElements.define('exp-input', ExpInput);

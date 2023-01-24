@@ -78,7 +78,7 @@ let NavLayout = class NavLayout extends LitElement {
             return;
         return html `
     <footer>
-      footer
+      <slot> name="footer"</slot>
     </footer>
     `;
     }

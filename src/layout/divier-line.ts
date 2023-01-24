@@ -37,3 +37,8 @@ export class DivierLine extends LitElement {
     </div>`;
   }
 }
+declare global {
+  interface HTMLElementTagNameMap{
+    'divier-line': DivierLine;
+  }
+}
