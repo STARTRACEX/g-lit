@@ -5,10 +5,11 @@ import { name } from '../config';
 export class SignForm extends LitElement {
   @property({ type: Boolean }) reset = false;
   @property() method = "get";
-  @property() submit = (x) => {
+  @property({ type: Function }) submit = (x) => {
     console.table(x);
     console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor\nelement.submit=function(x){...}\n");
   };
+  
   static styles = css`
   form {
     --hover:rgb(190 35 90);
@@ -62,7 +63,7 @@ export class SignForm extends LitElement {
   _reset() {
     this._label_input.forEach(element => {
       element.value = element.def || "";
-      element.clear();
+      element.reset();
     });
   }
   _submit(e) {

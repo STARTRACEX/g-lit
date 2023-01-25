@@ -8,7 +8,6 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { name } from '../config';
 let BaseInput = class BaseInput extends LitElement {
-    // };
     constructor() {
         super();
         // static properties = {
@@ -61,7 +60,7 @@ let BaseInput = class BaseInput extends LitElement {
     handleInput(e) {
         this.value = e.target.value;
     }
-    _clear() {
+    reset() {
         if (this.type === "range") {
             this._input.value = (this.def || (this.max - this.min) / 2).toString();
             this.value = this.def || (this.max - this.min) / 2;
@@ -80,6 +79,9 @@ let BaseInput = class BaseInput extends LitElement {
             default:
                 return html `<input class="input" type=${this.type} name=${this.name} id=${this.id} placeholder=${this.pla} value=${this.value} @input=${this.handleInput} />`;
         }
+    }
+    namevalue() {
+        return [this.name, this.value];
     }
 };
 BaseInput.styles = css `

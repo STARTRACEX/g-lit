@@ -44,7 +44,7 @@ let SignForm = class SignForm extends LitElement {
     _reset() {
         this._label_input.forEach(element => {
             element.value = element.def || "";
-            element.clear();
+            element.reset();
         });
     }
     _submit(e) {
@@ -96,7 +96,7 @@ __decorate([
     property()
 ], SignForm.prototype, "method", void 0);
 __decorate([
-    property()
+    property({ type: Function })
 ], SignForm.prototype, "submit", void 0);
 SignForm = __decorate([
     customElement(name.tag('sign-form'))

@@ -21,7 +21,6 @@ export class BaseInput extends LitElement {
   @property({ type: Number }) min = 0;
   @property({ type: Number }) max = 100;
   @property({ type: Number }) step = 1;
-  // };
   constructor() {
     super();
     this.type = "text";
@@ -135,7 +134,7 @@ export class BaseInput extends LitElement {
   handleInput(e) {
     this.value = e.target.value;
   }
-  _clear() {
+  reset() {
     if (this.type === "range") {
       this._input.value = (this.def as number || (this.max - this.min) / 2).toString();
       this.value = this.def || (this.max - this.min) / 2;
@@ -153,6 +152,9 @@ export class BaseInput extends LitElement {
       default:
         return html`<input class="input" type=${this.type} name=${this.name} id=${this.id} placeholder=${this.pla} value=${this.value} @input=${this.handleInput} />`;
     }
+  }
+  namevalue() {
+    return [this.name, this.value];
   }
 }
 declare global {

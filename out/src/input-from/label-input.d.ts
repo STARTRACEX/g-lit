@@ -13,9 +13,9 @@ export declare class LabelInput extends LitElement {
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
     input(i: any): void;
-    clear(): void;
+    reset(): void;
+    _passwordtype(): void;
     namevalue(): string[];
-    passwordtype(): void;
 }
 declare global {
     interface HTMLElementTagNameMap {

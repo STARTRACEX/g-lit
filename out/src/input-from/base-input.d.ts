@@ -19,8 +19,9 @@ export declare class BaseInput extends LitElement {
     firstUpdated(): void;
     handleRange(e: any): void;
     handleInput(e: any): void;
-    _clear(): void;
+    reset(): void;
     returnbytype(): import("lit-html").TemplateResult<1>;
+    namevalue(): (string | number)[];
 }
 declare global {
     interface HTMLElementTagNameMap {
