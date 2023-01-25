@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { name } from "../config";
 const originstyle = css `
   :host {
     --color: #f0f0f0;
@@ -134,6 +135,6 @@ __decorate([
     property()
 ], BaseButton.prototype, "color", void 0);
 BaseButton = __decorate([
-    customElement("base-button")
+    customElement(name.tag("base-button"))
 ], BaseButton);
 export { BaseButton };

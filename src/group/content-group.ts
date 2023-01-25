@@ -3,7 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
-@customElement("section-group")
+import { name } from "../config";
+@customElement(name.tag("section-group"))
 export class SectionGroup extends LitElement {
   current: number;
   all: number;
@@ -143,7 +144,7 @@ export class SectionGroup extends LitElement {
   }
 }
 
-@customElement("content-group")
+@customElement(name.tag("content-group"))
 export class ContentGroup extends LitElement {
   get _loading() {
     return this.shadowRoot.querySelector('slot[name="loading"]');

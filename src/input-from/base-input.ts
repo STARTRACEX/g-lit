@@ -1,7 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-type base = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
-@customElement('base-input')
+import { name } from '../config';
+type inputtype = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
+@customElement(name.tag('base-input'))
 export class BaseInput extends LitElement {
   get _input() {
     return this.shadowRoot.querySelector('input');
@@ -14,7 +15,7 @@ export class BaseInput extends LitElement {
   @property() name = '';
   @property() id = '';
   @property() pla = '';
-  @property() type: base = 'text';
+  @property() type: inputtype = 'text';
   @property() value: string | number = '';
   @property() def: string | number = '';
   @property({ type: Number }) min = 0;

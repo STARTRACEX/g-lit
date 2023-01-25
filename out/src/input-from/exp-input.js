@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { name } from '../config';
 let ExpInput = class ExpInput extends LitElement {
     constructor() {
         super(...arguments);
@@ -235,6 +236,6 @@ __decorate([
     property()
 ], ExpInput.prototype, "offset", void 0);
 ExpInput = __decorate([
-    customElement('exp-input')
+    customElement(name.tag('exp-input'))
 ], ExpInput);
 export { ExpInput };

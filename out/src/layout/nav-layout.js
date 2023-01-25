@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { name } from '../config';
 let AsidenavLayout = class AsidenavLayout extends LitElement {
     constructor() {
         super(...arguments);
@@ -31,7 +32,7 @@ __decorate([
     property({ type: Number })
 ], AsidenavLayout.prototype, "m", void 0);
 AsidenavLayout = __decorate([
-    customElement('asidenav-layout')
+    customElement(name.tag('asidenav-layout'))
 ], AsidenavLayout);
 export { AsidenavLayout };
 let NavLayout = class NavLayout extends LitElement {
@@ -100,7 +101,7 @@ __decorate([
     property({ type: Boolean })
 ], NavLayout.prototype, "foo", void 0);
 NavLayout = __decorate([
-    customElement('nav-layout')
+    customElement(name.tag('nav-layout'))
 ], NavLayout);
 export { NavLayout };
 const personal = html `<div class="personal">

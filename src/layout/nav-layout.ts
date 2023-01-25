@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-@customElement('asidenav-layout')
+import { name } from '../config';
+@customElement(name.tag('asidenav-layout'))
 export class AsidenavLayout extends LitElement {
   @property({ type: Number }) m = 720;
   static styles = css`:host{
@@ -19,7 +20,7 @@ export class AsidenavLayout extends LitElement {
     `;
   }
 }
-@customElement('nav-layout')
+@customElement(name.tag('nav-layout'))
 export class NavLayout extends LitElement {
   static styles = css`:host{
     --nav:rgb(28  28  31);

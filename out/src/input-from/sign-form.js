@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { name } from '../config';
 let SignForm = class SignForm extends LitElement {
     constructor() {
         super(...arguments);
@@ -98,6 +99,6 @@ __decorate([
     property()
 ], SignForm.prototype, "submit", void 0);
 SignForm = __decorate([
-    customElement('sign-form')
+    customElement(name.tag('sign-form'))
 ], SignForm);
 export { SignForm };

@@ -9,6 +9,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import { name } from "../config";
 let SectionGroup = class SectionGroup extends LitElement {
     constructor() {
         super();
@@ -160,7 +161,7 @@ __decorate([
     property({ type: Boolean })
 ], SectionGroup.prototype, "reversal", void 0);
 SectionGroup = __decorate([
-    customElement("section-group")
+    customElement(name.tag("section-group"))
 ], SectionGroup);
 export { SectionGroup };
 let ContentGroup = class ContentGroup extends LitElement {
@@ -231,6 +232,6 @@ __decorate([
     property({ attribute: false })
 ], ContentGroup.prototype, "inner", void 0);
 ContentGroup = __decorate([
-    customElement("content-group")
+    customElement(name.tag("content-group"))
 ], ContentGroup);
 export { ContentGroup };

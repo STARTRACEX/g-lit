@@ -1,7 +1,8 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
-@customElement("button-group")
+import { name } from "../config";
+@customElement(name.tag("button-group"))
 export class ButtonGroup extends LitElement {
   /**
    * @param h - Disable horizontal internal fillets 禁用水平内部圆角

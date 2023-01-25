@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { name } from '../config';
 let BaseInput = class BaseInput extends LitElement {
     // };
     constructor() {
@@ -192,6 +193,6 @@ __decorate([
     property({ type: Number })
 ], BaseInput.prototype, "step", void 0);
 BaseInput = __decorate([
-    customElement('base-input')
+    customElement(name.tag('base-input'))
 ], BaseInput);
 export { BaseInput };

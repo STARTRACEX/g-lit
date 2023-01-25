@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { name } from "../config";
 const styled = css `:host{
    --text:rgb(240,240,240);
    --surface:rgb(20,20,88);
@@ -41,7 +42,7 @@ __decorate([
     property()
 ], OVText.prototype, "t3", void 0);
 OVText = __decorate([
-    customElement("ov-text")
+    customElement(name.tag("ov-text"))
 ], OVText);
 export { OVText };
 let OVPort = class OVPort extends LitElement {
@@ -51,7 +52,7 @@ let OVPort = class OVPort extends LitElement {
 };
 OVPort.styles = styled;
 OVPort = __decorate([
-    customElement("ov-port")
+    customElement(name.tag("ov-port"))
 ], OVPort);
 export { OVPort };
 let OVButton = class OVButton extends LitElement {
@@ -65,6 +66,6 @@ OVButton.styles = [styled, css `::slotted(*){
       color:rgb(240 240 240);
   }`];
 OVButton = __decorate([
-    customElement("ov-button")
+    customElement(name.tag("ov-button"))
 ], OVButton);
 export { OVButton };

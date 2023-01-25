@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
+import { name } from "../config";
 let ButtonGroup = class ButtonGroup extends LitElement {
     constructor() {
         super(...arguments);
@@ -67,6 +68,6 @@ __decorate([
     property({ type: Boolean })
 ], ButtonGroup.prototype, "v", void 0);
 ButtonGroup = __decorate([
-    customElement("button-group")
+    customElement(name.tag("button-group"))
 ], ButtonGroup);
 export { ButtonGroup };

@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-
-@customElement('divier-line')
+import { name } from '../config';
+@customElement(name.tag('divier-line'))
 export class DivierLine extends LitElement {
   static styles = css`
     div {

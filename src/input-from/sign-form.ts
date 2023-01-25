@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { BaseInput } from './base-input';
-@customElement('sign-form')
+import { name } from '../config';
+@customElement(name.tag('sign-form'))
 export class SignForm extends LitElement {
   @property({ type: Boolean }) reset = false;
   @property() method = "get";

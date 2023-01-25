@@ -1,5 +1,5 @@
 import { LitElement } from 'lit';
-declare type base = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
+declare type inputtype = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
 export declare class BaseInput extends LitElement {
     get _input(): HTMLInputElement;
     get _ranged(): Element;
@@ -7,7 +7,7 @@ export declare class BaseInput extends LitElement {
     name: string;
     id: string;
     pla: string;
-    type: base;
+    type: inputtype;
     value: string | number;
     def: string | number;
     min: number;

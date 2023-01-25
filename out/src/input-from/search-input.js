@@ -6,6 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { name } from '../config';
 let SearchInput = class SearchInput extends LitElement {
     constructor() {
         super(...arguments);
@@ -108,7 +109,7 @@ __decorate([
     property({ type: Function })
 ], SearchInput.prototype, "submit", void 0);
 SearchInput = __decorate([
-    customElement('search-input')
+    customElement(name.tag('search-input'))
 ], SearchInput);
 export { SearchInput };
 const e = [
@@ -156,6 +157,6 @@ __decorate([
     property()
 ], SearchW.prototype, "origin", void 0);
 SearchW = __decorate([
-    customElement("search-w")
+    customElement(name.tag("search-w"))
 ], SearchW);
 export { SearchW };

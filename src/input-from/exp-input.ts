@@ -1,6 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-@customElement('exp-input')
+import { name } from '../config';
+@customElement(name.tag('exp-input'))
 export class ExpInput extends LitElement {
   static styles = css`
   :host{

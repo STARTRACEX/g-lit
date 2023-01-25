@@ -1,9 +1,10 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-type base = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
-@customElement('label-input')
+import { name } from '../config';
+type inputtype = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
+@customElement(name.tag('label-input'))
 export class LabelInput extends LitElement {
-  @property() type: base = "text";
+  @property() type: inputtype = "text";
   @property() label = "";
   @property() def = "";
   @property() pla = "";
