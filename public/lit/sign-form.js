@@ -44,7 +44,6 @@ export class SignForm extends LitElement {
     };
   }
   render() {
-    console.log(this);
     return html`
     <form method=${this.method.toLocaleLowerCase()} >
       <main>
@@ -66,10 +65,10 @@ export class SignForm extends LitElement {
     
     </form>`;
   }
-  _reset() {
+  reset() {
     this._label_input.forEach(element => {
       element.value = element.def;
-      element.clear();
+      element._reset();
     });
   }
   _submit(e) {

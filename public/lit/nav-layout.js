@@ -24,7 +24,6 @@ export class AsidenavLayout extends LitElement {
     `;
   }
 }
-
 export class NavLayout extends LitElement {
   static styles = css`
   :host{

@@ -115,6 +115,9 @@ export class BaseInput extends LitElement {
     
     `;
   }
+  namevalue() {
+    return [this.name, this.value];
+  }
   firstUpdated() {
     [...this.children].forEach((e) => {
       e.style.display = "";
@@ -130,7 +133,7 @@ export class BaseInput extends LitElement {
   handleInput(e) {
     this.value = e.target.value;
   }
-  _clear() {
+  reset() {
     if (this.type === "range") {
       this._input.value = this.def || (this.max - this.min) / 2;
       this.value = this.def || (this.max - this.min) / 2;
