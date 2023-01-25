@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { name } from "../config";
-let BaseButton = class BaseButton extends LitElement {
+let BaseSwitch = class BaseSwitch extends LitElement {
     constructor() {
         super(...arguments);
         this.disabled = false;
@@ -57,7 +57,7 @@ let BaseButton = class BaseButton extends LitElement {
         return [undefined, undefined];
     }
 };
-BaseButton.styles = css `:host,span {
+BaseSwitch.styles = css `:host,span {
       display: inline-flex;
       font-size: inherit;
       position: relative;
@@ -166,23 +166,23 @@ BaseButton.styles = css `:host,span {
     }`;
 __decorate([
     property({ type: Boolean })
-], BaseButton.prototype, "disabled", void 0);
+], BaseSwitch.prototype, "disabled", void 0);
 __decorate([
     property({ type: Boolean })
-], BaseButton.prototype, "checked", void 0);
+], BaseSwitch.prototype, "checked", void 0);
 __decorate([
     property({ type: Boolean })
-], BaseButton.prototype, "fat", void 0);
+], BaseSwitch.prototype, "fat", void 0);
 __decorate([
     property()
-], BaseButton.prototype, "def", void 0);
+], BaseSwitch.prototype, "def", void 0);
 __decorate([
     property()
-], BaseButton.prototype, "name", void 0);
+], BaseSwitch.prototype, "name", void 0);
 __decorate([
     property()
-], BaseButton.prototype, "value", void 0);
-BaseButton = __decorate([
-    customElement(name.tag("switch-item"))
-], BaseButton);
-export { BaseButton };
+], BaseSwitch.prototype, "value", void 0);
+BaseSwitch = __decorate([
+    customElement(name.tag("base-switch"))
+], BaseSwitch);
+export { BaseSwitch };

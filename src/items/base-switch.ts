@@ -1,8 +1,8 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { name } from "../config";
-@customElement(name.tag("switch-item"))
-export class BaseButton extends LitElement {
+@customElement(name.tag("base-switch"))
+export class BaseSwitch extends LitElement {
   get _input() {
     return this.renderRoot?.querySelector('input') ?? null;
   }

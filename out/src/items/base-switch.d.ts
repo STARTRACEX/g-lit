@@ -1,5 +1,5 @@
 import { LitElement } from "lit";
-export declare class BaseButton extends LitElement {
+export declare class BaseSwitch extends LitElement {
     get _input(): HTMLInputElement;
     static styles: import("lit").CSSResult;
     disabled: boolean;
@@ -14,4 +14,4 @@ export declare class BaseButton extends LitElement {
     changecheck(e: any): void;
     namevalue(): string[];
 }
-//# sourceMappingURL=switch-item.d.ts.map
+//# sourceMappingURL=base-switch.d.ts.map
