@@ -15,7 +15,7 @@ Import the js file contained in this repository into the page
 <script type="module" src="./public/lit.all.js"></script>
 ```
 
-**Note** Don't forget flag `type="module"` 
+**Note** Don't forget flag `type="module"`
 
 ### In npm
 
