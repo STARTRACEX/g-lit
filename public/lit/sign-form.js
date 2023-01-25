@@ -87,4 +87,5 @@ export class SignForm extends LitElement {
     this.submit(x);
   }
 }
-customElements.define('sign-form', SignForm);
+import { name } from './config.js';
+customElements.define(name.tag('sign-form'), SignForm);

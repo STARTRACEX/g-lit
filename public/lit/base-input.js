@@ -26,7 +26,6 @@ export class BaseInput extends LitElement {
     this.step = 1;
   }
   static styles = css`
-    
   :host{
     --shadow: #000000ab;
     --control: #fafafa;
@@ -151,4 +150,5 @@ export class BaseInput extends LitElement {
     }
   }
 }
-customElements.define('base-input', BaseInput);
+import { name } from './config.js';
+customElements.define(name.tag('base-input'), BaseInput);

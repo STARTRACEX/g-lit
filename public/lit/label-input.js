@@ -108,4 +108,5 @@ export class LabelInput extends LitElement {
     }
   }
 }
-customElements.define('label-input', LabelInput);
+import { name } from './config.js';
+customElements.define(name.tag('label-input'), LabelInput);

@@ -29,14 +29,14 @@ export class OVText extends LitElement {
       return html`<div class="overbreath"><span class="overbreathpart"><span class="overbreathroot">${this.t1}</span><span class="overbreathtext">${this.t1}</span></span><span class="overbreathpart"><span class="overbreathroot">${this.t2}</span><span class="overbreathtext">${this.t2}</span></span><span class="overbreathpart"><span class="overbreathroot">${this.t3}</span><span class="overbreathtext">${this.t3}</span></span></div>`;
    }
 }
-customElements.define("ov-text", OVText);
+
 export class OVPort extends LitElement {
    static styles = styled;
    render() {
       return html`<div class="overbreathflow"><slot></slot></div>`;
    }
 }
-customElements.define("ov-port", OVPort);
+
 export class OVButton extends LitElement {
    static styles = [styled, css`::slotted(*){
       background-color: transparent;
@@ -47,5 +47,8 @@ export class OVButton extends LitElement {
       return html`<div class="overbreathbord"><div class="overbreathflow"></div><button class="overbreathbutton"><slot></slot></button></div>`;
    }
 }
-customElements.define("ov-button", OVButton);
+import { name } from './config.js';
+customElements.define(name.tag("ov-text"), OVText);
+customElements.define(name.tag("ov-port"), OVPort);
+customElements.define(name.tag("ov-button"), OVButton);
 

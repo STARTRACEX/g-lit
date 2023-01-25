@@ -42,4 +42,5 @@ export class DivierLine extends LitElement {
     `;
   }
 }
-customElements.define('divier-line', DivierLine);
+import { name } from './config.js';
+customElements.define(name.tag('divier-line'), DivierLine);

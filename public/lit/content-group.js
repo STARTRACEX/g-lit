@@ -139,7 +139,7 @@ export class SectionGroup extends LitElement {
   }
 
 }
-customElements.define('section-group', SectionGroup);
+
 export class ContentGroup extends LitElement {
   get _loading() {
     return this.shadowRoot.querySelector('slot[name="loading"]');
@@ -195,4 +195,6 @@ export class ContentGroup extends LitElement {
     return html`${repeat(this.children, (el) => html`${el}`)}`;
   }
 }
-customElements.define('content-group', ContentGroup);
+import { name } from './config.js';
+customElements.define(name.tag('section-group'), SectionGroup);
+customElements.define(name.tag('content-group'), ContentGroup);

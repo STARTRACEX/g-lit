@@ -24,7 +24,7 @@ export class AsidenavLayout extends LitElement {
     `;
   }
 }
-customElements.define('asidenav-layout', AsidenavLayout);
+
 export class NavLayout extends LitElement {
   static styles = css`
   :host{
@@ -81,7 +81,9 @@ export class NavLayout extends LitElement {
     `;
   }
 }
-customElements.define('nav-layout', NavLayout);
+import { name } from './config.js';
+customElements.define(name.tag('asidenav-layout'), AsidenavLayout);
+customElements.define(name.tag('nav-layout'), NavLayout);
 const personal = html`<div class="personal">
     <a href="/account">
       <svg t="1650462239564" class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="1703" width="32" height="32"><path d="M512 0a512 512 0 1 1 0 1024A512 512 0 0 1 512 0z m0 654.222222a425.927111 425.927111 0 0 0-336.440889 164.238222A454.087111 454.087111 0 0 0 512 967.111111a453.973333 453.973333 0 0 0 336.440889-148.593778A425.699556 425.699556 0 0 0 512 654.222222zM512 56.888889a455.111111 455.111111 0 0 0-372.849778 716.231111 482.247111 482.247111 0 0 1 280.519111-166.968889 227.555556 227.555556 0 1 1 184.604445 0.113778 482.133333 482.133333 0 0 1 280.576 166.684444A455.111111 455.111111 0 0 0 512 56.888889z m0 170.666667a170.666667 170.666667 0 1 0 0 341.333333 170.666667 170.666667 0 0 0 0-341.333333z m102.627556 176.526222a28.444444 28.444444 0 0 1 8.021333 35.555555l-2.730667 4.323556-8.817778 11.548444a125.553778 125.553778 0 0 1-209.237333-14.904889 28.444444 28.444444 0 0 1 49.607111-27.875555 68.664889 68.664889 0 0 0 109.909334 13.539555l4.551111-5.347555 8.817777-11.548445a28.444444 28.444444 0 0 1 39.879112-5.290666z" fill="#f7f7f7" p-id="1704"></path></svg>

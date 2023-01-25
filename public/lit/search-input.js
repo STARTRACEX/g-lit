@@ -75,7 +75,7 @@ export class SearchInput extends LitElement {
     }
   }
 }
-customElements.define("search-input", SearchInput);
+
 const e = [
   { action: "https://www.google.com/search", name: "q", pla: "Google" },
   { action: "https://www.baidu.com/s", name: "wd", pla: "百度" },
@@ -110,4 +110,6 @@ export class WSearchInput extends LitElement {
     </form>`;
   }
 }
-customElements.define("search-w", WSearchInput);
+import { name } from './config.js';
+customElements.define(name.tag("search-input"), SearchInput);
+customElements.define(name.tag("search-w"), WSearchInput);

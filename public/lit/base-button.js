@@ -113,4 +113,5 @@ export class BaseButton extends LitElement {
   }
   
 }
-customElements.define('base-button', BaseButton);
+import { name } from './config.js';
+customElements.define(name.tag('base-button'), BaseButton);

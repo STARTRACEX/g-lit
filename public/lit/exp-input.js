@@ -203,4 +203,5 @@ export class ExpInput extends LitElement {
     return [this.name, this.value];
   }
 }
-customElements.define('exp-input', ExpInput);
+import { name } from './config.js';
+customElements.define(name.tag('exp-input'), ExpInput);
