@@ -1,5 +1,5 @@
 import { LitElement, html, css } from '../core/lit-core.min.js';
-export class SwitchItem extends LitElement {
+export class BaseSwitch extends LitElement {
   static styles = css`:host,span {
       display: inline-flex;
       font-size: inherit;
@@ -152,4 +152,4 @@ export class SwitchItem extends LitElement {
     return [undefined, undefined];
   }
 }
-customElements.define('switch-item', SwitchItem);
+customElements.define('base-switch', BaseSwitch);
