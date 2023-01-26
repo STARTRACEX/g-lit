@@ -3,9 +3,9 @@ import "./nav-layout.js";
 import "./ov-effect.js";
 import "./search-input.js";
 import "./sign-form.js";
-import "./divier-line.js"
-import "./base-input.js"
-import "./exp-input.js"
-import "./base-button.js"
-import "./button-group.js"
-import "./base-switch.js"
+import "./divier-line.js";
+import "./base-input.js";
+import "./exp-input.js";
+import "./base-button.js";
+import "./button-group.js";
+import "./base-switch.js";

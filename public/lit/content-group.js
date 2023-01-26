@@ -137,7 +137,6 @@ export class SectionGroup extends LitElement {
     this.split = false;
     this.index = name;
   }
-
 }
 
 export class ContentGroup extends LitElement {

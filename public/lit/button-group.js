@@ -48,4 +48,4 @@ export class ButtonGroup extends LitElement {
   }
 }
 import { name } from './config.js';
-customElements.define(name.tag("button-group"),ButtonGroup)
+customElements.define(name.tag("button-group"), ButtonGroup);

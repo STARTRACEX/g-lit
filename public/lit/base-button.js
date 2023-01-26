@@ -92,7 +92,7 @@ const colorful = css`.white {
     --background-hover: #1db68f;
     --background-active: #248067;
     --border-active: var(--background-active);
-  }`
+  }`;
 export class BaseButton extends LitElement {
   static properties = {
     disabled: { type: Boolean },
@@ -100,7 +100,7 @@ export class BaseButton extends LitElement {
     ghost: { type: Boolean },
     color: {},
   };
-  static styles = [originstyle,colorful]
+  static styles = [originstyle, colorful];
   render() {
     return html`<button @click=${this.click} ?disabled=${this.disabled} class=${classMap({ round: this.round, ghost: this.ghost, [this.color]: this.color })}>
         <div><slot name="pre"></slot></div>
@@ -111,7 +111,7 @@ export class BaseButton extends LitElement {
   click() {
     this.dispatchEvent(new CustomEvent('click', { bubbles: true }));
   }
-  
+
 }
 import { name } from './config.js';
 customElements.define(name.tag('base-button'), BaseButton);

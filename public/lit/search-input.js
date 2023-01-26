@@ -1,4 +1,5 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
+import { name, theme } from './config.js';
 export class SearchInput extends LitElement {
   static properties = {
     query: {},
@@ -25,10 +26,18 @@ export class SearchInput extends LitElement {
     };
   }
 
-  static styles = css`form{
-    --text:rgb(240 240 240);
-    --ground:rgb(88 88 88);
-    color:var(--text);background-color:var(--ground);border-radius:15.6px;padding:0;position:relative;width:100%;position:relative;margin:0}button{position:absolute;right:0;padding-left:0}ul{border-top:var(--text) 1px solid;margin:0;list-style:none;padding:.5em}li{margin:.5px;padding-left:5px}button,input{height:36px;border:0;background-color:transparent;outline:none}input{--mr:42px;margin-right:var(--mr);padding-left:15.6px;height:2em;width:calc(100% - var(--mr));padding-right:0;font-size:18px;color:var(--text)}svg path{fill:var(--text)}`;
+  static styles = [theme, css`
+  :host{
+    display: inline-flex;
+    border-radius: 15.6px;
+    background-color:  var(--input-background);
+  }
+  form{
+    background-color:inherit;
+    color:var(--text);
+    border-radius:inherit;
+    padding:0;position:relative;width:100%;position:relative;margin:0}button{position:absolute;right:0;padding-left:0}ul{border-top:var(--text) 1px solid;margin:0;list-style:none;padding:.5em}li{margin:.5px;padding-left:5px}button,input{height:36px;border:0;background-color:transparent;outline:none}input{--mr:42px;margin-right:var(--mr);padding-left:15.6px;height:2em;width:calc(100% - var(--mr));padding-right:0;font-size:18px;color:var(--text)}svg path{fill:var(--text)}`
+  ];
   render() {
     return html`<form action=${this.action} method=${this.method}>
       <input name=${this.name} @input=${this.handleinput} autocomplete="off" value=${this.value} >
@@ -40,7 +49,7 @@ export class SearchInput extends LitElement {
           <li key=${i}>
           ${v}
           </li>`)}
-        </ul>`:""}
+        </ul>`: ""}
     </form>`;
   }
   handlesearch(e) {
@@ -110,6 +119,5 @@ export class WSearchInput extends LitElement {
     </form>`;
   }
 }
-import { name } from './config.js';
 customElements.define(name.tag("search-input"), SearchInput);
 customElements.define(name.tag("search-w"), WSearchInput);

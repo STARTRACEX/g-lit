@@ -1,6 +1,7 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
+import { name,theme} from './config.js';
 export class LabelInput extends LitElement {
-  static styles = css`
+  static styles = [theme, css`
   :host{
     background-color: inherit;
     margin:.25em;
@@ -29,7 +30,7 @@ export class LabelInput extends LitElement {
     outline: 0;
   }
   fieldset:has(input:focus) {
-    outline: 1.2px solid rgb(7 200 234 / 56%);
+    outline: 1.2px solid var(--input-outline-focus);
   }
   @media screen and (max-width:540px) {
     label {
@@ -49,18 +50,17 @@ export class LabelInput extends LitElement {
     width:1em;
   }
   fieldset {
-    background-color: rgb(68 68 68 / 21%);
+    background-color: var(--input-background);
     display: flex;
     padding: 0;
     border-radius: 4px;
     outline: none;
     border: 0;
-    /* width: 100%; */
     margin: 0;
   }
   .password{
     margin-right:-1em
-  }`;
+  }`];
   static properties = {
     label: {},
     name: {},
@@ -97,7 +97,6 @@ export class LabelInput extends LitElement {
     this.value = this.def || "";
     this._input.value = this.def || "";
   }
-  
   _passwordtype() {
     if (this._input.type === "password") {
       this._input.type = "text";
@@ -109,5 +108,4 @@ export class LabelInput extends LitElement {
     return [this.name, this.value];
   }
 }
-import { name } from './config.js';
 customElements.define(name.tag('label-input'), LabelInput);

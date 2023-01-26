@@ -31,15 +31,13 @@ export class DivierLine extends LitElement {
     this.after = "auto";
   }
   render() {
-    return html`
-    <div class=${classMap({ v: this.v, reversal: this.reversal })}>
-      <nav>${this.bar()}</nav>
-    <main>
-      ${this.slots()}
+    var hrstyle = `.before{height:${this.b};max-width:${this.Before}}.after{height:${this.b};max-width:${this.After}}.v .before{width:${this.b};max-height:${this.Before}}.v .after{width:${this.b};max-height:${this.After}}`;
+    return html`<div class=${this.v ? "v" : ""}>
+    <style>${hrstyle}</style>
+      <hr class="before"/>
       <slot></slot>
-    </main>
-    </div>
-    `;
+      <hr class="after"/>
+    </div>`;
   }
 }
 import { name } from './config.js';
