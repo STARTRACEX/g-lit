@@ -1,16 +1,12 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name, theme } from '../config';
 @customElement(name.tag('asidenav-layout'))
 export class AsidenavLayout extends LitElement {
   @property({ type: Number }) m = 720;
-  static styles = css`:host{
-    --nav: rgb(28  28  31);
-    --a: rgb(40 160 150 / 56%);
-    --txt:rgb(240 240 240)
-  }nav{background-color:var(--nav)}nav{--nav-short:48px;--nav-pd:4px;min-height:var(--nav-short);min-width:var(--nav-short);box-sizing:border-box;padding:var(--nav-pd);z-index:900;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;position:fixed;top:0;left:0;width:fit-content;height:100vh}
-  
-  `;
+  static styles = [theme, css`
+  nav{background-color:var(--nav-background)}nav{--nav-short:48px;--nav-pd:4px;min-height:var(--nav-short);min-width:var(--nav-short);box-sizing:border-box;padding:var(--nav-pd);z-index:900;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;position:fixed;top:0;left:0;height:100vh}
+  `];
   render() {
     return html`
     <nav>
@@ -22,14 +18,13 @@ export class AsidenavLayout extends LitElement {
 }
 @customElement(name.tag('nav-layout'))
 export class NavLayout extends LitElement {
-  static styles = css`:host{
-    --nav:rgb(28  28  31);
-    --a:rgb(40 160 150 / 56%);
-    --txt:rgb(240 240 240);
-    min-height:100%;
-    display: flex;flex-direction: column;justify-content: space-between;
-  }nav{background-color:var(--nav)}.option{background-color:var(--nav)}.option a:hover{background-color:var(--a)}h1,a{color:var(--txt)}nav{height:48px;z-index:999;display:flex;justify-content:space-between;align-items:center;width:100%;padding:0 2.5%;box-sizing:border-box;margin:0}a{text-decoration:none;color:rgb(240,240,240)}h1{font-weight:normal;margin:0;font-size:145%}nav>div{height:100%;display:flex;flex-direction:row}.personal,.setting{height:40px;margin-top:3px;padding:2.5px 5px;position:relative}.option{width:max-content;visibility:hidden;overflow:hidden;position:absolute;top:44px;z-index:999}.option:hover,.setting:hover>.option,.personal:hover>.option{visibility:visible}.setting .option{right:-15.5%;padding-bottom:0.2px}.personal .option{right:-28.4%}.option a{height:46px;line-height:46px;text-align:center;display:block;padding:0px 18px;text-align:center;transition:background-color 152ms}.option a:hover{transform:scale(1.025)}
-  `;
+  static styles = [theme,
+    css`
+  :host{
+      display: flex;flex-flow: column nowrap;justify-content: space-between;align-items: center;min-height: 100%;
+  }
+  nav{background-color:var(--nav-background)}.option{background-color:var(--nav-background)}.option a:hover{background-color:var(--nav-super)}h1,a{color:var(--text)}nav{height:48px;z-index:999;display:flex;justify-content:space-between;align-items:center;width:100%;padding:0 2.5%;box-sizing:border-box;margin:auto}a{text-decoration:none;color:rgb(240,240,240)}h1{font-weight:normal;margin:0;font-size:145%}nav>div{height:100%;display:flex;flex-direction:row}.personal,.setting{height:40px;margin-top:3px;padding:2.5px 5px;position:relative}.option{width:max-content;visibility:hidden;overflow:hidden;position:absolute;top:44px;z-index:999}.option:hover,.setting:hover>.option,.personal:hover>.option{visibility:visible}.setting .option{right:-15.5%;padding-bottom:0.2px}.personal .option{right:-28.4%}.option a{height:46px;line-height:46px;text-align:center;display:block;padding:0px 18px;text-align:center;transition:background-color 152ms}.option a:hover{transform:scale(1.025)}
+  `];
   @property() title = '';
   @property({ type: Number }) set = 2;
   @property({ type: Boolean }) foo = false;

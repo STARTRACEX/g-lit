@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name, theme } from '../config';
 type inputtype = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
 @customElement(name.tag('base-input'))
 export class BaseInput extends LitElement {
@@ -28,18 +28,16 @@ export class BaseInput extends LitElement {
     this.max = 100;
     this.step = 1;
   }
-  static styles = css`
-    
+  static styles = [theme, css`
   :host{
-    --shadow: #000000ab;
-    --control: #fafafa;
-    --backgrond: #2f81ed;
-    --surface: #4de11c;
+    display: inline-flex;
+    background-color: transparent !important;
   }
   main{
     width: 100%;
-      display: inline-flex;
-      align-items: center
+    margin: .25em 0;
+    display: inline-flex;
+    align-items: center;
   }
   .input[type="color"] {
       padding: 0;
@@ -68,7 +66,7 @@ export class BaseInput extends LitElement {
     align-items: center;
     box-shadow: 0 .1em .1em var(--shadow);
     border-radius: .2em;
-    background-color:var(--backgrond);
+    background-color:var(--input-false);
   }
   .range input~i {
     position: absolute;
@@ -76,10 +74,9 @@ export class BaseInput extends LitElement {
     width: 50%;
     pointer-events: none ;
     border-radius: 10px;
-    background-color: var(--surface);
+    background-color: var(--input-true);
     height: calc(.5em - 1.1px);
   }
-
   .range input {
   margin: 0px -0.5em;
   width: calc(100% + 0.5em);
@@ -103,11 +100,11 @@ export class BaseInput extends LitElement {
     height: 1em;
     width: 1em;
     margin-top: -0.25em;
-    background: var(--control);
+    background-color: var(--input-control);
     border-radius: 50%;
     border: solid 0.125em rgba(0, 221, 255, 0.5);
     box-shadow: 0 .1em .1em var(--shadow);
-  }`;
+  }`];;
   render() {
     if (!this.name) this.name = this.label || this.type;
     return html`<main>

@@ -8,7 +8,7 @@ export declare class LabelInput extends LitElement {
     name: string;
     id: string;
     value: string;
-    static styles: import("lit").CSSResult;
+    static styles: import("lit").CSSResult[];
     get _input(): HTMLInputElement;
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;

@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name, theme } from '../config';
 let SearchInput = class SearchInput extends LitElement {
     constructor() {
         super(...arguments);
@@ -74,10 +74,18 @@ let SearchInput = class SearchInput extends LitElement {
         }
     }
 };
-SearchInput.styles = css `form{
-    --text:rgb(240 240 240);
-    --ground:rgb(88 88 88);
-    color:var(--text);background-color:var(--ground);border-radius:15.6px;padding:0;position:relative;width:100%;position:relative;margin:0}button{position:absolute;right:0;padding-left:0}ul{border-top:var(--text) 1px solid;margin:0;list-style:none;padding:.5em}li{margin:.5px;padding-left:5px}button,input{height:36px;border:0;background-color:transparent;outline:none}input{--mr:42px;margin-right:var(--mr);padding-left:15.6px;height:2em;width:calc(100% - var(--mr));padding-right:0;font-size:18px;color:var(--text)}svg path{fill:var(--text)}`;
+SearchInput.styles = [theme, css `
+  :host{
+    display: inline-flex;
+    border-radius: 15.6px;
+    background-color:  var(--input-background);
+  }
+  form{
+    background-color:inherit;
+    color:var(--text);
+    border-radius:inherit;
+    padding:0;position:relative;width:100%;position:relative;margin:0}button{position:absolute;right:0;padding-left:0}ul{border-top:var(--text) 1px solid;margin:0;list-style:none;padding:.5em}li{margin:.5px;padding-left:5px}button,input{height:36px;border:0;background-color:transparent;outline:none}input{--mr:42px;margin-right:var(--mr);padding-left:15.6px;height:2em;width:calc(100% - var(--mr));padding-right:0;font-size:18px;color:var(--text)}svg path{fill:var(--text)}`
+];
 __decorate([
     property()
 ], SearchInput.prototype, "query", void 0);

@@ -3,4 +3,5 @@ export declare const name: {
     suffix: string;
     tag: (origin: any) => string;
 };
+export declare const theme: import("lit").CSSResult;
 //# sourceMappingURL=config.d.ts.map

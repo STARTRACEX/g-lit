@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { name } from "../config";
+import { name, theme } from "../config";
 let BaseSwitch = class BaseSwitch extends LitElement {
     constructor() {
         super(...arguments);
@@ -57,7 +57,7 @@ let BaseSwitch = class BaseSwitch extends LitElement {
         return [undefined, undefined];
     }
 };
-BaseSwitch.styles = css `:host,span {
+BaseSwitch.styles = [theme, css `:host,span {
       display: inline-flex;
       font-size: inherit;
       position: relative;
@@ -75,7 +75,7 @@ BaseSwitch.styles = css `:host,span {
       font-size: inherit;
       width: 3em;
       height: 1.5em;
-      background: #ccc;
+      background-color: var(--input-false);
       border-radius: inherit;
       transition: all .3s;
     }
@@ -123,23 +123,23 @@ BaseSwitch.styles = css `:host,span {
 
     .rect input:checked~aside .true,
     .rect .false {
-      background-color: #4aafdf;
+      background-color: var(--input-true);
     }
 
     .rect input:checked~aside .false,
     .rect .true {
-      background-color: #ccc;
+      background-color: var(--input-false);
     }
 
     .fat aside {
-      width: 1.26em;
-      height: 1.26em;
+      width: 1.20em;
+      height: 1.20em;
       border-radius: 50%;
-      background: #fafafa;
+      background-color: var(--input-control);
       transition: .3s;
-      left: .12em;
-      top: .12em;
-      bottom: .12em;
+      left: .15em;
+      top: .15em;
+      bottom: .15em;
     }
 
     .fat {
@@ -147,12 +147,12 @@ BaseSwitch.styles = css `:host,span {
     }
 
     .fat input:checked {
-      background: #4AAFDF;
+      background-color: var(--input-true);
     }
 
     .fat input:checked~aside {
-      left: calc(100% - .12em - 1.26em);
-      right: 0.12em;
+      left: calc(100% - .15em - 1.20em);
+      right: 0.15em;
     }
 
     .fat input:checked~aside .true,
@@ -163,7 +163,7 @@ BaseSwitch.styles = css `:host,span {
     .fat input:checked~aside .false,
     .fat .true {
       display: none;
-    }`;
+    }`];
 __decorate([
     property({ type: Boolean })
 ], BaseSwitch.prototype, "disabled", void 0);

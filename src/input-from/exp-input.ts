@@ -1,169 +1,143 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name, theme } from '../config';
 @customElement(name.tag('exp-input'))
 export class ExpInput extends LitElement {
-  static styles = css`
-  :host{
-    --outline: rgb(210, 47, 47);
-    --outline-focus: rgb(169, 202, 35);
-    --background-hover: rgb(230, 230, 230);
-    --background-focus: rgb(235, 235, 235);
-    --legend-focus: rgb(39, 123, 234);
-    --lengend: rgb(28, 209, 73);
-  }
-  *{
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  div {
-    margin-top: .25em;
-    position: relative;
-    border-radius: 4px;
-    font-size:max(14px, 100%)
-  }
-
-  legend {
-    padding: 0;
-    width: 0;
-    max-width: fit-content;
-    transform: translateY(.95em);
-    transition: all .3s ease-in, background-color .2s ease-out;
-    border-radius: inherit;
-    color: var(--lengend);
-    background-color: none;
-  }
-
-  fieldset {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    box-sizing: border-box;
-    bottom: 2px;
-    right: 0;
-    margin: 0;
-    padding-top: 0;
-    padding-left: .25em;
-    padding-bottom: 0;
-    border: 1px var(--outline) solid;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: -1;
-    overflow: hidden;
-    transition: all .3s ease-out;
-    background-color: inherit;
+  static styles = [theme, css`
+    :host{
+      display: inline-block;
+    }
+    .input:focus {
+      --input-outline: var(--input-outline-focus) !important;
     }
 
-  .input {
-    height: 2.1em;
-    min-height: 2.1em;
-    margin-top: 6px;
-    margin-bottom: 2px;
-    font-size: inherit;
-    width: 100%;
-    box-sizing: border-box;
-    border: 0;
-    outline: none;
-    background-color: initial;
-    padding: .5em .5em .3em;
-    border-radius: inherit;
-    color: inherit;
-  }
+    div:hover {
+      --input-background: var(--input-background-hover) !important;
+    }
 
-  span {
-    display: flex;
-    height: 16px;
-    align-items: center;
-    z-index:3;
-    padding:0 .35em
-  }
-  span:empty{
-    padding:0;
-  }
-  .input:valid~fieldset legend,
-  .input:focus~fieldset legend {
-    color: var(--legend-focus);
-    background-color: var(--background-focus);
-    font-size: 60%;
-    transform: translateY(-1.5px);
-    width: 100%;
-    max-width: min-content;
-  }
+    .outline fieldset {
+      border-color: var(--input-outline);
+    }
 
-  .input:valid~fieldset,
-  .input:focus~fieldset {
-    border-color: var(--outline-focus); 
-    background-color: var(--background-focus) !important;
-  }
+    .underline::after {
+      content: "";
+      position: absolute;
+      bottom: -.1em;
+      width: calc(100% - .5em);
+      margin: 0 .25em;
+      height: .1em;
+      border-radius: inherit;
+      background-color: var(--input-outline);
+    }
 
-  textarea {
-    min-height: 2.1em;
-    overflow-x: hidden;
-    resize: vertical;
-  }
-  
-  .underline fieldset {
-    border-color: transparent !important;
-  }
+    .underline fieldset {
+      border-color: transparent !important;
+    }
 
-  .input:hover~fieldset {
-    background-color: var(--background-hover);
-  }
+    .filed {
+      background-color: var(--input-background);
+      outline: .1em solid var(--input-outline);
+    }
 
-  .underline fieldset::after,
-  .underline fieldset::before {
-    content: "";
-    position: absolute;
-    bottom: 2px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    height: 1.2px;
-    max-width: calc(100% - .8em);
-  }
+    .filed fieldset {
+      border-color: transparent !important;
+      background-color: transparent !important;
+    }
 
-  .underline fieldset::after {
-    width: 0%;
-    background-color: var(--outline-focus);
-    transition: all .3s ease-out;
-  }
+    :focus~fieldset,
+    :valid~fieldset {
+      border-color: var(--input-outline-focus);
+    }
 
-  .underline fieldset::before {
-    width: 100%;
-    background-color: var(--outline);
-  }
+    * {
+      border-radius: inherit;
+      color: inherit;
+      transition: all .3s;
+    }
 
-  .underline .input:focus~fieldset::after,
-  .underline .input:valid~fieldset::after {
-    width: 100%;
-  }
-  .filed{
-    width: calc(100% - 1.9px);
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 4px;
-  }
-  .filed fieldset {
-    outline: 1px solid var(--outline);
-    border:0;
-    background-color: transparent !important;
-  }
-  .filed .input{
-    height: 1.65em;
-    min-height: 1.65em;
-    margin-bottom:0;
-  }
-  .filed .input:focus~fieldset,
-  .filed .input:valid~fieldset {
-    outline: 1px solid var(--outline-focus);
-    border:0;
-    background-color: transparent !important;
-  }
-  .filed legend{
-      transform: translateY(.5em);
-    background-color:transparent !important;
-  }
-  `;
+    div:has(span:empty) {
+      min-height: 1em !important;
+    }
+
+    div {
+      position: relative;
+      width: 100%;
+      min-height: 2em;
+      display: inline-flex;
+    }
+
+    .input {
+      margin-top: .71em;
+      border: 0;
+      width: 100%;
+      box-sizing: border-box;
+      padding: .3em;
+      font-size: inherit;
+      outline: 0;
+      resize: vertical;
+      min-height: 1.4em;
+      height: 1.4em;
+      background-color: transparent;
+      z-index: 2;
+    }
+
+    fieldset {
+      background-color: var(--input-background);
+      pointer-events: none;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      height: 100%;
+      bottom: 0;
+      width: inherit;
+      margin: -.1em;
+      border: .1em solid;
+    }
+
+    legend span {
+      display: inline-block;
+      padding: 0 .3em;
+      background-color: var(--input-background);
+      font-size: inherit;
+    }
+
+    legend {
+      margin-left: 5px;
+      margin: 0;
+      padding: 0;
+      transition: all .3s;
+      width: 0;
+      height: 1em;
+      transform: translateY(.8em);
+    }
+
+    div:has(span:empty) legend {
+      display: none;
+    }
+
+    div:has(span:empty) .input {
+      margin: 0;
+    }
+
+    :focus+fieldset legend,
+    :valid+fieldset legend {
+      transform: translateY(0) !important;
+    }
+
+    .filed legend {
+      transform: translateY(.5em) !important;
+    }
+    .filed span{
+      background-color:transparent;
+    }
+
+    :focus+fieldset span,
+    :valid+fieldset span {
+      font-size: 70%;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  `];
   @property() label = "";
   @property() name = "";
   @property() id = "";
@@ -179,10 +153,10 @@ export class ExpInput extends LitElement {
   render() {
     if (!this.name) this.name = this.label || this.type;
     return html`<div class=${this.base}>
-    ${this.type !== "textaera" ? html`<input class="input" required value=${this.value || this.def} @input=${this.input} type=${this.type} placeholder=${this.pla} name=${this.name}>` : html`<textarea class="input" required value=${this.value || this.def} @input=${this.input} placeholder=${this.pla} name=${this.name}></textarea>`}
+    ${this.type !== "textaera" ? html`<input class="input" required title="" value=${this.value || this.def} @input=${this.input} type=${this.type} placeholder=${this.pla} name=${this.name}>` : html`<textarea class="input" required title="" value=${this.value || this.def} @input=${this.input} placeholder=${this.pla} name=${this.name}></textarea>`}
     <fieldset>
       <legend><span>${this.label}</span></legend>
-    </fieldset><style>.input:valid~fieldset legend,.input:focus~fieldset legend{margin-left: ${this.offset || 0} !important;}</style>
+    </fieldset><style>:valid~fieldset legend,:focus~fieldset legend{margin-left: ${this.offset || 0} !important;}</style>
   </div>`;
   }
 
@@ -192,7 +166,8 @@ export class ExpInput extends LitElement {
   input(i) {
     this.value = i.target.value;
   }
-  _clear() {
+  reset() {
+    this.value = this.def || "";
     this._input.value = this.def || null;
   }
   namevalue() {

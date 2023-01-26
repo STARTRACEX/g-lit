@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 export declare class ExpInput extends LitElement {
-    static styles: import("lit").CSSResult;
+    static styles: import("lit").CSSResult[];
     label: string;
     name: string;
     id: string;
@@ -14,7 +14,7 @@ export declare class ExpInput extends LitElement {
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
     input(i: any): void;
-    _clear(): void;
+    reset(): void;
     namevalue(): string[];
 }
 //# sourceMappingURL=exp-input.d.ts.map

@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name, theme } from '../config';
 let LabelInput = class LabelInput extends LitElement {
     constructor() {
         super(...arguments);
@@ -55,7 +55,7 @@ let LabelInput = class LabelInput extends LitElement {
         return [this.name, this.value];
     }
 };
-LabelInput.styles = css `
+LabelInput.styles = [theme, css `
   :host{
     background-color: inherit;
     margin:.25em;
@@ -84,7 +84,7 @@ LabelInput.styles = css `
     outline: 0;
   }
   fieldset:has(input:focus) {
-    outline: 1.2px solid rgb(7 200 234 / 56%);
+    outline: 1.2px solid var(--input-outline-focus);
   }
   @media screen and (max-width:540px) {
     label {
@@ -104,18 +104,17 @@ LabelInput.styles = css `
     width:1em;
   }
   fieldset {
-    background-color: rgb(68 68 68 / 21%);
+    background-color: var(--input-background);
     display: flex;
     padding: 0;
     border-radius: 4px;
     outline: none;
     border: 0;
-    /* width: 100%; */
     margin: 0;
   }
   .password{
     margin-right:-1em
-  }`;
+  }`];
 __decorate([
     property()
 ], LabelInput.prototype, "type", void 0);

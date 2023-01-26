@@ -10,7 +10,7 @@ export declare class SearchInput extends LitElement {
     value: string;
     list: any[];
     submit: (x: any) => string[];
-    static styles: import("lit").CSSResult;
+    static styles: import("lit").CSSResult[];
     render(): import("lit-html").TemplateResult<1>;
     handlesearch(e: any): void;
     handleinput(e: any): void;

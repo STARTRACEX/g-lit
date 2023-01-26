@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name, theme } from '../config';
 type inputtype = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
 @customElement(name.tag('label-input'))
 export class LabelInput extends LitElement {
@@ -12,7 +12,7 @@ export class LabelInput extends LitElement {
   @property() id = "";
   @property() value = "";
 
-  static styles = css`
+  static styles = [theme, css`
   :host{
     background-color: inherit;
     margin:.25em;
@@ -41,7 +41,7 @@ export class LabelInput extends LitElement {
     outline: 0;
   }
   fieldset:has(input:focus) {
-    outline: 1.2px solid rgb(7 200 234 / 56%);
+    outline: 1.2px solid var(--input-outline-focus);
   }
   @media screen and (max-width:540px) {
     label {
@@ -61,18 +61,17 @@ export class LabelInput extends LitElement {
     width:1em;
   }
   fieldset {
-    background-color: rgb(68 68 68 / 21%);
+    background-color: var(--input-background);
     display: flex;
     padding: 0;
     border-radius: 4px;
     outline: none;
     border: 0;
-    /* width: 100%; */
     margin: 0;
   }
   .password{
     margin-right:-1em
-  }`;
+  }`];
 
   get _input() {
     return this.renderRoot?.querySelector('input') ?? null;

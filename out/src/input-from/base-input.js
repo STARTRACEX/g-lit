@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name, theme } from '../config';
 let BaseInput = class BaseInput extends LitElement {
     constructor() {
         super();
@@ -32,6 +32,7 @@ let BaseInput = class BaseInput extends LitElement {
     get _ranged() {
         return this.shadowRoot.querySelector('.range i');
     }
+    ;
     render() {
         if (!this.name)
             this.name = this.label || this.type;
@@ -84,18 +85,16 @@ let BaseInput = class BaseInput extends LitElement {
         return [this.name, this.value];
     }
 };
-BaseInput.styles = css `
-    
+BaseInput.styles = [theme, css `
   :host{
-    --shadow: #000000ab;
-    --control: #fafafa;
-    --backgrond: #2f81ed;
-    --surface: #4de11c;
+    display: inline-flex;
+    background-color: transparent !important;
   }
   main{
     width: 100%;
-      display: inline-flex;
-      align-items: center
+    margin: .25em 0;
+    display: inline-flex;
+    align-items: center;
   }
   .input[type="color"] {
       padding: 0;
@@ -124,7 +123,7 @@ BaseInput.styles = css `
     align-items: center;
     box-shadow: 0 .1em .1em var(--shadow);
     border-radius: .2em;
-    background-color:var(--backgrond);
+    background-color:var(--input-false);
   }
   .range input~i {
     position: absolute;
@@ -132,10 +131,9 @@ BaseInput.styles = css `
     width: 50%;
     pointer-events: none ;
     border-radius: 10px;
-    background-color: var(--surface);
+    background-color: var(--input-true);
     height: calc(.5em - 1.1px);
   }
-
   .range input {
   margin: 0px -0.5em;
   width: calc(100% + 0.5em);
@@ -159,11 +157,11 @@ BaseInput.styles = css `
     height: 1em;
     width: 1em;
     margin-top: -0.25em;
-    background: var(--control);
+    background-color: var(--input-control);
     border-radius: 50%;
     border: solid 0.125em rgba(0, 221, 255, 0.5);
     box-shadow: 0 .1em .1em var(--shadow);
-  }`;
+  }`];
 __decorate([
     property()
 ], BaseInput.prototype, "label", void 0);
