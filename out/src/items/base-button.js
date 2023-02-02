@@ -111,14 +111,11 @@ let BaseButton = class BaseButton extends LitElement {
         this.color = "";
     }
     render() {
-        return html `<button @click=${this.click} ?disabled=${this.disabled} class=${classMap({ round: this.round, ghost: this.ghost, [this.color]: this.color })}>
+        return html `<button ?disabled=${this.disabled} class=${classMap({ round: this.round, ghost: this.ghost, [this.color]: this.color })}>
         <div><slot name="pre"></slot></div>
         <div><slot></slot></div> 
         <div><slot name="suf"></slot></div>   
       </button>`;
-    }
-    click() {
-        this.dispatchEvent(new CustomEvent('click', { bubbles: true }));
     }
 };
 BaseButton.styles = [originstyle, colorful];

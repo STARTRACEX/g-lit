@@ -6,7 +6,6 @@ export declare class BaseButton extends LitElement {
     ghost: boolean;
     color: string;
     render(): import("lit-html").TemplateResult<1>;
-    click(): void;
 }
 declare global {
     interface HTMLElementTagNameMap {
