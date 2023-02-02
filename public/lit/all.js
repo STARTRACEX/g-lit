@@ -9,3 +9,5 @@ import "./exp-input.js";
 import "./base-button.js";
 import "./button-group.js";
 import "./base-switch.js";
+import "./call-item.js";
+import "./details-item.js"

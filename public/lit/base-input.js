@@ -39,15 +39,14 @@ export class BaseInput extends LitElement {
     align-items: center;
   }
   .input[type="color"] {
-      padding: 0;
-      height: 100% !important;
-    }
+    padding: 0;
+    height: 100% !important;
+  }
   .input {
     width: 100%;
     height: 1.6em;
     outline: 0;
     margin: 0;
-    /* flex: 1; */
     border: none;
     color: inherit;
     background: transparent;
@@ -77,20 +76,18 @@ export class BaseInput extends LitElement {
     height: calc(.5em - 1.1px);
   }
   .range input {
-  margin: 0px -0.5em;
-  width: calc(100% + 0.5em);
-  appearance: none;
-  -webkit-appearance: none;
-  outline: none;
-  border-radius: 10px;
-  background-color: transparent;
+    margin: 0px -0.5em;
+    width: calc(100% + 0.5em);
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: transparent;
   }
-
   .range input::-webkit-slider-runnable-track {
     height: .5em;
     border-radius: 10px;
   }
-
   .range input::-webkit-slider-thumb {
     z-index: 1;
     appearance: none;
@@ -111,9 +108,7 @@ export class BaseInput extends LitElement {
     <slot></slot>
     ${this.returnbytype()}
     <slot name="suf"></slot>
-    </main>
-    
-    `;
+    </main>`;
   }
   namevalue() {
     return [this.name, this.value];
