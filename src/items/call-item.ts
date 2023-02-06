@@ -42,8 +42,6 @@ export class ShadeItem extends LitElement {
   @property({ type: Boolean }) scale = false;
   @property({ type: String }) call = "center";
   @property({ type: Function }) close = () => true;
-
-
   get _aside() {
     return this.shadowRoot.querySelector('aside');
   }
@@ -62,14 +60,14 @@ export class ShadeItem extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('click', this._close);
-    this.removeEventListener('wheel', this.wheel);
+    this.removeEventListener('wheel', this._handleWheel);
   }
   show() {
     console.log(this.key);
     if (this.scale)
-      this.addEventListener('wheel', this.wheel);
+      this.addEventListener('wheel', this._handleWheel);
     if (this.key)
-      document.addEventListener('keydown', e => this.keydown(e));
+      document.addEventListener('keydown', e => this._handleKeydown(e));
     this.addEventListener('click', this._close);
     this.style.width = '100%';
     this.style.height = '100%';
@@ -84,7 +82,7 @@ export class ShadeItem extends LitElement {
       this.style.height = '0';
     }, 500);
   }
-  wheel(e) {
+  _handleWheel(e) {
     e.preventDefault();
     e.stopPropagation();
     let s = this._aside.style.transform.match(/scale\((.*)\)/);
@@ -94,7 +92,7 @@ export class ShadeItem extends LitElement {
     else scale += 0.1;
     this._aside.style.transform = `scale(${scale})`;
   }
-  keydown(e) {
+  _handleKeydown(e) {
     if (e.key == 'Escape')
       this._close();
   }

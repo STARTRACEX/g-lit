@@ -179,13 +179,13 @@ export class ContentGroup extends LitElement {
   render() {
     return html`<main style=${styleMap({ "grid-template-columns": this.col })}>
     <slot name="loading" style="background-color:inherit;"></slot>
-    ${this.content()}
+    ${this._content()}
     </main>`;
   }
   firstUpdated() {
     if (this._loading) (<HTMLElement>this._loading).style.display = 'none';
   }
-  content() {
+  _content() {
     if (this.sort) {
       let inner = [];
       [...this.children].forEach(e => {

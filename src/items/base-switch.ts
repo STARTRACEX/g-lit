@@ -121,7 +121,7 @@ export class BaseSwitch extends LitElement {
   @property() value = "on";
   render() {
     return html`<span class=${this.fat ? "fat" : "rect"}>
-    <input @change=${this.changecheck} ?disabled=${this.disabled} ?checked=${this.checked} name=${this.name} value=${this.value} type="checkbox">
+    <input @change=${this._handleChange} ?disabled=${this.disabled} ?checked=${this.checked} name=${this.name} value=${this.value} type="checkbox">
     <aside>
       <div class="false"><slot name="false"></slot></div>
       <div class="always"><slot></slot><slot name="always"></slot></div>
@@ -144,7 +144,7 @@ export class BaseSwitch extends LitElement {
     }
     this._input.checked = this.checked;
   }
-  changecheck(e) {
+  _handleChange(e) {
     this.checked = e.target.checked;
   }
   namevalue() {

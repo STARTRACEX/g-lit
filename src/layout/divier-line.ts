@@ -22,14 +22,13 @@ export class DivierLine extends LitElement {
       display: flex;
       flex-direction: column;
     }`;
-
   @property() Before = "auto";
   @property() After = "auto";
   @property({ type: Boolean }) v = false;
   @property() b = "2.2";
   render() {
     var hrstyle = `.before{height:${this.b};max-width:${this.Before}}.after{height:${this.b};max-width:${this.After}}.v .before{width:${this.b};max-height:${this.Before}}.v .after{width:${this.b};max-height:${this.After}}`;
-    return html`<div class=${this.v ? "v" : ""}>
+    return html`<div class=${this.v ? "v" : "h"}>
     <style>${hrstyle}</style>
       <hr class="before"/>
       <slot></slot>

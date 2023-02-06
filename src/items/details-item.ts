@@ -188,14 +188,13 @@ export class DetailsItem extends LitElement {
 export class DetailsGroup extends LitElement {
   @property() index = 0;
   @property({ type: Boolean }) only = false;
-
   static styles = css`
   `;
   pre: number;
   constructor() {
     super();
     this.pre = 0;
-    this.addEventListener("click", this.itemclick);
+    this.addEventListener("click", this._handleClick);
   }
   render() {
     return html`
@@ -217,7 +216,7 @@ export class DetailsGroup extends LitElement {
       });
     }
   }
-  itemclick(e) {
+  _handleClick(e) {
     let target = e.target;
     while (target.parentNode != this) {
       target = target.parentNode;
