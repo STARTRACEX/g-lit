@@ -78,7 +78,7 @@ export class DetailsGroup extends LitElement {
     this.index = 0;
     this.pre = 0;
     this.only = false;
-    this.addEventListener("click", this.itemclick);
+    this.addEventListener("click", this._handleClick);
   }
   render() {
     return html`<slot></slot>`;
@@ -99,7 +99,7 @@ export class DetailsGroup extends LitElement {
       });
     }
   }
-  itemclick(e) {
+  _handleClick(e) {
     let target = e.target;
     while (target.parentNode != this) {
       target = target.parentNode;
@@ -139,6 +139,5 @@ export class DetailsGroup extends LitElement {
     });
     this.pre = this.index;
   }
-
 }
 customElements.define(name.tag("details-group"), DetailsGroup);

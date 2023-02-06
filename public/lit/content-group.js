@@ -92,7 +92,7 @@ export class SectionGroup extends LitElement {
     return html`
     ${[...this.children].map((v, i) => html`<a
     class=${classMap({ active: !this.split && (this.index == v.slot) })}
-    @click=${() => { this.resetindex(v.slot, i); }}>${v.slot}</a>`
+    @click=${() => { this._resetIndex(v.slot, i); }}>${v.slot}</a>`
     )}
     `;
   }
@@ -112,7 +112,7 @@ export class SectionGroup extends LitElement {
       }
     }
   }
-  resetindex(name, current) {
+  _resetIndex(name, current) {
     if (this.split) this.index = null;
     if (this.index === name) {
       if (this._act) {
@@ -175,13 +175,13 @@ export class ContentGroup extends LitElement {
   render() {
     return html`<main style=${styleMap({ "grid-template-columns": this.col })}>
     <slot name="loading" style="background-color:inherit;"></slot>
-    ${this.content()}
+    ${this._content()}
     </main>`;
   }
   firstUpdated() {
     if (this._loading) this._loading.style.display = 'none';
   }
-  content() {
+  _content() {
     if (this.sort) {
       let inner = [];
       [...this.children].forEach(e => {

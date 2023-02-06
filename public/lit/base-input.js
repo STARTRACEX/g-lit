@@ -106,12 +106,9 @@ export class BaseInput extends LitElement {
     return html`<main>
       <slot name="pre"></slot>
     <slot></slot>
-    ${this.returnbytype()}
+    ${this._typeSwitcher()}
     <slot name="suf"></slot>
     </main>`;
-  }
-  namevalue() {
-    return [this.name, this.value];
   }
   firstUpdated() {
     [...this.children].forEach((e) => {
@@ -119,14 +116,15 @@ export class BaseInput extends LitElement {
     });
     if (!this.value) this.value = this.def;
     if (this.type === "range") this._ranged.style.width = 100 * (this.value / (this.max - this.min)) + '%';
-
   }
-  handleRange(e) {
+  _handleRange(e) {
     this.value = e.target.value;
     this._ranged.style.width = 100 * e.target.value / (this.max - this.min) + '%';
+    this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
   }
-  handleInput(e) {
+  _handleInput(e) {
     this.value = e.target.value;
+    this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
   }
   reset() {
     if (this.type === "range") {
@@ -138,14 +136,17 @@ export class BaseInput extends LitElement {
       this.value = this.def || "";
     }
   }
-  returnbytype() {
+  _typeSwitcher() {
     switch (this.type) {
       case "range":
         return html`
-        <div style="margin:0 4px;"><div class="range"><input type="range" @input=${this.handleRange} min=${this.min} max=${this.max} step=${this.step} value=${this.value} ><i></i></div></div>`;
+        <div style="margin:0 4px;"><div class="range"><input type="range" @input=${this._handleRange} min=${this.min} max=${this.max} step=${this.step} value=${this.value} ><i></i></div></div>`;
       default:
-        return html`<input class="input" type=${this.type} name=${this.name} id=${this.id} placeholder=${this.pla} value=${this.value} @input=${this.handleInput} />`;
+        return html`<input class="input" type=${this.type} name=${this.name} id=${this.id} placeholder=${this.pla} value=${this.value} @input=${this._handleInput} />`;
     }
+  }
+  namevalue() {
+    return [this.name, this.value];
   }
 }
 customElements.define(name.tag('base-input'), BaseInput);

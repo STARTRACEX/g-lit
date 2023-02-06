@@ -121,7 +121,7 @@ export class BaseSwitch extends LitElement {
   }
   render() {
     return html`<span class=${this.fat ? "fat" : "rect"}>
-    <input @change=${this.changecheck} ?disabled=${this.disabled} ?checked=${this.checked} name=${this.name || "checkbox"} value=${this.value || "on"} type="checkbox" >
+    <input @change=${this._handleChange} ?disabled=${this.disabled} ?checked=${this.checked} name=${this.name || "checkbox"} value=${this.value || "on"} type="checkbox" >
     <aside>
       <div class="false"><slot name="false"></slot></div>
       <div class="always"><slot></slot><slot name="always"></slot></div>
@@ -137,15 +137,18 @@ export class BaseSwitch extends LitElement {
       }
   }
   reset() {
-    try {
-      this.checked = JSON.parse(this.def);
-    } catch {
-      this.checked = false;
-    }
+    if (this.def)
+      try {
+        this.checked = JSON.parse(this.def);
+      } catch {
+        this.checked = false;
+      }
     this._input.checked = this.checked;
   }
-  changecheck(e) {
+  _handleChange(e) {
     this.checked = e.target.checked;
+    this.dispatchEvent(new CustomEvent('change', { detail: this.checked }));
+    this.dispatchEvent(new CustomEvent('input', { detail: this.checked }));
   }
   namevalue() {
     if (this._input.checked)

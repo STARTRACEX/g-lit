@@ -32,7 +32,7 @@ export class DivierLine extends LitElement {
   }
   render() {
     var hrstyle = `.before{height:${this.b};max-width:${this.Before}}.after{height:${this.b};max-width:${this.After}}.v .before{width:${this.b};max-height:${this.Before}}.v .after{width:${this.b};max-height:${this.After}}`;
-    return html`<div class=${this.v ? "v" : ""}>
+    return html`<div class=${this.v ? "v" : "h"}>
     <style>${hrstyle}</style>
       <hr class="before"/>
       <slot></slot>
