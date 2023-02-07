@@ -41,9 +41,9 @@ export class Details extends LitElement {
   `;
   render() {
     return html`
-    <dl class=${this.open ? "open" : ""} >
+    <dl class=${this.open ? "open" : "close"} >
       <dt @click=${this.toggle}><slot name="title"></slot>
-        <svg width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/></svg>
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/></svg>
       </dt>
       <dd>
         <div>
@@ -64,15 +64,11 @@ export class Details extends LitElement {
     return this.open;
   }
 }
-import { name } from './config.js';
-customElements.define(name.tag("detail-item"), Details);
 export class DetailsGroup extends LitElement {
   static properties = {
     index: { type: Number },
     only: { type: Boolean }
   };
-  static styles = css`
-  `;
   constructor() {
     super();
     this.index = 0;
@@ -140,4 +136,6 @@ export class DetailsGroup extends LitElement {
     this.pre = this.index;
   }
 }
+import { name } from './config.js';
+customElements.define(name.tag("detail-item"), Details);
 customElements.define(name.tag("details-group"), DetailsGroup);

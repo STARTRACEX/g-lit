@@ -121,7 +121,7 @@ export class AlertItem extends LitElement {
   }
 }
 customElements.define(name.tag('alert-item'), AlertItem);
-export class ShadeItem extends LitElement {
+export class DialogItem extends LitElement {
   static styles = css`:host {
       position: fixed;
       top: 0;
@@ -222,4 +222,4 @@ export class ShadeItem extends LitElement {
       this._close();
   }
 }
-customElements.define(name.tag('shade-item'), ShadeItem);
+customElements.define(name.tag('dialog-item'), DialogItem);

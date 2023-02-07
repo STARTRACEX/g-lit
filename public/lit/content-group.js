@@ -77,18 +77,18 @@ export class SectionGroup extends LitElement {
   render() {
     return html`
     <div class=${classMap({ v: this.v, reversal: this.reversal })}>
-      <nav>${this.bar()}</nav>
+      <nav>${this._bar()}</nav>
     <main>
-      ${this.slots()}
+      ${this._slots()}
       <slot></slot>
     </main>
     </div>
     `;
   }
-  slots() {
+  _slots() {
     return html`${[...this.children].map((v) => html`<slot name="${v.slot}" ></slot>`)}`;
   }
-  bar() {
+  _bar() {
     return html`
     ${[...this.children].map((v, i) => html`<a
     class=${classMap({ active: !this.split && (this.index == v.slot) })}
