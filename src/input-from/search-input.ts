@@ -27,7 +27,7 @@ export class SearchInput extends LitElement {
     background-color:inherit;
     color:var(--text);
     border-radius:inherit;
-    padding:0;position:relative;width:100%;position:relative;margin:0}button{position:absolute;right:0;padding-left:0}ul{border-top:var(--text) 1px solid;margin:0;list-style:none;padding:.5em}li{margin:.5px;padding-left:5px}button,input{height:36px;border:0;background-color:transparent;outline:none}input{--mr:42px;margin-right:var(--mr);padding-left:15.6px;height:2em;width:calc(100% - var(--mr));padding-right:0;font-size:18px;color:var(--text)}svg path{fill:var(--text)}`
+    padding:0;position:relative;width:100%;position:relative;margin:0}button{position:absolute;right:0;padding-left:0}ul{border-top:var(--text) 1px solid;margin:0;list-style:none;padding:.5em}li{margin:.5px;padding-left:5px}button,input{height:36px;border:0;background-color:transparent;outline:none}input{--pl:.75em;--mr:42px;margin-right:var(--mr);padding-left:var(--pl);width: calc(100% - var(--pl) - var(--mr));height:2em;padding-right:0;font-size:18px;color:var(--text)}svg path{fill:currentColor}`
   ];
   render() {
     return html`<form action=${this.action} method=${this.method}>

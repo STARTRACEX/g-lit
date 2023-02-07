@@ -1,8 +1,8 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { name } from "../config";
-@customElement(name.tag("shade-item"))
-export class ShadeItem extends LitElement {
+@customElement(name.tag("dialog-item"))
+export class DialogItem extends LitElement {
   static styles = css`:host {
       position: fixed;
       top: 0;
