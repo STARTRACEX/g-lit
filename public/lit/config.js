@@ -9,7 +9,7 @@ export const theme = css`
   :host{
     
     --text:rgb(240 240 240);
-    --shadow: rgb(0 0 0 / 75%);
+    --shadow: rgb(0 0 0 / 55%);
     --nav-background: rgb(28  28  31);
     --nav-super: rgb(40 160 150 / 55%);
     
