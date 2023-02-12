@@ -136,7 +136,7 @@ export class DialogItem extends LitElement {
       width: fit-content;
       height: fit-content;
       margin:auto;
-      transition: all .3s;
+      transition: all .3s ease-in-out;
       opacity: 1;
       transform: translateY(0);
     }
@@ -152,21 +152,31 @@ export class DialogItem extends LitElement {
     .left{
       margin-left:0;
     }
-    aside.hide{
+    .hide{
       opacity:0;
+    }
+    .top.hide,.center.hide{
       transform:translateY(-15%);
+    }
+    .right.hide{
+      transform:translateX(15%);
+    }
+    .left.hide{
+      transform:translateX(-15%);
+    }
+    .buttom.hide{
+      transform:translateY(15%);
     }
     `;
   static properties = {
     key: { type: Boolean },
+    model: { type: Boolean },
     scale: { type: Boolean },
     call: {},
-    close: { type: Function },
   };
   constructor() {
     super();
     this.call = "center";
-    this.close = (x) => true;
   }
   get _aside() {
     return this.shadowRoot.querySelector('aside');
@@ -176,36 +186,35 @@ export class DialogItem extends LitElement {
       <slot></slot>
     </aside>`;
   }
-  _close() {
-    if (this.close())
-      this.hide();
-  }
   firstUpdated() {
-    this.show();
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('click', this._close);
-    this.removeEventListener('wheel', this._handleWheel);
-  }
-  show() {
+    this.tempmodel = this.model;
+    this.addEventListener('submit', e => {
+      if (e.target.method === "dialog") this.close();
+    });
     if (this.scale)
       this.addEventListener('wheel', this._handleWheel);
+    this.show();
+  }
+  show() {
     if (this.key)
       document.addEventListener('keydown', e => this._handleKeydown(e));
-    this.addEventListener('click', this._close);
-    this.style.width = '100%';
-    this.style.height = '100%';
-    this.style.pointerEvents = 'all';
+    this.addEventListener('click', this._handleClick);
     this._aside.classList.remove('hide');
+    this.style.pointerEvents = 'all';
   }
-  hide() {
+  showModel() {
+    this.tempmodel = true;
+    this.show();
+  }
+  close() {
+    this.tempmodel = this.model;
     this._aside.classList.add('hide');
     this.style.pointerEvents = 'none';
-    setTimeout(() => {
-      this.style.width = '0';
-      this.style.height = '0';
-    }, 500);
+    document.removeEventListener('keydown', e => this._handleKeydown(e));
+  }
+  _handleClick() {
+    if (this.tempmodel) return;
+    this.close();
   }
   _handleWheel(e) {
     e.preventDefault();
@@ -219,7 +228,7 @@ export class DialogItem extends LitElement {
   }
   _handleKeydown(e) {
     if (e.key == 'Escape')
-      this._close();
+      this.close();
   }
 }
 customElements.define(name.tag('dialog-item'), DialogItem);

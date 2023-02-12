@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "../core/lit-core.min.js";
-export class Details extends LitElement {
+export class DetailsItem extends LitElement {
   static properties = {
     open: { type: Boolean },
   };
@@ -137,5 +137,5 @@ export class DetailsGroup extends LitElement {
   }
 }
 import { name } from './config.js';
-customElements.define(name.tag("detail-item"), Details);
+customElements.define(name.tag("details-item"), DetailsItem);
 customElements.define(name.tag("details-group"), DetailsGroup);

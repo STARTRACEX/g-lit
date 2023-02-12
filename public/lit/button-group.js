@@ -2,12 +2,15 @@ import { LitElement, html, css, classMap } from "../core/lit-all.min.js";
 export class ButtonGroup extends LitElement {
   static properties = {
     v: { type: Boolean },
-    h: { type: Boolean }
+    r: {}
   };
   static styles = css`
   :host{
     display: inline-flex;
     align-items: center;
+  }
+  .v{
+    flex-direction: column;
   }
   .h ::slotted(*:nth-of-type(1)){
     border-top-right-radius:0 !important;
@@ -18,29 +21,36 @@ export class ButtonGroup extends LitElement {
     border-bottom-left-radius:0 !important;
   }
   .v ::slotted(*:nth-of-type(1)){
-    border-bottom-right-radius:0 !important;
+    border-bottom-left-radius:0 !important;
     border-bottom-right-radius:0 !important;
   }
   .v ::slotted(*:last-of-type){
     border-top-left-radius:0 !important;
     border-top-right-radius:0 !important;
   }
-  div ::slotted(*){
+  .h ::slotted(*){
    margin:0 -.04em; /* 50% border-width */
+  }
+  .v ::slotted(*){
+   margin: -.04em 0; /* 50% border-width */
   }
   ::slotted(*:hover){
     z-index:2
   }
-  div{
+  .h{
     margin:0 .04em;
     display: inherit;
-    flex-direction:inherit;
+  }
+  .v{
+    margin:.04em 0;
+    display: inherit;
   }
   `;
   render() {
     return html`
     <slot name="pre"></slot>
-    <div class=${classMap({ v: this.v, h: this.h })}>
+    <div class=${this.v ? "v" : "h"}>
+    <style>::slotted(*:nth-of-type(1)),::slotted(*:last-of-type){border-radius:${getComputedStyle(this).borderRadius}}</style>
     <slot></slot>
     </div>
     <slot name="suf"></slot>
