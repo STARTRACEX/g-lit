@@ -1,6 +1,125 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { name } from "../config";
+@customElement(name.tag("alert-item"))
+export class AlertItem extends LitElement {
+  static styles = css`
+  :host{
+    display: inline-block;
+  }
+  .success {
+    --color: #3c763d;
+    --super: #2b542c;
+    --background: #dff0d8;
+    --border: #d6e9c6;
+  }
+
+  .info {
+    --color: #31708f;
+    --background: #d9edf7;
+    --border: #bce8f1;
+    --super: #245269;
+  }
+
+  .warning {
+    --color: #8a6d3b;
+    --background: #fcf8e3;
+    --border: #faebcc;
+    --soper: #66512c;
+  }
+
+  .danger {
+    --color: #a94442;
+    --background: #f2dede;
+    --border: #ebccd1;
+    --super: #843534;
+  }
+  .alert {
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all .3s;
+  }
+
+  .content {
+    min-height: 1.6em;
+    line-height: 1.6em;
+  }
+
+  .close {
+    height: fit-content;
+    border-radius: 50%;
+    transition: all .3s;
+  }
+
+  .close:hover {
+    backdrop-filter: contrast(115%);
+  }
+
+  svg {
+    display: block;
+    height: 1.8em;
+    width: 1.8em;
+  }
+
+  .alert {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .close:hover path {
+    stroke: var(--super);
+  }
+
+  path {
+    stroke: var(--color);
+    transition: all .3s;
+  }
+
+  .alert {
+    color: var(--color);
+    background-color: var(--background);
+    border-color: var(--border);
+  }
+
+  .alert ::slotted(a) {
+    font-weight: bold;
+    color: var(--super);
+  }`;
+  @property() call = "info";
+  @property({ type: Number }) autoclose = 0;
+  static properties = {
+    autoclose: { type: Number },
+    call: {}
+  };
+  get _alert() {
+    return this.shadowRoot.querySelector('.alert');
+  }
+  render() {
+    if (this.autoclose) setTimeout(() => this.close(), this.autoclose);
+    return html`
+      <div class=${this.call + " alert"} role="alert">
+    <div class="content">
+      <strong><slot name=title></slot></strong>
+      <slot></slot>
+    </div>
+    <div class="close" @click=${this.close}>
+      <svg width="38" height="38" viewBox="0 0 48 48" fill="none">
+        <path d="M14 14L34 34" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <path d="M14 34L34 14" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+  </div>
+    `;
+  }
+  close() {
+    (<HTMLElement>this._alert).style.opacity = '0';
+    (<HTMLElement>this._alert).style.transform = 'translateY(-100%)';
+    setTimeout(() => {
+      this.remove();
+    }, 300);
+  }
+}
 @customElement(name.tag("dialog-item"))
 export class DialogItem extends LitElement {
   static styles = css`:host {
@@ -40,8 +159,9 @@ export class DialogItem extends LitElement {
     `;
   @property({ type: Boolean }) key = false;
   @property({ type: Boolean }) scale = false;
+  @property({ type: Boolean }) model = false;
   @property({ type: String }) call = "center";
-  @property({ type: Function }) close = () => true;
+  tempmodel: boolean;
   get _aside() {
     return this.shadowRoot.querySelector('aside');
   }
@@ -50,37 +170,35 @@ export class DialogItem extends LitElement {
       <slot></slot>
     </aside>`;
   }
-  _close() {
-    if (this.close())
-      this.hide();
-  }
   firstUpdated() {
-    this.show();
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.removeEventListener('click', this._close);
-    this.removeEventListener('wheel', this._handleWheel);
-  }
-  show() {
-    console.log(this.key);
+    this.tempmodel = this.model;
+    this.addEventListener('submit', e => {
+      if ((e.target as HTMLFormElement).method === "dialog") this.close();
+    });
     if (this.scale)
       this.addEventListener('wheel', this._handleWheel);
+    this.show();
+  }
+  show() {
     if (this.key)
       document.addEventListener('keydown', e => this._handleKeydown(e));
-    this.addEventListener('click', this._close);
-    this.style.width = '100%';
-    this.style.height = '100%';
-    this.style.pointerEvents = 'all';
+    this.addEventListener('click', this._handleClick);
     this._aside.classList.remove('hide');
+    this.style.pointerEvents = 'all';
   }
-  hide() {
+  showModel() {
+    this.tempmodel = true;
+    this.show();
+  }
+  close() {
+    this.tempmodel = this.model;
     this._aside.classList.add('hide');
     this.style.pointerEvents = 'none';
-    setTimeout(() => {
-      this.style.width = '0';
-      this.style.height = '0';
-    }, 500);
+    document.removeEventListener('keydown', e => this._handleKeydown(e));
+  }
+  _handleClick() {
+    if (this.tempmodel) return;
+    this.close();
   }
   _handleWheel(e) {
     e.preventDefault();
@@ -94,6 +212,12 @@ export class DialogItem extends LitElement {
   }
   _handleKeydown(e) {
     if (e.key == 'Escape')
-      this._close();
+      this.close();
+  }
+}
+declare global {
+  interface HTMLElementTagNameMap {
+    "alert-item": AlertItem;
+    "dialog-item": DialogItem;
   }
 }
