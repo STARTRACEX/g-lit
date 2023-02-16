@@ -7,27 +7,27 @@ export class DivierLine extends LitElement {
     div {
       display: flex;
       align-items: center;
+      border-radius:inherit;
     }
     hr {
+      border-radius:inherit;
       margin: 0;
-      border-radius: .1em;
       border: 0;
       flex: 1;
       backdrop-filter: invert(0.2);
-      -webkit-backdrop-filter: invert(0.2);
-      background-color: rgb(119 136 153);
+      -webkit-backdrop-filter: invert(0.2)
     }
     .v {
       height: 100%;
       display: flex;
       flex-direction: column;
     }`;
-  @property() Before = "auto";
-  @property() After = "auto";
+  @property() pre = "auto";
+  @property() suf = "auto";
   @property({ type: Boolean }) v = false;
   @property() b = "2.2";
   render() {
-    var hrstyle = `.before{height:${this.b};max-width:${this.Before}}.after{height:${this.b};max-width:${this.After}}.v .before{width:${this.b};max-height:${this.Before}}.v .after{width:${this.b};max-height:${this.After}}`;
+    var hrstyle = `.before{height:${this.b};max-width:${this.pre}}.after{height:${this.b};max-width:${this.suf}}.v .before{width:${this.b};max-height:${this.pre}}.v .after{width:${this.b};max-height:${this.suf}}`;
     return html`<div class=${this.v ? "v" : "h"}>
     <style>${hrstyle}</style>
       <hr class="before"/>
