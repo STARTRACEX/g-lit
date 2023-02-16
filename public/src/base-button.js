@@ -17,6 +17,7 @@ const originstyle = css`
   .ghost,
   .ghost:hover {
     color: var(--background);
+    border-color: var(--background);
     background-color: transparent;
   }
 
@@ -36,7 +37,6 @@ const originstyle = css`
     border-style: solid;
     display: inline-flex;
     justify-content: center;
-    align-items: center;
     color: var(--color);
     background-color: var(--background);
     cursor: inherit;
@@ -51,14 +51,6 @@ const originstyle = css`
     vertical-align: middle;
     margin-right: .1em;
     margin-left: .1em;
-  }
-
-  div:first-child {
-    margin-left: .5em;
-  }
-
-  div:last-child {
-    margin-right: .5em;
   }
 
   a:hover {
@@ -151,7 +143,7 @@ export class BaseButton extends LitElement {
   };
   static styles = [originstyle, colorful];
   render() {
-    this.href=undefined
+    // this.href=undefined
     return html`<a href=${ifDefined(this.href)} target=${ifDefined(this.target)} ?disabled=${this.disabled} class=${classMap({ghost: this.ghost, [this.color]: this.color })}>
         <div><slot name="pre"></slot></div>
         <div><slot></slot></div> 
