@@ -28,3 +28,27 @@ export const theme = css`
   }
 /* } */
 `;
+export const append = (target: string | object, args: { tag: any, props?: any, children?: any, html?: any; }) => {
+  if (!args) return;
+  target = (typeof target === 'string' ? document.querySelector(target) : target) || document.body;
+  const { tag, props, children, html } = args;
+  const element = document.createElement(tag);
+  if (props) {
+    Object.keys(props).forEach((prop) => {
+      // element[prop] = props[prop];
+      element.setAttribute(prop, props[prop] === true ? '' : props[prop]);
+    });
+  };
+  if (html) element.innerHTML = html;
+  if (children) {
+    if (children.length) /* Iterators exist */ {
+      [...children].forEach((child) => {
+        console.log(child);
+        typeof child === "string" ? element.appendChild(document.createTextNode(child)) : element.appendChild(child);
+      });
+    } else {
+      typeof children === "string" ? element.appendChild(document.createTextNode(children)) : element.appendChild(children);
+    }
+  }
+  (target as HTMLElement).appendChild(element);
+};

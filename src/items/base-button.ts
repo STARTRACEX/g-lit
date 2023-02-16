@@ -21,6 +21,7 @@ const originstyle = css`
   .ghost,
   .ghost:hover {
     color: var(--background);
+    border-color: var(--background);
     background-color: transparent;
   }
 
@@ -40,7 +41,6 @@ const originstyle = css`
     border-style: solid;
     display: inline-flex;
     justify-content: center;
-    align-items: center;
     color: var(--color);
     background-color: var(--background);
     cursor: inherit;
@@ -55,14 +55,6 @@ const originstyle = css`
     vertical-align: middle;
     margin-right: .1em;
     margin-left: .1em;
-  }
-
-  div:first-child {
-    margin-left: .5em;
-  }
-
-  div:last-child {
-    margin-right: .5em;
   }
 
   a:hover {
