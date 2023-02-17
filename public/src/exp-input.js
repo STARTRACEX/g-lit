@@ -8,15 +8,12 @@ export class ExpInput extends LitElement {
     .input:focus {
       --input-outline: var(--input-outline-focus) !important;
     }
-
     div:hover {
       --input-background: var(--input-background-hover) !important;
     }
-
     .outline fieldset {
       border-color: var(--input-outline);
     }
-
     .underline::after {
       content: "";
       position: absolute;
@@ -27,43 +24,35 @@ export class ExpInput extends LitElement {
       border-radius: inherit;
       background-color: var(--input-outline);
     }
-
     .underline fieldset {
       border-color: transparent !important;
     }
-
     .filed {
       background-color: var(--input-background);
       outline: .1em solid var(--input-outline);
     }
-
     .filed fieldset {
       border-color: transparent !important;
       background-color: transparent !important;
     }
-
     :focus~fieldset,
     :valid~fieldset {
       border-color: var(--input-outline-focus);
     }
-
     * {
       border-radius: inherit;
       color: inherit;
       transition: all .3s;
     }
-
     div:has(span:empty) {
       min-height: 1em !important;
     }
-
     div {
       position: relative;
       width: 100%;
       min-height: 2em;
       display: inline-flex;
     }
-
     .input {
       margin-top: .71em;
       border: 0;
@@ -73,12 +62,12 @@ export class ExpInput extends LitElement {
       font-size: inherit;
       outline: 0;
       resize: vertical;
-      min-height: 1.4em;
-      height: 1.4em;
+      min-height: 1.5em;
+      height: 1.5em;
       background-color: transparent;
       z-index: 2;
+      overflow-y: hidden;
     }
-
     fieldset {
       background-color: var(--input-background);
       pointer-events: none;
@@ -91,14 +80,12 @@ export class ExpInput extends LitElement {
       margin: -.1em;
       border: .1em solid;
     }
-
     legend span {
       display: inline-block;
       padding: 0 .3em;
       background-color: var(--input-background);
       font-size: inherit;
     }
-
     legend {
       margin-left: 5px;
       margin: 0;
@@ -108,27 +95,22 @@ export class ExpInput extends LitElement {
       height: 1em;
       transform: translateY(.8em);
     }
-
     div:has(span:empty) legend {
       display: none;
     }
-
     div:has(span:empty) .input {
       margin: 0;
     }
-
     :focus+fieldset legend,
     :valid+fieldset legend {
       transform: translateY(0) !important;
     }
-
     .filed legend {
       transform: translateY(.5em) !important;
     }
     .filed span{
       background-color:transparent;
     }
-
     :focus+fieldset span,
     :valid+fieldset span {
       font-size: 70%;
@@ -158,7 +140,7 @@ export class ExpInput extends LitElement {
   render() {
     if (!this.name) this.name = this.label || this.type;
     return html`<div class=${this.base}>
-    ${this.type !== "textaera" ? html`<input class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} type=${this.type} placeholder=${this.pla} name=${this.name}>` : html`<textarea class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} placeholder=${this.pla} name=${this.name}></textarea>`}
+    ${this.type !== "textarea" ? html`<input class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} type=${this.type} placeholder=${this.pla} name=${this.name}>` : html`<textarea class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} placeholder=${this.pla} name=${this.name}></textarea>`}
     <fieldset>
       <legend><span>${this.label}</span></legend>
     </fieldset><style>:valid~fieldset legend,:focus~fieldset legend{margin-left: ${this.offset || 0} !important;}</style>
