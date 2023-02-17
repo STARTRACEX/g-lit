@@ -6,6 +6,8 @@ export class ExpInput extends LitElement {
   static styles = [theme, css`
     :host{
       display: inline-block;
+      height: 100%;
+      width: 100%;
     }
     .input:focus {
       --input-outline: var(--input-outline-focus) !important;
@@ -44,6 +46,8 @@ export class ExpInput extends LitElement {
     * {
       border-radius: inherit;
       color: inherit;
+      font-size: inherit;
+      font-family: inherit;
       transition: all .3s;
     }
     div:has(span:empty) {
@@ -52,20 +56,25 @@ export class ExpInput extends LitElement {
     div {
       position: relative;
       width: 100%;
-      min-height: 2em;
+      height:100%;
       display: inline-flex;
+      min-height:inherit;
+    }
+    textarea.input{
+      margin-top:1em;
+      resize: vertical;
+      height:2.6em;
     }
     .input {
+      height:1.6em;
+      width: 100%;
+      min-height:inherit;
       margin-top: .71em;
       border: 0;
-      width: 100%;
       box-sizing: border-box;
       padding: .3em;
       font-size: inherit;
       outline: 0;
-      resize: vertical;
-      min-height: 1.5em;
-      height: 1.5em;
       background-color: transparent;
       z-index: 2;
       overflow-y: hidden;
@@ -88,6 +97,9 @@ export class ExpInput extends LitElement {
       background-color: var(--input-background);
       font-size: inherit;
     }
+    textarea~fieldset legend {
+      transform: translateY(.6em);
+    }
     legend {
       margin-left: 5px;
       margin: 0;
@@ -105,10 +117,7 @@ export class ExpInput extends LitElement {
     }
     :focus+fieldset legend,
     :valid+fieldset legend {
-      transform: translateY(0) !important;
-    }
-    .filed legend {
-      transform: translateY(.5em) !important;
+      transform: translateY(-.19em) !important;
     }
     .filed span{
       background-color:transparent;
@@ -129,9 +138,6 @@ export class ExpInput extends LitElement {
   @property() def = "";
   @property() base = "outline";
   @property() offset = "";
-  get _input() {
-    return this.renderRoot?.querySelector('input') ?? null;
-  }
   render() {
     if (!this.name) this.name = this.label || this.type;
     return html`<div class=${this.base}>
@@ -150,7 +156,7 @@ export class ExpInput extends LitElement {
   }
   reset() {
     this.value = this.def || "";
-    this._input.value = this.def || null;
+    (this.renderRoot.querySelector('.input') as HTMLInputElement).value = this.def || "";
   }
   namevalue() {
     return [this.name, this.value];
