@@ -61,7 +61,8 @@ export class ExpInput extends LitElement {
     textarea.input{
       margin-top:1em;
       resize: vertical;
-      height:2.6em;
+      height: inherit;
+      min-height:1.6em;
     }
     .input {
       height:1.6em;
