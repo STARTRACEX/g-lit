@@ -4,8 +4,9 @@ export class ExpInput extends LitElement {
   static styles = [theme, css`
     :host{
       display: inline-block;
-      height: 100%;
+      height: 100% !important;
       width: 100%;
+      min-height:1.6em;
     }
     .input:focus {
       --input-outline: var(--input-outline-focus) !important;
@@ -46,10 +47,7 @@ export class ExpInput extends LitElement {
       color: inherit;
       font-size: inherit;
       font-family: inherit;
-      transition: all .3s;
-    }
-    div:has(span:empty) {
-      min-height: 1em !important;
+      transition: all .3s,height 0s;
     }
     div {
       position: relative;
@@ -62,10 +60,11 @@ export class ExpInput extends LitElement {
       margin-top:1em;
       resize: vertical;
       height: inherit;
-      min-height:1.6em;
+    }
+    input.input{
+      height: 1.6em;
     }
     .input {
-      height:1.6em;
       width: 100%;
       min-height:inherit;
       margin-top: .71em;

@@ -1,9 +1,10 @@
+import { css, html } from "../core/lit-core.min.js";
 export const name = {
+  host: html`Host`,
   prefix: "",
   suffix: "",
   tag: (origin) => name.prefix + origin + name.suffix,
 };
-import { css } from "../core/lit-core.min.js";
 export const theme = css`
 /* @layer host{ */
   :host{
@@ -28,6 +29,11 @@ export const theme = css`
   }
 /* } */
 `;
+/**
+* Create element with args append to target
+* @param target Appended target element or use document.querySelector(target) or document.body
+* @param args tag:tag name, props:attribute, children:appended chindren, html:innerHTML
+*/
 export const append = (target, args) => {
   if (!args) return;
   target = (typeof target === 'string' ? document.querySelector(target) : target) || document.body;
