@@ -1,6 +1,6 @@
 import { LitElement } from 'lit';
 export declare class OVText extends LitElement {
-    static styles: import("lit").CSSResult;
+    static styles: import("lit").CSSResult[];
     t1: string;
     t2: string;
     t3: string;

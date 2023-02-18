@@ -10,10 +10,9 @@ export declare class ExpInput extends LitElement {
     def: string;
     base: string;
     offset: string;
-    get _input(): HTMLInputElement;
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
-    input(i: any): void;
+    _handleInput(i: any): void;
     reset(): void;
     namevalue(): string[];
 }

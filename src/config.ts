@@ -28,6 +28,11 @@ export const theme = css`
   }
 /* } */
 `;
+/**
+* Create element with args append to target
+* @param target Appended target element or use document.querySelector(target) or document.body
+* @param args tag:tag name, props:attribute, children:appended chindren, html:innerHTML
+*/
 export const append = (target: string | object, args: { tag: any, props?: any, children?: any, html?: any; }) => {
   if (!args) return;
   target = (typeof target === 'string' ? document.querySelector(target) : target) || document.body;

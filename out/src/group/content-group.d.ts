@@ -11,8 +11,8 @@ export declare class SectionGroup extends LitElement {
     reversal: boolean;
     constructor();
     render(): import("lit-html").TemplateResult<1>;
-    slots(): import("lit-html").TemplateResult<1>;
-    bar(): import("lit-html").TemplateResult<1>;
+    _slots(): import("lit-html").TemplateResult<1>;
+    _bar(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
     resetindex(name: any, current: any): void;
 }
@@ -24,7 +24,7 @@ export declare class ContentGroup extends LitElement {
     inner: any[];
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
-    content(): import("lit-html").TemplateResult<1>;
+    _content(): import("lit-html").TemplateResult<1>;
 }
 declare global {
     interface HTMLElementTagNameMap {

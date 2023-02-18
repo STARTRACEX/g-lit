@@ -11,7 +11,7 @@ export declare class BaseSwitch extends LitElement {
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
     reset(): void;
-    changecheck(e: any): void;
+    _handleChange(e: any): void;
     namevalue(): string[];
 }
 declare global {

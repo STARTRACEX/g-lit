@@ -10,14 +10,14 @@ import { name } from '../config';
 let DivierLine = class DivierLine extends LitElement {
     constructor() {
         super(...arguments);
-        this.Before = "auto";
-        this.After = "auto";
+        this.pre = "auto";
+        this.suf = "auto";
         this.v = false;
         this.b = "2.2";
     }
     render() {
-        var hrstyle = `.before{height:${this.b};max-width:${this.Before}}.after{height:${this.b};max-width:${this.After}}.v .before{width:${this.b};max-height:${this.Before}}.v .after{width:${this.b};max-height:${this.After}}`;
-        return html `<div class=${this.v ? "v" : ""}>
+        var hrstyle = `.before{height:${this.b};max-width:${this.pre}}.after{height:${this.b};max-width:${this.suf}}.v .before{width:${this.b};max-height:${this.pre}}.v .after{width:${this.b};max-height:${this.suf}}`;
+        return html `<div class=${this.v ? "v" : "h"}>
     <style>${hrstyle}</style>
       <hr class="before"/>
       <slot></slot>
@@ -29,15 +29,15 @@ DivierLine.styles = css `
     div {
       display: flex;
       align-items: center;
+      border-radius:inherit;
     }
     hr {
+      border-radius:inherit;
       margin: 0;
-      border-radius: .1em;
       border: 0;
       flex: 1;
       backdrop-filter: invert(0.2);
-      -webkit-backdrop-filter: invert(0.2);
-      background-color: rgb(119 136 153);
+      -webkit-backdrop-filter: invert(0.2)
     }
     .v {
       height: 100%;
@@ -46,10 +46,10 @@ DivierLine.styles = css `
     }`;
 __decorate([
     property()
-], DivierLine.prototype, "Before", void 0);
+], DivierLine.prototype, "pre", void 0);
 __decorate([
     property()
-], DivierLine.prototype, "After", void 0);
+], DivierLine.prototype, "suf", void 0);
 __decorate([
     property({ type: Boolean })
 ], DivierLine.prototype, "v", void 0);

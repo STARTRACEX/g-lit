@@ -9,7 +9,7 @@ export const theme = css `
 :host{
     
     --text:rgb(240 240 240);
-    --shadow: rgb(0 0 0 / 75%);
+    --shadow: rgb(0 0 0 / 55%);
     --nav-background: rgb(28  28  31);
     --nav-super: rgb(40 160 150 / 55%);
     
@@ -28,3 +28,36 @@ export const theme = css `
   }
 /* } */
 `;
+/**
+* Create element with args append to target
+* @param target Appended target element or use document.querySelector(target) or document.body
+* @param args tag:tag name, props:attribute, children:appended chindren, html:innerHTML
+*/
+export const append = (target, args) => {
+    if (!args)
+        return;
+    target = (typeof target === 'string' ? document.querySelector(target) : target) || document.body;
+    const { tag, props, children, html } = args;
+    const element = document.createElement(tag);
+    if (props) {
+        Object.keys(props).forEach((prop) => {
+            // element[prop] = props[prop];
+            element.setAttribute(prop, props[prop] === true ? '' : props[prop]);
+        });
+    }
+    ;
+    if (html)
+        element.innerHTML = html;
+    if (children) {
+        if (children.length) /* Iterators exist */ {
+            [...children].forEach((child) => {
+                console.log(child);
+                typeof child === "string" ? element.appendChild(document.createTextNode(child)) : element.appendChild(child);
+            });
+        }
+        else {
+            typeof children === "string" ? element.appendChild(document.createTextNode(children)) : element.appendChild(children);
+        }
+    }
+    target.appendChild(element);
+};

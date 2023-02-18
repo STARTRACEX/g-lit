@@ -12,9 +12,9 @@ export declare class LabelInput extends LitElement {
     get _input(): HTMLInputElement;
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
-    input(i: any): void;
+    _handleInput(i: any): void;
     reset(): void;
-    _passwordtype(): void;
+    _passwordSwitcher(): void;
     namevalue(): string[];
 }
 declare global {

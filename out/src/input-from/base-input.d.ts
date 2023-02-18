@@ -5,7 +5,6 @@ export declare class BaseInput extends LitElement {
     get _ranged(): Element;
     label: string;
     name: string;
-    id: string;
     pla: string;
     type: inputtype;
     value: string | number;
@@ -17,10 +16,11 @@ export declare class BaseInput extends LitElement {
     static styles: import("lit").CSSResult[];
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
-    handleRange(e: any): void;
-    handleInput(e: any): void;
+    _handleRange(e: any): void;
+    _handleInput(e: any): void;
+    _handelFocus(): void;
     reset(): void;
-    returnbytype(): import("lit-html").TemplateResult<1>;
+    _typeSwitcher(): import("lit-html").TemplateResult<1>;
     namevalue(): (string | number)[];
 }
 declare global {

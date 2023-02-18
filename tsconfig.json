@@ -8,6 +8,7 @@
       "DOM",
       "DOM.Iterable"
     ],
+    
     "declaration": true,
     "declarationMap": true,
     "experimentalDecorators": true,

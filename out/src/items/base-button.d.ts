@@ -2,8 +2,9 @@ import { LitElement } from "lit";
 export declare class BaseButton extends LitElement {
     static styles: import("lit").CSSResult[];
     disabled: boolean;
-    round: boolean;
     ghost: boolean;
+    href: string;
+    target: string;
     color: string;
     render(): import("lit-html").TemplateResult<1>;
 }
