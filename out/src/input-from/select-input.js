@@ -10,15 +10,13 @@ import { name } from '../config';
 const selcls = `${name.tag('select-input')}-selected`;
 let SelectInput = class SelectInput extends LitElement {
     constructor() {
-        super();
+        super(...arguments);
         this.pla = '';
         this.m = false;
         this.def = '';
         this.autofocus = false;
         this.value = [];
         this.name = '';
-        this.text = [];
-        this.value = [];
         this.text = [];
     }
     get assigned() {

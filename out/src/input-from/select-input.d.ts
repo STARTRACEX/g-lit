@@ -10,7 +10,6 @@ export declare class SelectInput extends LitElement {
     text: Array<string>;
     get assigned(): any;
     render(): import("lit-html").TemplateResult<1>;
-    constructor();
     firstUpdated(): void;
     select(value: string, text?: any): void;
     focus(): void;
@@ -19,5 +18,10 @@ export declare class SelectInput extends LitElement {
     _handleInput(): void;
     namevalue(): any[];
     reset(): void;
+}
+declare global {
+    interface HTMLElementTagNameMap {
+        "select-input": SelectInput;
+    }
 }
 //# sourceMappingURL=select-input.d.ts.map

@@ -59,11 +59,6 @@ export class SelectInput extends LitElement {
     </div>
     `;
   }
-  constructor() {
-    super();
-    this.value = [];
-    this.text = [];
-  }
   firstUpdated() {
     this.reset();
     if (this.autofocus) this.focus();
@@ -226,5 +221,10 @@ export class SelectInput extends LitElement {
           this.select(this.def.split(";")[0].trim(), undefined);
       }
     }
+  }
+}
+declare global {
+  interface HTMLElementTagNameMap {
+    "select-input": SelectInput;
   }
 }
