@@ -3,7 +3,6 @@ export declare class ExpInput extends LitElement {
     static styles: import("lit").CSSResult[];
     label: string;
     name: string;
-    id: string;
     pla: string;
     type: string;
     value: string;

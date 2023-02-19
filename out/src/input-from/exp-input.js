@@ -12,7 +12,6 @@ let ExpInput = class ExpInput extends LitElement {
         super(...arguments);
         this.label = "";
         this.name = "";
-        this.id = "";
         this.pla = "";
         this.type = "text";
         this.value = "";
@@ -177,9 +176,6 @@ __decorate([
 __decorate([
     property()
 ], ExpInput.prototype, "name", void 0);
-__decorate([
-    property()
-], ExpInput.prototype, "id", void 0);
 __decorate([
     property()
 ], ExpInput.prototype, "pla", void 0);

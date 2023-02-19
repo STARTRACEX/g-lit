@@ -109,36 +109,36 @@ export class SectionGroup extends LitElement {
         }
       });
       if (this.v) {
-        [...this.children].forEach(v => (<HTMLElement>v).style.height = '0');
-        (<HTMLElement>this.children[this.current]).style.height = '100%';
+        [...this.children].forEach(v => (v as HTMLElement).style.height = '0');
+        (this.children[this.current] as HTMLElement).style.height = '100%';
       } else {
-        [...this.children].forEach(v => (<HTMLElement>v).style.width = '0');
-        (<HTMLElement>this.children[this.current]).style.width = '100%';
+        [...this.children].forEach(v => (v as HTMLElement).style.width = '0');
+        (this.children[this.current] as HTMLElement).style.width = '100%';
       }
     }
   }
-  resetindex(name, current) {
+  resetindex(name: string, current: number) {
     if (this.split) this.index = null;
     if (this.index === name) {
       if (this._act) {
         this._act.classList.remove('active');
         if (this.v)
-          [...this.children].forEach(v => (<HTMLElement>v).style.height = '100%');
+          [...this.children].forEach(v => (v as HTMLElement).style.height = '100%');
         else
-          [...this.children].forEach(v => (<HTMLElement>v).style.width = '100%');
+          [...this.children].forEach(v => (v as HTMLElement).style.width = '100%');
         this.index = null;
       }
       return;
     }
     if (this.v)
-      (<HTMLElement>this.children[current]).style.height = '100%';
+      (this.children[current] as HTMLElement).style.height = '100%';
     else
-      (<HTMLElement>this.children[current]).style.width = '100%';
+      (this.children[current] as HTMLElement).style.width = '100%';
     var other = [...this.children].filter((v, i) => i != current);
     if (this.v)
-      other.forEach(v => (<HTMLElement>v).style.height = '0');
+      other.forEach(v => (v as HTMLElement).style.height = '0');
     else
-      other.forEach(v => (<HTMLElement>v).style.width = '0');
+      other.forEach(v => (v as HTMLElement).style.width = '0');
     this.split = false;
     this.index = name;
   }

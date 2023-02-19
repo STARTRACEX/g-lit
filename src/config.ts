@@ -48,7 +48,6 @@ export const append = (target: string | object, args: { tag: any, props?: any, c
   if (children) {
     if (children.length) /* Iterators exist */ {
       [...children].forEach((child) => {
-        console.log(child);
         typeof child === "string" ? element.appendChild(document.createTextNode(child)) : element.appendChild(child);
       });
     } else {

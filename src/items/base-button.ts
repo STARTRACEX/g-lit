@@ -141,7 +141,6 @@ const colorful = css`.white {
 @customElement(name.tag("base-button"))
 export class BaseButton extends LitElement {
   static styles = [originstyle, colorful];
-
   @property({ type: Boolean }) disabled = false;
   @property({ type: Boolean }) ghost = false;
   @property() href:string = undefined;

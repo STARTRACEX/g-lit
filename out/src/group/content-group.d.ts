@@ -14,7 +14,7 @@ export declare class SectionGroup extends LitElement {
     _slots(): import("lit-html").TemplateResult<1>;
     _bar(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
-    resetindex(name: any, current: any): void;
+    resetindex(name: string, current: number): void;
 }
 export declare class ContentGroup extends LitElement {
     get _loading(): Element;

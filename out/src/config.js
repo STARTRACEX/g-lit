@@ -51,7 +51,6 @@ export const append = (target, args) => {
     if (children) {
         if (children.length) /* Iterators exist */ {
             [...children].forEach((child) => {
-                console.log(child);
                 typeof child === "string" ? element.appendChild(document.createTextNode(child)) : element.appendChild(child);
             });
         }

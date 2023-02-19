@@ -6,7 +6,6 @@ export declare class LabelInput extends LitElement {
     def: string;
     pla: string;
     name: string;
-    id: string;
     value: string;
     static styles: import("lit").CSSResult[];
     get _input(): HTMLInputElement;

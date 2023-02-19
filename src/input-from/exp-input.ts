@@ -131,7 +131,6 @@ export class ExpInput extends LitElement {
   `];
   @property() label = "";
   @property() name = "";
-  @property() id = "";
   @property() pla = "";
   @property() type = "text";
   @property() value = "";
@@ -152,7 +151,7 @@ export class ExpInput extends LitElement {
   }
   _handleInput(i) {
     this.value = i.target.value;
-    this.dispatchEvent(new CustomEvent('input', { detail: this.value }));    
+    this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
   }
   reset() {
     this.value = this.def || "";
