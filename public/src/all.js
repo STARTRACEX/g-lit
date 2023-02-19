@@ -1,3 +1,4 @@
+import "./avatar-anchor.js";
 import "./base-button.js";
 import "./base-input.js";
 import "./base-switch.js";
@@ -12,6 +13,9 @@ import "./exp-input.js";
 import "./label-input.js";
 import "./nav-layout.js";
 import "./ov-effect.js";
+import "./ro-effect.js";
 import "./search-input.js";
 import "./select-input.js";
 import "./sign-form.js";
+import "./super-a.js";
+import "./tw-effect.js";

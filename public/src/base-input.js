@@ -1,6 +1,5 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
 import { name, theme } from './config.js';
-
 export class BaseInput extends LitElement {
   get _input() {
     return this.shadowRoot.querySelector('input');

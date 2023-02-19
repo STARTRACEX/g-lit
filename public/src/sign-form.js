@@ -1,5 +1,4 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
-import './label-input.js';
 export class SignForm extends LitElement {
   get _label_input() {
     return this.renderRoot?.querySelectorAll('label-input') ?? null;

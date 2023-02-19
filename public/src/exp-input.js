@@ -130,7 +130,6 @@ export class ExpInput extends LitElement {
   static properties = {
     label: {},
     name: {},
-    id: {},
     pla: {},
     type: {},
     value: {},
