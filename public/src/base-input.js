@@ -28,13 +28,17 @@ export class BaseInput extends LitElement {
   static styles = [theme, css`
   :host{
     display: inline-flex;
-    align-items: baseline;
-    background-color: transparent;
+    background-color: var(--input-background);
     border-radius: .2em;
-    outline:1px solid transparent;
+    outline:.18em solid transparent ;
   }
   :host(:focus){
-    outline: 1px solid var(--input-outline);
+    outline-color:var(--input-outline);
+  }
+  div{
+    margin: 0 -.25em;
+    display: flex;
+    flex:1;
   }
   *{
     border-radius: inherit;
@@ -63,13 +67,13 @@ export class BaseInput extends LitElement {
     border-radius: .25em;
   }
   .range{
-    width: 100%;
     position: relative;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0 .5px .1em var(--shadow);
     background-color:var(--input-false);
+    margin: auto .24em;
   }
   .range input~i {
     position: absolute;
@@ -77,9 +81,10 @@ export class BaseInput extends LitElement {
     width: 50%;
     pointer-events: none ;
     background-color: var(--input-true);
-    height: calc(.5em - 1.1px);
+    height: calc(.6em - 1.1px);
   }
   .range input {
+    height: .6em;
     margin: 0px -0.5em;
     width: calc(100% + 0.5em);
     appearance: none;
@@ -88,37 +93,42 @@ export class BaseInput extends LitElement {
     background-color: transparent;
   }
   .range input::-webkit-slider-runnable-track {
-    height: .5em;
+    height: .6em;
   }
   .range input::-webkit-slider-thumb {
     z-index: 1;
     appearance: none;
     -webkit-appearance: none;
     position: relative;
-    height: 1em;
-    width: 1em;
-    margin-top: -0.25em;
+    height: 1.2em;
+    width: 1.2em;
+    margin-top: -0.3em;
     background-color: var(--input-control);
     border-radius: 50%;
     border: solid 0.125em rgba(0, 221, 255, 0.5);
     box-shadow: 0 .1em .1em var(--shadow);
-  }`];
+  }
+  `];
   render() {
     if (!this.name) this.name = this.label || this.type;
-    return html`<slot name="pre"></slot>
+    return html`
+    <div>
+    <slot name="pre"></slot>
       <slot></slot>
       <div class=${this.type}>
         ${this._typeSwitcher()}
       </div>
-      <slot name="suf"></slot>`;
+      <slot name="suf"></slot></div>`;
   }
   firstUpdated() {
-    this.addEventListener('click', this._handelFocus);
-    [...this.children].forEach((e) => {
-      e.style.display = "";
-    });
+    if (!this.def) this.def = this.value ?? "";
     if (!this.value) this.value = this.def;
-    if (this.type === "range") this._ranged.style.width = 100 * (this.value / (this.max - this.min)) + '%';
+    if (this.type === "range") {
+      this._ranged.style.width = 100 * (this.value / (this.max - this.min)) + '%';
+      if (this.childNodes.length) {
+        this.shadowRoot.querySelector('div').style.margin = "0";
+      }
+    } this.addEventListener('click', this._handelFocus);
   }
   _handleRange(e) {
     this.value = e.target.value;
@@ -139,8 +149,8 @@ export class BaseInput extends LitElement {
       this.value = this.def || (this.max - this.min) / 2;
       this._ranged.style.width = 100 * (this.value / (this.max - this.min)) + '%';
     } else {
-      this._input.value = this.def || "";
-      this.value = this.def || "";
+      this._input.value = this.def;
+      this.value = this.def;
     }
   }
   _typeSwitcher() {
@@ -152,7 +162,7 @@ export class BaseInput extends LitElement {
     }
   }
   namevalue() {
-    return [this.name, this.value];
+    return [this.name, this.value || ""];
   }
 }
 customElements.define(name.tag('base-input'), BaseInput);

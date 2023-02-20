@@ -1,6 +1,6 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
 export class SignForm extends LitElement {
-  get _label_input() {
+  get _input() {
     return this.renderRoot?.querySelectorAll('label-input') ?? null;
   }
   static styles = css`
@@ -31,16 +31,19 @@ export class SignForm extends LitElement {
   `;
   static properties = {
     method: {},
-    reset: { type: Boolean },
-    submit: { type: Function },
+    // reset: { type: Boolean },
+    // submit: { type: Function },
   };
   constructor() {
     super();
     this.method = "post";
-    this.submit = (x) => {
-      console.table(x);
-      console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor element.submit=function(x){...}\n");
-    };
+    // this.submit = (x) => {
+    //   console.table(x);
+    //   console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor element.submit=function(x){...}\n");
+    // };
+  }
+  get assigned() {
+    return this.shadowRoot.querySelector('slot').assignedNodes();
   }
   render() {
     return html`
@@ -52,38 +55,69 @@ export class SignForm extends LitElement {
       </label-input>
         <label-input
         label="Password"
-        name="password"
         type="password"
         ></label-input>
         <slot></slot>
       </main>
-      <div>
-        ${this.reset && html`<input type="reset" @click=${this._reset} style="--hover:rgb(190 35 90)" />`}
-        <input type="submit" @click=${this._submit} style="--hover:rgb(44 194 224 / 85%)" />
-      </div>
-    
     </form>`;
   }
   reset() {
-    this._label_input.forEach(element => {
-      element.value = element.def;
-      element._reset();
-    });
+    for (let i of this._input) {
+      i.reset();
+    }
+    for (let i of this.assigned) {
+      each(i, (node) => {
+        if (node.reset) {
+          node.reset();
+        }
+        else if (node.value) node.value = node.defaultValue ?? "";
+      });
+    }
   }
-  _submit(e) {
-    e.preventDefault();
-    let x = {};
-    this._label_input.forEach(element => {
-      var [name, value] = element.namevalue();
+  namevalue() {
+    var x = {};
+    for (let i of this._input) {
+      var [name, value] = i.namevalue();
       x[name] = value;
-    });
-    this.shadowRoot.querySelector('slot').assignedNodes().forEach((node) => {
-      if (node.name) {
-        x[node.name] = node.value;
-      }
-    });
-    this.submit(x);
+    }
+    for (let i of this.assigned) {
+      each(i, (node) => {
+        if (node.namevalue) {
+          var [name, value] = node.namevalue();
+          x[name] = value;
+        }
+        else if (node.name) {
+          if (node.type == "radio" || node.type == "checkbox") {
+            if (node.checked) {
+              x[node.name] = node.value;
+            }
+          }
+          else {
+            x[node.name] = node.value;
+          }
+        }
+      });
+    }
+    return x;
+  }
+  submit() {
+    const x = this.namevalue();
+    this.dispatchEvent(new CustomEvent('submit', { detail: x }));
+    return x;
+  }
+  firstUpdated() {
+
   }
 }
 import { name } from './config.js';
 customElements.define(name.tag('sign-form'), SignForm);
+
+// 递归遍历
+function each(node, callback) {
+  if (node) {
+    callback(node);
+    for (let i of node.childNodes) {
+      each(i, callback);
+    }
+  }
+}

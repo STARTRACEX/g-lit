@@ -5,12 +5,13 @@ import "./base-switch.js";
 import "./button-group.js";
 import "./call-item.js";
 import "./content-group.js";
-import "./details-group.js"
+import "./details-group.js";
 import "./details-item.js";
 import "./divier-line.js";
 import "./down-drop.js";
 import "./exp-input.js";
 import "./label-input.js";
+import "./menu-list.js";
 import "./nav-layout.js";
 import "./ov-effect.js";
 import "./ro-effect.js";

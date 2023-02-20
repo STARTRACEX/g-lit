@@ -1,4 +1,4 @@
-import { LitElement, html, css, classMap, ifDefined } from '../core/lit-all.min.js';
+import { LitElement, html, css, ifDefined } from '../core/lit-all.min.js';
 import { name, append } from './config.js';
 export class AvatarAnchor extends LitElement {
   static properties = {

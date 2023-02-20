@@ -30,9 +30,12 @@ export class ExpInput extends LitElement {
     .underline fieldset {
       border-color: transparent !important;
     }
+    .outline fieldset{
+      border: .18em solid;
+    }
     .filed {
       background-color: var(--input-background);
-      outline: .1em solid var(--input-outline);
+      outline: .18em solid var(--input-outline);
     }
     .filed fieldset {
       border-color: transparent !important;
@@ -87,7 +90,6 @@ export class ExpInput extends LitElement {
       bottom: 0;
       width: inherit;
       margin: -.1em;
-      border: .1em solid;
     }
     legend span {
       display: inline-block;
@@ -138,7 +140,7 @@ export class ExpInput extends LitElement {
     offset: {},
   };
   get _input() {
-    return this.renderRoot?.querySelector('input') ?? null;
+    return this.renderRoot?.querySelector('input');
   }
   constructor() {
     super();
@@ -148,22 +150,23 @@ export class ExpInput extends LitElement {
   render() {
     if (!this.name) this.name = this.label || this.type;
     return html`<div class=${this.base}>
-    ${this.type !== "textarea" ? html`<input class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} type=${this.type} placeholder=${this.pla} name=${this.name}>` : html`<textarea class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} placeholder=${this.pla} name=${this.name}></textarea>`}
+    ${this.type !== "textarea" ? html`<input class="input" required title="" value=${this.value} @input=${this._handleInput} type=${this.type} placeholder=${this.pla} name=${this.name}>` : html`<textarea class="input" required title="" value=${this.value} @input=${this._handleInput} placeholder=${this.pla} name=${this.name}></textarea>`}
     <fieldset>
       <legend><span>${this.label}</span></legend>
     </fieldset><style>:valid~fieldset legend,:focus~fieldset legend{margin-left: ${this.offset || 0} !important;}</style>
   </div>`;
   }
   firstUpdated() {
-    this.value = this.def || "";
+    if (!this.def) this.def = this.value ?? "";
+    if (!this.value) this.value = this.def;
   }
   _handleInput(i) {
     this.value = i.target.value;
     this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
   }
   reset() {
-    this.value = this.def || "";
-    this.renderRoot.querySelector('.input').value = this.def || "";
+    this.value = this.def;
+    this._input.value = this.def;
   }
   namevalue() {
     return [this.name, this.value];
