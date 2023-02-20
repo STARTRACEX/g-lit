@@ -2,8 +2,8 @@ import { LitElement } from "lit";
 export declare class BaseSwitch extends LitElement {
     get _input(): HTMLInputElement;
     static styles: import("lit").CSSResult[];
-    disabled: boolean;
     checked: boolean;
+    disabled: boolean;
     fat: boolean;
     def: string;
     name: string;
@@ -11,8 +11,8 @@ export declare class BaseSwitch extends LitElement {
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
     reset(): void;
-    _handleChange(e: any): void;
-    namevalue(): string[];
+    _handleChange(): void;
+    namevalue(): (string | boolean)[];
 }
 declare global {
     interface HTMLElementTagNameMap {

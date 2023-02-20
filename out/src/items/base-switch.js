@@ -10,8 +10,8 @@ import { name, theme } from "../config";
 let BaseSwitch = class BaseSwitch extends LitElement {
     constructor() {
         super(...arguments);
-        this.disabled = false;
         this.checked = false;
+        this.disabled = false;
         this.fat = false;
         this.def = "";
         this.name = "checkbox";
@@ -23,7 +23,7 @@ let BaseSwitch = class BaseSwitch extends LitElement {
     }
     render() {
         return html `<span class=${this.fat ? "fat" : "rect"}>
-    <input @change=${this._handleChange} ?disabled=${this.disabled} ?checked=${this.checked} name=${this.name} value=${this.value} type="checkbox">
+    <input @change=${this._handleChange} ?disabled=${this.disabled} ?checked=${this.checked} name=${this.name} value=${this.value} type="checkbox" >
     <aside>
       <div class="false"><slot name="false"></slot></div>
       <div class="always"><slot></slot><slot name="always"></slot></div>
@@ -31,30 +31,31 @@ let BaseSwitch = class BaseSwitch extends LitElement {
     </aside></span>`;
     }
     firstUpdated() {
-        if (this.checked !== true)
+        if (!this.def) {
+            this.def = this.checked ? "true" : "false";
+        }
+        if (this.checked !== true) {
+            this.reset();
+        }
+    }
+    reset() {
+        if (this.def)
             try {
                 this.checked = JSON.parse(this.def);
             }
             catch {
                 this.checked = false;
             }
-    }
-    reset() {
-        try {
-            this.checked = JSON.parse(this.def);
-        }
-        catch {
-            this.checked = false;
-        }
+        this.checked = !!this.def;
         this._input.checked = this.checked;
     }
-    _handleChange(e) {
-        this.checked = e.target.checked;
+    _handleChange() {
+        this.checked = this._input.checked;
+        this.dispatchEvent(new CustomEvent('change', { detail: this.checked }));
+        this.dispatchEvent(new CustomEvent('input', { detail: this.checked }));
     }
     namevalue() {
-        if (this._input.checked)
-            return [this.name, this.value];
-        return [undefined, undefined];
+        return [this.name, this.checked || false];
     }
 };
 BaseSwitch.styles = [theme, css `:host,span {
@@ -166,10 +167,10 @@ BaseSwitch.styles = [theme, css `:host,span {
     }`];
 __decorate([
     property({ type: Boolean })
-], BaseSwitch.prototype, "disabled", void 0);
+], BaseSwitch.prototype, "checked", void 0);
 __decorate([
     property({ type: Boolean })
-], BaseSwitch.prototype, "checked", void 0);
+], BaseSwitch.prototype, "disabled", void 0);
 __decorate([
     property({ type: Boolean })
 ], BaseSwitch.prototype, "fat", void 0);

@@ -12,7 +12,6 @@ export declare class BaseInput extends LitElement {
     min: number;
     max: number;
     step: number;
-    constructor();
     static styles: import("lit").CSSResult[];
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;

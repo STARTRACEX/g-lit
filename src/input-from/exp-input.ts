@@ -32,9 +32,12 @@ export class ExpInput extends LitElement {
     .underline fieldset {
       border-color: transparent !important;
     }
+    .outline fieldset{
+      border: .18em solid;
+    }
     .filed {
       background-color: var(--input-background);
-      outline: .1em solid var(--input-outline);
+      outline: .18em solid var(--input-outline);
     }
     .filed fieldset {
       border-color: transparent !important;
@@ -89,7 +92,6 @@ export class ExpInput extends LitElement {
       bottom: 0;
       width: inherit;
       margin: -.1em;
-      border: .1em solid;
     }
     legend span {
       display: inline-block;
@@ -137,6 +139,9 @@ export class ExpInput extends LitElement {
   @property() def = "";
   @property() base = "outline";
   @property() offset = "";
+  get _input() {
+    return this.renderRoot?.querySelector('input');
+  }
   render() {
     if (!this.name) this.name = this.label || this.type;
     return html`<div class=${this.base}>
@@ -147,15 +152,16 @@ export class ExpInput extends LitElement {
   </div>`;
   }
   firstUpdated() {
-    this.value = this.def || "";
+    if (!this.def) this.def = this.value ?? "";
+    if (!this.value) this.value = this.def;
   }
   _handleInput(i) {
     this.value = i.target.value;
     this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
   }
   reset() {
-    this.value = this.def || "";
-    (this.renderRoot.querySelector('.input') as HTMLInputElement).value = this.def || "";
+    this.value = this.def;
+    this._input.value = this.def;
   }
   namevalue() {
     return [this.name, this.value];

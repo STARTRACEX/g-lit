@@ -15,11 +15,11 @@ const originstyle = css `
     --border: #444444;
     --background: #2c2c2c;
     --hover: #fafafa;
-    --border-hover: #5a5a5a;
+    --border-hover: #707070;
     --background-hover: #303030;
     --active: #fafafa;
     --border-active: #5a5a5a;
-    --background-active: #252525;
+    --background-active: #3a3a3a;
     display:inline-flex;
     text-decoration:none;
     cursor:pointer;
@@ -30,12 +30,10 @@ const originstyle = css `
     border-color: var(--background);
     background-color: transparent;
   }
-
   .ghost:active {
     color: var(--active);
     background-color: var(--background-active);
   }
-
   a {
     box-sizing: border-box;
     height:100%;
@@ -53,7 +51,6 @@ const originstyle = css `
     text-decoration:inherit;
     transition: all .2s ease-in;
   }
-
   div {
     display: inline-flex;
     justify-content: center;
@@ -62,20 +59,17 @@ const originstyle = css `
     margin-right: .1em;
     margin-left: .1em;
   }
-
   a:hover {
     color: var(--hover);
     border-color: var(--border-hover);
     background-color: var(--background-hover);
   }
-
   a:active {
     transition:  0s;
     color: var(--active);
     border-color: var(--border-active);
     background-color: var(--background-active);
   }
-
   a[disabled],
   a[disabled]:hover,
   a[disabled]:active {

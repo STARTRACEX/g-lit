@@ -10,73 +10,86 @@ import { name } from '../config';
 let DetailsItem = class DetailsItem extends LitElement {
     constructor() {
         super(...arguments);
+        this.summary = "";
         this.open = false;
+        this.fill = false;
     }
     render() {
-        return html `
-    <dl class=${this.open ? "open" : "close"} >
-      <dt @click=${this.toggle}><slot name="title"></slot>
-        <svg width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/></svg>
-      </dt>
-      <dd>
+        return html `<dl >
+      <dt @click=${this.toggle}>
+      ${this.summary}
+      <slot name="summary"></slot>
+        <i>
+          <svg fill="currentColor" viewBox="0 0 16 16"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/></svg>
+        </i>
+        </dt>
+      <dd @click=${e => { if (this.fill && this.shadowRoot.contains(e.target))
+            this.toggle(); }}>
         <div>
           <slot></slot>
         </div>
       </dd>
-    </dl>
-    `;
+    </dl>`;
     }
     firstUpdated() {
-        this.shadowRoot.querySelector("dl").style.setProperty("--height", this.shadowRoot.querySelector("dd").clientHeight + "px");
+        if (this.open) {
+            this.toggle();
+            this.open = true;
+        }
     }
     toggle() {
-        this.shadowRoot.querySelector("dl").style.setProperty("--height", this.shadowRoot.querySelector("dd").clientHeight + "px");
+        this.shadowRoot.querySelector("dl").style.setProperty("--height", this.shadowRoot.querySelector("div").clientHeight + "px");
         this.shadowRoot.querySelector("dl").classList.toggle("open");
         this.open = !this.open;
-    }
-    isopen() {
-        return this.open;
+        this.dispatchEvent(new CustomEvent("change", { detail: this.open }));
     }
 };
 DetailsItem.styles = css `
-  :host{
-    --height:auto;
-  }
-  dl.open {
-    height: calc(2em + var(--height));
-  }
-  svg{
+  i{
+    height: 1.5em;
+    width: 1.5em;
     transition: all .3s ease-in-out;
     margin-left: auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
-  .open svg{
+  .open i{
     transform: rotate(-90deg);
   }
   dl{
+    padding: inherit;
+  }
+  dl,dd{
     margin: 0;
-    height: 2em;
-    line-height: 2em;
     overflow: hidden;
-    transition: all .3s ease-in-out;
   }
   dt{
-    height: 2em;
-    display: inline-flex;
-    width: 100%;
-    align-items: center;
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+  .open dd{
+    height: var(--height);
   }
   dd{
-    display:flex;
-    margin: 0;
+    height: 0;
+    transition: all .3s ease-in-out;
+    
   }
   div{
-    height: fit-content;
+    display: flow-root;
+    height:var(--height);
   }
   `;
 __decorate([
+    property()
+], DetailsItem.prototype, "summary", void 0);
+__decorate([
     property({ type: Boolean })
 ], DetailsItem.prototype, "open", void 0);
+__decorate([
+    property({ type: Boolean })
+], DetailsItem.prototype, "fill", void 0);
 DetailsItem = __decorate([
     customElement(name.tag("details-item"))
 ], DetailsItem);

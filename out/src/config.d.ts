@@ -15,4 +15,14 @@ export declare const append: (target: string | object, args: {
     children?: any;
     html?: any;
 }) => void;
+/**
+* Create element from args
+* @param args tag:tag name, props:attribute, children:appended chindren, html:innerHTML
+*/
+export declare const create: (args: any) => any;
+/**
+* Create element with args append to target
+* @param map Map of key:selector, value:args
+*/
+export declare const retag: (map: any) => void;
 //# sourceMappingURL=config.d.ts.map

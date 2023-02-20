@@ -11,7 +11,7 @@ import { name } from '../config';
 let SuperAuchor = class SuperAuchor extends LitElement {
     constructor() {
         super(...arguments);
-        this.href = '';
+        this.href = undefined;
         this.target = '';
         this.active = '';
         this.arrow = '';

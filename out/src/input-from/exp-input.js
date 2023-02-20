@@ -19,6 +19,10 @@ let ExpInput = class ExpInput extends LitElement {
         this.base = "outline";
         this.offset = "";
     }
+    get _input() {
+        var _a;
+        return (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelector('input');
+    }
     render() {
         if (!this.name)
             this.name = this.label || this.type;
@@ -30,15 +34,19 @@ let ExpInput = class ExpInput extends LitElement {
   </div>`;
     }
     firstUpdated() {
-        this.value = this.def || "";
+        var _a;
+        if (!this.def)
+            this.def = (_a = this.value) !== null && _a !== void 0 ? _a : "";
+        if (!this.value)
+            this.value = this.def;
     }
     _handleInput(i) {
         this.value = i.target.value;
         this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
     }
     reset() {
-        this.value = this.def || "";
-        this.renderRoot.querySelector('.input').value = this.def || "";
+        this.value = this.def;
+        this._input.value = this.def;
     }
     namevalue() {
         return [this.name, this.value];
@@ -73,9 +81,12 @@ ExpInput.styles = [theme, css `
     .underline fieldset {
       border-color: transparent !important;
     }
+    .outline fieldset{
+      border: .18em solid;
+    }
     .filed {
       background-color: var(--input-background);
-      outline: .1em solid var(--input-outline);
+      outline: .18em solid var(--input-outline);
     }
     .filed fieldset {
       border-color: transparent !important;
@@ -130,7 +141,6 @@ ExpInput.styles = [theme, css `
       bottom: 0;
       width: inherit;
       margin: -.1em;
-      border: .1em solid;
     }
     legend span {
       display: inline-block;

@@ -9,4 +9,9 @@ export declare class SuperAuchor extends LitElement {
     firstUpdated(): void;
     _arrowSwitcher(): import("lit-html").TemplateResult<1>;
 }
+declare global {
+    interface HTMLElementTagNameMap {
+        'super-a': SuperAuchor;
+    }
+}
 //# sourceMappingURL=super-a.d.ts.map

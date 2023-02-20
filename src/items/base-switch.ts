@@ -113,15 +113,15 @@ export class BaseSwitch extends LitElement {
     .fat .true {
       display: none;
     }`];
-  @property({ type: Boolean }) disabled = false;
   @property({ type: Boolean }) checked = false;
+  @property({ type: Boolean }) disabled = false;
   @property({ type: Boolean }) fat = false;
   @property() def = "";
   @property() name = "checkbox";
   @property() value = "on";
   render() {
     return html`<span class=${this.fat ? "fat" : "rect"}>
-    <input @change=${this._handleChange} ?disabled=${this.disabled} ?checked=${this.checked} name=${this.name} value=${this.value} type="checkbox">
+    <input @change=${this._handleChange} ?disabled=${this.disabled} ?checked=${this.checked} name=${this.name} value=${this.value} type="checkbox" >
     <aside>
       <div class="false"><slot name="false"></slot></div>
       <div class="always"><slot></slot><slot name="always"></slot></div>
@@ -129,28 +129,30 @@ export class BaseSwitch extends LitElement {
     </aside></span>`;
   }
   firstUpdated() {
-    if (this.checked !== true)
+    if (!this.def) {
+      this.def = this.checked ? "true" : "false";
+    }
+    if (this.checked !== true) {
+      this.reset();
+    }
+  }
+  reset() {
+    if (this.def)
       try {
         this.checked = JSON.parse(this.def);
       } catch {
         this.checked = false;
       }
-  }
-  reset() {
-    try {
-      this.checked = JSON.parse(this.def);
-    } catch {
-      this.checked = false;
-    }
+    this.checked = !!this.def;
     this._input.checked = this.checked;
   }
-  _handleChange(e) {
-    this.checked = e.target.checked;
+  _handleChange() {
+    this.checked = this._input.checked;
+    this.dispatchEvent(new CustomEvent('change', { detail: this.checked }));
+    this.dispatchEvent(new CustomEvent('input', { detail: this.checked }));
   }
   namevalue() {
-    if (this._input.checked)
-      return [this.name, this.value];
-    return [undefined, undefined];
+    return [this.name, this.checked || false];
   }
 }
 declare global {
