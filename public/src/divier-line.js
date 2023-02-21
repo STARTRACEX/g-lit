@@ -1,24 +1,24 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
 export class DivierLine extends LitElement {
   static styles = css`
-    div {
-      display: flex;
-      align-items: center;
-      border-radius:inherit;
-    }
-    hr {
-      border-radius:inherit;
-      margin: 0;
-      border: 0;
-      flex: 1;
-      backdrop-filter: invert(0.2);
-      -webkit-backdrop-filter: invert(0.2)
-    }
-    .v {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }`;
+  div {
+    display: flex;
+    align-items: center;
+    border-radius:inherit;
+  }
+  hr {
+    border-radius:inherit;
+    margin: 0;
+    border: 0;
+    flex: 1;
+    backdrop-filter: invert(0.2);
+    -webkit-backdrop-filter: invert(0.2)
+  }
+  .v {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }`;
   static properties = {
     pre: {},
     suf: {},
