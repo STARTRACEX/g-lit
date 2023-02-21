@@ -1,18 +1,10 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { name } from '../config';
 @customElement(name.tag('sign-form'))
-export class SignForm extends LitElement {
-  @property({ type: Boolean }) reset = false;
-  @property() method = "get";
-  @property({ type: Function }) submit = (x) => {
-    console.table(x);
-    console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor\nelement.submit=function(x){...}\n");
-  };
-  
+export class SignForm extends LitElement {  
   static styles = css`
   form {
-    --hover:rgb(190 35 90);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,8 +29,12 @@ export class SignForm extends LitElement {
     transform: scale(1.02);
   }
   `;
+  get _from() {
+    return this.shadowRoot.querySelector('form');
+  }
   render() {
-    return html`<form method=${this.method.toLocaleLowerCase()} >
+    return html`<form>
+      <slot name="pre"></slot>
       <main>
         <label-input
         label="E-mail"
@@ -46,39 +42,47 @@ export class SignForm extends LitElement {
       </label-input>
         <label-input
         label="Password"
-        name="password"
         type="password"
         ></label-input>
         <slot></slot>
       </main>
-      <div>
-        ${this.reset ? html`<input type="reset" @click=${this._reset} style="--hover:rgb(190 35 90)" />` : ""}
-        <input type="submit" @click=${this._submit} style="--hover:rgb(44 194 224 / 85%)" />
-      </div>
+      <slot name="suf"></slot>
     </form>`;
   }
-  get _label_input() {
-    return this.renderRoot?.querySelectorAll('label-input') ?? null;
+  firstUpdated() {
+    for (let slot of [...this.shadowRoot.querySelectorAll('slot')]) for (let i of slot.assignedNodes()) { slot.appendChild(i); }
   }
-  _reset() {
-    this._label_input.forEach(element => {
-      element.value = element.def || "";
-      element.reset();
+  reset() {
+    each(this.shadowRoot.querySelector('form'), (node) => {
+      if (node.reset) { node.reset(); }
     });
   }
-  _submit(e) {
-    e.preventDefault();
-    let x = {};
-    this._label_input.forEach(element => {
-      var [name, value] = element.namevalue();
-      x[name] = value;
-    });
-    this.shadowRoot.querySelector('slot').assignedNodes().forEach((node) => {
-      if ((node as HTMLInputElement).name) {
-        x[(node as HTMLInputElement).name] = (node as HTMLInputElement).value;
+  namevalue() {
+    var x = {};
+    each(this._from, (node) => {
+      if (node.namevalue) {
+        var [name, value] = node.namevalue();
+        x[name] = value;
+      }
+      else if (node.name && node.tagName !== "SLOT") {
+        if (node.type == "radio" || node.type == "checkbox") { if (node.checked) { x[node.name] = node.value ?? ""; } }
+        else { x[node.name] = node.value ?? ""; }
       }
     });
-    this.submit(x);
+    return x;
+  }
+  submit() {
+    const x = this.namevalue();
+    this.dispatchEvent(new CustomEvent('submit', { detail: x }));
+    return x;
+  }
+}
+function each(node, callback) {
+  if (node) {
+    callback(node);
+    for (let i of node.childNodes) {
+      each(i, callback);
+    }
   }
 }
 declare global {

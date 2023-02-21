@@ -5,20 +5,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { name } from '../config';
 let SignForm = class SignForm extends LitElement {
-    constructor() {
-        super(...arguments);
-        this.reset = false;
-        this.method = "get";
-        this.submit = (x) => {
-            console.table(x);
-            console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor\nelement.submit=function(x){...}\n");
-        };
+    get _from() {
+        return this.shadowRoot.querySelector('form');
     }
     render() {
-        return html `<form method=${this.method.toLocaleLowerCase()} >
+        return html `<form>
+      <slot name="pre"></slot>
       <main>
         <label-input
         label="E-mail"
@@ -26,45 +21,55 @@ let SignForm = class SignForm extends LitElement {
       </label-input>
         <label-input
         label="Password"
-        name="password"
         type="password"
         ></label-input>
         <slot></slot>
       </main>
-      <div>
-        ${this.reset ? html `<input type="reset" @click=${this._reset} style="--hover:rgb(190 35 90)" />` : ""}
-        <input type="submit" @click=${this._submit} style="--hover:rgb(44 194 224 / 85%)" />
-      </div>
+      <slot name="suf"></slot>
     </form>`;
     }
-    get _label_input() {
-        var _a, _b;
-        return (_b = (_a = this.renderRoot) === null || _a === void 0 ? void 0 : _a.querySelectorAll('label-input')) !== null && _b !== void 0 ? _b : null;
+    firstUpdated() {
+        for (let slot of [...this.shadowRoot.querySelectorAll('slot')])
+            for (let i of slot.assignedNodes()) {
+                slot.appendChild(i);
+            }
     }
-    _reset() {
-        this._label_input.forEach(element => {
-            element.value = element.def || "";
-            element.reset();
-        });
-    }
-    _submit(e) {
-        e.preventDefault();
-        let x = {};
-        this._label_input.forEach(element => {
-            var [name, value] = element.namevalue();
-            x[name] = value;
-        });
-        this.shadowRoot.querySelector('slot').assignedNodes().forEach((node) => {
-            if (node.name) {
-                x[node.name] = node.value;
+    reset() {
+        each(this.shadowRoot.querySelector('form'), (node) => {
+            if (node.reset) {
+                node.reset();
             }
         });
-        this.submit(x);
+    }
+    namevalue() {
+        var x = {};
+        each(this._from, (node) => {
+            var _a, _b;
+            if (node.namevalue) {
+                var [name, value] = node.namevalue();
+                x[name] = value;
+            }
+            else if (node.name && node.tagName !== "SLOT") {
+                if (node.type == "radio" || node.type == "checkbox") {
+                    if (node.checked) {
+                        x[node.name] = (_a = node.value) !== null && _a !== void 0 ? _a : "";
+                    }
+                }
+                else {
+                    x[node.name] = (_b = node.value) !== null && _b !== void 0 ? _b : "";
+                }
+            }
+        });
+        return x;
+    }
+    submit() {
+        const x = this.namevalue();
+        this.dispatchEvent(new CustomEvent('submit', { detail: x }));
+        return x;
     }
 };
 SignForm.styles = css `
   form {
-    --hover:rgb(190 35 90);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,16 +94,15 @@ SignForm.styles = css `
     transform: scale(1.02);
   }
   `;
-__decorate([
-    property({ type: Boolean })
-], SignForm.prototype, "reset", void 0);
-__decorate([
-    property()
-], SignForm.prototype, "method", void 0);
-__decorate([
-    property({ type: Function })
-], SignForm.prototype, "submit", void 0);
 SignForm = __decorate([
     customElement(name.tag('sign-form'))
 ], SignForm);
 export { SignForm };
+function each(node, callback) {
+    if (node) {
+        callback(node);
+        for (let i of node.childNodes) {
+            each(i, callback);
+        }
+    }
+}

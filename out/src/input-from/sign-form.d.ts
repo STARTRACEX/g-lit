@@ -1,13 +1,12 @@
 import { LitElement } from 'lit';
 export declare class SignForm extends LitElement {
-    reset: boolean;
-    method: string;
-    submit: (x: any) => void;
     static styles: import("lit").CSSResult;
+    get _from(): HTMLFormElement;
     render(): import("lit-html").TemplateResult<1>;
-    get _label_input(): NodeListOf<import("./label-input").LabelInput>;
-    _reset(): void;
-    _submit(e: any): void;
+    firstUpdated(): void;
+    reset(): void;
+    namevalue(): {};
+    submit(): {};
 }
 declare global {
     interface HTMLElementTagNameMap {
