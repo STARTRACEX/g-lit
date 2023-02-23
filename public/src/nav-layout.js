@@ -1,16 +1,33 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
 import { name, theme } from './config.js';
-export class AsidenavLayout extends LitElement {
+export class AsideNav extends LitElement {
   static properties = {
     m: { type: Number },
+    positon: {}
   };
   constructor() {
     super();
-    this.m = 720;
+    this.m = 0;
+    this.position = "fixed sticky"
   }
-  static styles = [theme, css`
-  nav{background-color:var(--nav-background)}nav{--nav-short:48px;--nav-pd:4px;min-height:var(--nav-short);min-width:var(--nav-short);box-sizing:border-box;padding:var(--nav-pd);z-index:900;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;position:fixed;top:0;left:0;height:100vh}
-  `];
+  static styles = [theme, css`:host{
+    min-height: 3em;
+    min-width:3em;
+    background-color: var(--nav-background);
+  }
+  nav {
+    background-color:inherit;;
+    min-height: initial;
+    min-width: inherit;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }`];
   render() {
     return html`
     <nav>
@@ -23,7 +40,7 @@ export class AsidenavLayout extends LitElement {
 export class NavLayout extends LitElement {
   static styles = [theme, css`
   :host{
-      display: flex;flex-flow: column nowrap;justify-content: space-between;align-items: center;min-height: 100%;
+    color:var(--text);display: flex;flex-flow: column nowrap;justify-content: space-between;align-items: center;min-height: 100%;
   }
   nav {
     background-color: var(--nav-background)
@@ -43,6 +60,8 @@ export class NavLayout extends LitElement {
     padding: 0 2.5%;
     box-sizing: border-box;
     margin: auto;
+    position: relative;
+
   }
   a {
     text-decoration: none;
@@ -55,7 +74,7 @@ export class NavLayout extends LitElement {
   nav>div {
     height: 100%;
     display: flex;
-    flex-direction: row
+    flex-direction: row;
   }
   .option {
     overflow: hidden;
@@ -79,8 +98,7 @@ export class NavLayout extends LitElement {
     height: 100%;
     justify-content: center;
     align-items: center;
-  }
-  `];
+  }`];
   static properties = {
     title: {},
     set: { type: Number },
@@ -120,7 +138,7 @@ export class NavLayout extends LitElement {
     return html`<footer><slot name="footer"></slot></footer>`;
   }
 }
-customElements.define(name.tag('asidenav-layout'), AsidenavLayout);
+customElements.define(name.tag('aside-nav'), AsideNav);
 customElements.define(name.tag('nav-layout'), NavLayout);
 const personal = html`<down-drop>
   <a href="/account" slot="hover">

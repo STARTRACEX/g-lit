@@ -20,5 +20,6 @@ import "./ro-effect.js";
 import "./search-input.js";
 import "./select-input.js";
 import "./sign-form.js";
+import "./split-input.js";
 import "./super-a.js";
 import "./tw-effect.js";

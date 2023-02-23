@@ -2,20 +2,27 @@ import { html, css, LitElement } from '../core/lit-core.min.js';
 import { name } from './config.js';
 export class DownDrop extends LitElement {
   static styles = css`
-  :host{
-    color:inherit;
-    background-color:inherit;
+  main{
+    height:100%;
+    width:100%;
+    display: flex;
     position: relative;
+    flex-direction: column;
+    align-items: center;
   }
   div{
     background-color:inherit;
     position: absolute;
     visibility: hidden;
+    top:100%;
   }
   slot[name="hover"]:hover~div,div:hover{
     visibility: visible;
   }
   `;
+  get div() {
+    return this.shadowRoot.querySelector("div");
+  }
   render() {
     return html`
     <slot name="hover"></slot>
@@ -23,24 +30,46 @@ export class DownDrop extends LitElement {
     <div><slot></slot></div>`;
   }
   firstUpdated() {
-    let div = this.shadowRoot.querySelector("div");
-    let divRect = div.getBoundingClientRect();
-    if (divRect.right > document.body.clientWidth) {
-      var x = divRect.right - document.body.clientWidth;
-      div.style.left = -x + "px";
+    if (this.querySelector('[slot="focus"]')) {
+      document.addEventListener('click', (e) => {
+        if (!this.contains(e.target)) {
+          this.close();
+        }
+      });
     }
-    if (divRect.bottom > document.body.clientHeight) {
-      div.style.bottom = "100%";
+    this.asyncrect();
+  }
+  async asyncrect() {
+    return new Promise(() => {
+      setTimeout(() => {
+        this.rect();
+      }, 0);
+    });
+  }
+  rect() {
+    const offsets = this.offsetParent?.getBoundingClientRect() || document.body.getBoundingClientRect();
+    const div = this.div;
+    const divLeft = div.getBoundingClientRect().left;
+    const divTop = div.getBoundingClientRect().top;
+    const divRight = div.getBoundingClientRect().right;
+    const RightWidth = offsets.width - (divRight - offsets.x);
+    const LeftWidth = offsets.width - (offsets.right - divLeft);
+    if (divLeft < 0) {
+      div.style.transform = `translateX(${-LeftWidth}px)`;
+    } else if (divRight > offsets.right) {
+      div.style.transform = `translateX(${RightWidth}px)`;
+    } else {
+      div.style.transform = `translateX(0)`;
     }
   }
   close() {
-    this.shadowRoot.querySelector("div").style.visibility = "hidden";
+    this.div.style.visibility = "hidden";
   }
   open() {
-    this.shadowRoot.querySelector("div").style.visibility = "visible";
+    this.div.style.visibility = "visible";
   }
   toggle() {
-    this.shadowRoot.querySelector("div").style.visibility == "visible" ? this.close() : this.open();
+    this.div.style.visibility === "visible" ? this.close() : this.open();
   }
 }
 customElements.define(name.tag('down-drop'), DownDrop);
