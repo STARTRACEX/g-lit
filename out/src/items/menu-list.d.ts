@@ -1,8 +1,8 @@
 import { LitElement } from "lit";
 export declare class MenuList extends LitElement {
     summary: string;
-    static styles: import("lit").CSSResult;
     open: boolean;
+    static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
     toggle(): void;

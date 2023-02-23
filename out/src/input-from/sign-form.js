@@ -5,28 +5,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, query } from 'lit/decorators.js';
 import { name } from '../config';
 let SignForm = class SignForm extends LitElement {
-    get _from() {
-        return this.shadowRoot.querySelector('form');
-    }
     render() {
-        return html `<form>
-      <slot name="pre"></slot>
-      <main>
-        <label-input
-        label="E-mail"
-        name="email">
-      </label-input>
-        <label-input
-        label="Password"
-        type="password"
-        ></label-input>
-        <slot></slot>
-      </main>
-      <slot name="suf"></slot>
-    </form>`;
+        return html `<form enctype="multipart/form-data"><slot name="pre"></slot>
+<main>
+  <label-input name="e-mail" type="email">
+    E-mail
+  </label-input>
+  <label-input type="password" >
+    Password
+  </label-input>
+</main><slot></slot><slot name="suf"></slot></form>`;
     }
     firstUpdated() {
         for (let slot of [...this.shadowRoot.querySelectorAll('slot')])
@@ -35,7 +26,7 @@ let SignForm = class SignForm extends LitElement {
             }
     }
     reset() {
-        each(this.shadowRoot.querySelector('form'), (node) => {
+        each(this._from, (node) => {
             if (node.reset) {
                 node.reset();
             }
@@ -44,27 +35,35 @@ let SignForm = class SignForm extends LitElement {
     namevalue() {
         var x = {};
         each(this._from, (node) => {
-            var _a, _b;
             if (node.namevalue) {
                 var [name, value] = node.namevalue();
-                x[name] = value;
-            }
-            else if (node.name && node.tagName !== "SLOT") {
-                if (node.type == "radio" || node.type == "checkbox") {
-                    if (node.checked) {
-                        x[node.name] = (_a = node.value) !== null && _a !== void 0 ? _a : "";
-                    }
-                }
-                else {
-                    x[node.name] = (_b = node.value) !== null && _b !== void 0 ? _b : "";
+                if (name) {
+                    x[name] = value;
                 }
             }
         });
-        return x;
+        var y = Object.fromEntries(new FormData(this._from));
+        x = { ...x, ...y };
+        return [this.getAttribute('name'), x];
     }
-    submit() {
-        const x = this.namevalue();
-        this.dispatchEvent(new CustomEvent('submit', { detail: x }));
+    FormData() {
+        var x = new FormData(this._from);
+        each(this._from, (node) => {
+            // 将node表单的Formdata追加到x
+            if (node.namevalue) {
+                var [name, value] = node.namevalue();
+                if (name && typeof value !== 'object' && !x.has(name)) {
+                    x.append(name, value);
+                }
+            }
+            if (node.FormData) {
+                for (let [key, value] of node.FormData()) {
+                    if (!x.has(key)) {
+                        x.append(key, value);
+                    }
+                }
+            }
+        });
         return x;
     }
 };
@@ -94,6 +93,9 @@ SignForm.styles = css `
     transform: scale(1.02);
   }
   `;
+__decorate([
+    query("form")
+], SignForm.prototype, "_from", void 0);
 SignForm = __decorate([
     customElement(name.tag('sign-form'))
 ], SignForm);

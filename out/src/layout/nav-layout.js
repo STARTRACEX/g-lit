@@ -7,30 +7,48 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { name, theme } from '../config';
-let AsidenavLayout = class AsidenavLayout extends LitElement {
+let AsideNav = class AsideNav extends LitElement {
     constructor() {
         super(...arguments);
-        this.m = 720;
+        this.m = 0;
+        this.position = "fixed sticky;";
     }
     render() {
         return html `
     <nav>
       <slot></slot>
-      <style>@media (max-width:${this.m || 720}px){nav{height:fit-content !important;width:100% !important;flex-direction:row-reverse !important;position:sticky !important;height:fit-content !important}}</style>
-    </nav>
-    `;
+      <style>nav{position:${this.position.split(" ")[0] || "fixed"};}@media (max-width:${this.m || 720}px){nav{weight:100% !important;height:fit-content !important;flex-direction:row-reverse !important;height:fit-content !important;position:${this.position.split(" ")[1] || "sticky"} !important;}}</style>
+    </nav>`;
     }
 };
-AsidenavLayout.styles = [theme, css `
-  nav{background-color:var(--nav-background)}nav{--nav-short:48px;--nav-pd:4px;min-height:var(--nav-short);min-width:var(--nav-short);box-sizing:border-box;padding:var(--nav-pd);z-index:900;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;position:fixed;top:0;left:0;height:100vh}
-  `];
+AsideNav.styles = [theme, css `:host{
+    min-height: 3em;
+    min-width:3em;
+    background-color: var(--nav-background);
+  }
+  nav {
+    background-color:inherit;;
+    min-height: initial;
+    min-width: inherit;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }`];
 __decorate([
     property({ type: Number })
-], AsidenavLayout.prototype, "m", void 0);
-AsidenavLayout = __decorate([
-    customElement(name.tag('asidenav-layout'))
-], AsidenavLayout);
-export { AsidenavLayout };
+], AsideNav.prototype, "m", void 0);
+__decorate([
+    property()
+], AsideNav.prototype, "position", void 0);
+AsideNav = __decorate([
+    customElement(name.tag('aside-nav'))
+], AsideNav);
+export { AsideNav };
 let NavLayout = class NavLayout extends LitElement {
     constructor() {
         super(...arguments);
@@ -74,7 +92,7 @@ let NavLayout = class NavLayout extends LitElement {
 };
 NavLayout.styles = [theme, css `
   :host{
-      display: flex;flex-flow: column nowrap;justify-content: space-between;align-items: center;min-height: 100%;
+      color:var(--text);display: flex;flex-flow: column nowrap;justify-content: space-between;align-items: center;min-height: 100%;
   }
   nav {
     background-color: var(--nav-background)
@@ -94,6 +112,8 @@ NavLayout.styles = [theme, css `
     padding: 0 2.5%;
     box-sizing: border-box;
     margin: auto;
+    position: relative;
+
   }
   a {
     text-decoration: none;
@@ -106,7 +126,7 @@ NavLayout.styles = [theme, css `
   nav>div {
     height: 100%;
     display: flex;
-    flex-direction: row
+    flex-direction: row;
   }
   .option {
     overflow: hidden;

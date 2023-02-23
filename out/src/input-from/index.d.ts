@@ -4,4 +4,5 @@ export * from "./label-input";
 export * from "./select-input";
 export * from "./search-input";
 export * from "./sign-form";
+export * from "./split-input";
 //# sourceMappingURL=index.d.ts.map

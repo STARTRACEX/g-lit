@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, query } from 'lit/decorators.js';
 import { name } from '../config';
 @customElement(name.tag('sign-form'))
-export class SignForm extends LitElement {  
+export class SignForm extends LitElement {
   static styles = css`
   form {
     display: flex;
@@ -29,51 +29,58 @@ export class SignForm extends LitElement {
     transform: scale(1.02);
   }
   `;
-  get _from() {
-    return this.shadowRoot.querySelector('form');
-  }
+  @query("form") _from: HTMLFormElement;
   render() {
-    return html`<form>
-      <slot name="pre"></slot>
-      <main>
-        <label-input
-        label="E-mail"
-        name="email">
-      </label-input>
-        <label-input
-        label="Password"
-        type="password"
-        ></label-input>
-        <slot></slot>
-      </main>
-      <slot name="suf"></slot>
-    </form>`;
+    return html`<form enctype="multipart/form-data"><slot name="pre"></slot>
+<main>
+  <label-input name="e-mail" type="email">
+    E-mail
+  </label-input>
+  <label-input type="password" >
+    Password
+  </label-input>
+</main><slot></slot><slot name="suf"></slot></form>`;
   }
   firstUpdated() {
     for (let slot of [...this.shadowRoot.querySelectorAll('slot')]) for (let i of slot.assignedNodes()) { slot.appendChild(i); }
   }
   reset() {
-    each(this.shadowRoot.querySelector('form'), (node) => {
+    each(this._from, (node: any) => {
       if (node.reset) { node.reset(); }
     });
   }
   namevalue() {
     var x = {};
-    each(this._from, (node) => {
+    each(this._from, (node: any) => {
       if (node.namevalue) {
         var [name, value] = node.namevalue();
-        x[name] = value;
-      }
-      else if (node.name && node.tagName !== "SLOT") {
-        if (node.type == "radio" || node.type == "checkbox") { if (node.checked) { x[node.name] = node.value ?? ""; } }
-        else { x[node.name] = node.value ?? ""; }
+        if (name) {
+          x[name] = value;
+        }
       }
     });
-    return x;
+    var y = Object.fromEntries(new FormData(this._from));
+    x = { ...x, ...y };
+    return [this.getAttribute('name'), x];
   }
-  submit() {
-    const x = this.namevalue();
-    this.dispatchEvent(new CustomEvent('submit', { detail: x }));
+  FormData() {
+    var x = new FormData(this._from) as any;
+    each(this._from, (node: any) => {
+      // 将node表单的Formdata追加到x
+      if (node.namevalue) {
+        var [name, value] = node.namevalue();
+        if (name && typeof value !== 'object' && !x.has(name)) {
+          x.append(name, value);
+        }
+      }
+      if (node.FormData) {
+        for (let [key, value] of node.FormData()) {
+          if (!x.has(key)) {
+            x.append(key, value);
+          }
+        }
+      }
+    });
     return x;
   }
 }

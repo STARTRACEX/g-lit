@@ -1,6 +1,7 @@
 import { LitElement } from 'lit';
-export declare class AsidenavLayout extends LitElement {
+export declare class AsideNav extends LitElement {
     m: number;
+    position: string;
     static styles: import("lit").CSSResult[];
     render(): import("lit-html").TemplateResult<1>;
 }
@@ -17,7 +18,7 @@ export declare class NavLayout extends LitElement {
 declare global {
     interface HTMLElementTagNameMap {
         'nav-layout': NavLayout;
-        'asidenav-layout': AsidenavLayout;
+        'asidenav-layout': AsideNav;
     }
 }
 //# sourceMappingURL=nav-layout.d.ts.map

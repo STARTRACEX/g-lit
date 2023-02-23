@@ -1,26 +1,41 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { name, theme } from '../config';
-@customElement(name.tag('asidenav-layout'))
-export class AsidenavLayout extends LitElement {
-  @property({ type: Number }) m = 720;
-  static styles = [theme, css`
-  nav{background-color:var(--nav-background)}nav{--nav-short:48px;--nav-pd:4px;min-height:var(--nav-short);min-width:var(--nav-short);box-sizing:border-box;padding:var(--nav-pd);z-index:900;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;position:fixed;top:0;left:0;height:100vh}
-  `];
+@customElement(name.tag('aside-nav'))
+export class AsideNav extends LitElement {
+  @property({ type: Number }) m = 0;
+  @property() position = "fixed sticky;";
+  static styles = [theme, css`:host{
+    min-height: 3em;
+    min-width:3em;
+    background-color: var(--nav-background);
+  }
+  nav {
+    background-color:inherit;;
+    min-height: initial;
+    min-width: inherit;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }`];
   render() {
     return html`
     <nav>
       <slot></slot>
-      <style>@media (max-width:${this.m || 720}px){nav{height:fit-content !important;width:100% !important;flex-direction:row-reverse !important;position:sticky !important;height:fit-content !important}}</style>
-    </nav>
-    `;
+      <style>nav{position:${this.position.split(" ")[0] || "fixed"};}@media (max-width:${this.m || 720}px){nav{weight:100% !important;height:fit-content !important;flex-direction:row-reverse !important;height:fit-content !important;position:${this.position.split(" ")[1] || "sticky"} !important;}}</style>
+    </nav>`;
   }
 }
 @customElement(name.tag('nav-layout'))
 export class NavLayout extends LitElement {
   static styles = [theme, css`
   :host{
-      display: flex;flex-flow: column nowrap;justify-content: space-between;align-items: center;min-height: 100%;
+      color:var(--text);display: flex;flex-flow: column nowrap;justify-content: space-between;align-items: center;min-height: 100%;
   }
   nav {
     background-color: var(--nav-background)
@@ -40,6 +55,8 @@ export class NavLayout extends LitElement {
     padding: 0 2.5%;
     box-sizing: border-box;
     margin: auto;
+    position: relative;
+
   }
   a {
     text-decoration: none;
@@ -52,7 +69,7 @@ export class NavLayout extends LitElement {
   nav>div {
     height: 100%;
     display: flex;
-    flex-direction: row
+    flex-direction: row;
   }
   .option {
     overflow: hidden;
@@ -115,7 +132,7 @@ export class NavLayout extends LitElement {
 declare global {
   interface HTMLElementTagNameMap {
     'nav-layout': NavLayout;
-    'asidenav-layout': AsidenavLayout;
+    'asidenav-layout': AsideNav;
   }
 }
 const personal = html`<down-drop>

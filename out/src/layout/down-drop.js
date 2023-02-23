@@ -5,51 +5,84 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { html, css, LitElement } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, query } from 'lit/decorators.js';
 import { name } from '../config';
 let DownDrop = class DownDrop extends LitElement {
     render() {
-        return html `
+        return html `<main>
     <slot name="hover"></slot>
     <slot name="focus" @click=${this.toggle}></slot>
-    <div><slot></slot></div>`;
+    <div><slot></slot></div>
+    </main>`;
     }
     firstUpdated() {
-        let div = this.shadowRoot.querySelector("div");
-        let divRect = div.getBoundingClientRect();
-        if (divRect.right > document.body.clientWidth) {
-            var x = divRect.right - document.body.clientWidth;
-            div.style.left = -x + "px";
+        if (this.querySelector('[slot="focus"]')) {
+            document.addEventListener('click', (e) => {
+                if (!this.contains(e.target)) {
+                    this.close();
+                }
+            });
         }
-        if (divRect.bottom > document.body.clientHeight) {
-            div.style.bottom = "100%";
+        this.asyncrect();
+    }
+    async asyncrect() {
+        return new Promise(() => {
+            setTimeout(() => {
+                this.rect();
+            }, 0);
+        });
+    }
+    rect() {
+        var _a;
+        const offsets = ((_a = this.offsetParent) === null || _a === void 0 ? void 0 : _a.getBoundingClientRect()) || document.body.getBoundingClientRect();
+        const div = this.div;
+        const divLeft = div.getBoundingClientRect().left;
+        const divTop = div.getBoundingClientRect().top;
+        const divRight = div.getBoundingClientRect().right;
+        const RightWidth = offsets.width - (divRight - offsets.x);
+        const LeftWidth = offsets.width - (offsets.right - divLeft);
+        if (divLeft < 0) {
+            div.style.transform = `translateX(${-LeftWidth}px)`;
+        }
+        else if (divRight > offsets.right) {
+            div.style.transform = `translateX(${RightWidth}px)`;
+        }
+        else {
+            div.style.transform = `translateX(0)`;
         }
     }
     close() {
-        this.shadowRoot.querySelector("div").style.visibility = "hidden";
+        this.div.style.visibility = "hidden";
     }
     open() {
-        this.shadowRoot.querySelector("div").style.visibility = "visible";
+        this.div.style.visibility = "visible";
     }
     toggle() {
-        this.shadowRoot.querySelector("div").style.visibility == "visible" ? this.close() : this.open();
+        this.div.style.visibility === "visible" ? this.close() : this.open();
     }
 };
 DownDrop.styles = css `
-  :host{
-    color:inherit;
-    background-color:inherit;
+  main{
+    height:100%;
+    width:100%;
+    display: flex;
     position: relative;
+    flex-direction: column;
+    align-items: center;
   }
   div{
     background-color:inherit;
     position: absolute;
     visibility: hidden;
+    top:100%;
   }
   slot[name="hover"]:hover~div,div:hover{
     visibility: visible;
   }
   `;
+__decorate([
+    query('div')
+], DownDrop.prototype, "div", void 0);
 DownDrop = __decorate([
     customElement(name.tag('down-drop'))
 ], DownDrop);

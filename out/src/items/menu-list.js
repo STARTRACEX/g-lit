@@ -11,14 +11,15 @@ let MenuList = class MenuList extends LitElement {
     constructor() {
         super(...arguments);
         this.summary = "";
+        this.open = false;
     }
     render() {
-        return html `<div>
+        return html `<div ?open=${this.open}>
       <span>${this.summary}
       <slot name="summary"></slot></span>
       <i>
         <i @click=${this.toggle}>
-          <svg viewBox="0 0 48 48" fill="none"><path d="M19 12L31 24L19 36" stroke="#1e293b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 48 48" fill="none"><path d="M19 12L31 24L19 36" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </i>
       </i>
     </div>
@@ -27,15 +28,16 @@ let MenuList = class MenuList extends LitElement {
     </ul>`;
     }
     firstUpdated() {
-        this.open = true;
-        if (!this.summary && !this.shadowRoot.querySelector('slot[name="summary"]').assignedNodes().length) {
+        this.shadowRoot.querySelector('ul').style.setProperty('--height', this.shadowRoot.querySelector('ul').scrollHeight + 'px');
+        if (!this.summary && !this.querySelector('[slot="summary"]')) {
+            this.open = true;
             this.shadowRoot.querySelector('div').classList.add('no-title');
         }
-        this.toggle();
+        else {
+            this.open = this.open;
+        }
     }
     toggle() {
-        this.shadowRoot.querySelector('ul').style.height = (this.open ? this.shadowRoot.querySelector('ul').scrollHeight : "0") + 'px';
-        this.shadowRoot.querySelector('div').classList.toggle('open');
         this.open = !this.open;
     }
 };
@@ -47,16 +49,15 @@ MenuList.styles = css `
     margin: 0;
   }
   div{
+    overflow: hidden;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
     transition: all .3s ease-in-out;
     background-color:inherit;
   }
-  div:empty{
-    display: none;
-  }
   ul{
+    height: 0;
     margin: 0.1em 0px 0px 0.3em;
     padding:0;
     overflow: hidden;
@@ -70,29 +71,33 @@ MenuList.styles = css `
     flex:1;
   }
   i,::slotted([slot="icon"]){
-    height: fit-content;
     display: inline-flex;
     align-items: center;
     border-radius: 20%;
     transition:inherit;
   }
   i>*,::slotted([slot="icon"]){
-    width: 2em;
-    height: 2em;
-    padding: 0.25em;
+    width: 1.25em;
+    height: 1.25em;
     border-radius: inherit;
     transition: all .3s ease-in-out;
   }
   div>i:hover, ::slotted([slot="icon"]:hover){
     background-color: rgb(0 0 0 /.075);
   }
-  .open i>i{
+  div[open] i>i{
     transform: rotate(90deg);
+  }
+  div[open]+ul{
+    height:var(--height) ;
   }
   `;
 __decorate([
     property()
 ], MenuList.prototype, "summary", void 0);
+__decorate([
+    property({ type: Boolean })
+], MenuList.prototype, "open", void 0);
 MenuList = __decorate([
     customElement(name.tag("menu-list"))
 ], MenuList);
