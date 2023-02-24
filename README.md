@@ -19,6 +19,9 @@ Import the js file contained in this repository into the page
 
 ### In npm
 
-on branch [npm]
+```sh
+npm i godown
+```
 
-**Note** Unpublished
+[repo](https://github.com/STARTRACEX/godown/tree/main)
+
