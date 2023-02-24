@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, query, queryAll } from 'lit/decorators.js'; 1;
-import { name } from '../config';
+import { name,theme } from '../config';
 @customElement(name.tag('split-input'))
 export class SplitInput extends LitElement {
-  static styles = css`div {
+  static styles = [theme, css`div {
       position: relative;
       display:inline-flex;
     }
@@ -17,7 +17,7 @@ export class SplitInput extends LitElement {
     i {
       width: 100%;
       z-index: 1;
-      background-color: rgb(88 149 239 / 0.5);
+      background-color: var(--input-false);
       font-style: normal;
       font-size: .5em;
       text-align: center;
@@ -32,8 +32,8 @@ export class SplitInput extends LitElement {
       bottom: 0;
     }
     .focus i {
-      outline: 1px solid red;
-    }`;
+      outline: .12em solid var(--input-true);
+    }`];
   render() {
     return html`<main><div>
   ${Array(this.max).fill(0).map((v, i) => html`<span><i></i></span>`)}

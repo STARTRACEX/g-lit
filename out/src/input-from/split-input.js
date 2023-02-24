@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from 'lit';
 import { customElement, property, query, queryAll } from 'lit/decorators.js';
 1;
-import { name } from "../config.js";
+import { name, theme } from "../config.js";
 let SplitInput = class SplitInput extends LitElement {
     constructor() {
         super(...arguments);
@@ -18,8 +18,8 @@ let SplitInput = class SplitInput extends LitElement {
         this.currentValue = [];
     }
     render() {
-        return html `<main><div>
-  ${Array(this.max).fill(0).map((v, i) => html `<span><i></i></span>`)}
+        return html`<main><div>
+  ${Array(this.max).fill(0).map((v, i) => html`<span><i></i></span>`)}
   <input @input=${this._handleInput} value="     ">
 </div></main>`;
     }
@@ -85,7 +85,7 @@ let SplitInput = class SplitInput extends LitElement {
         this.input.blur();
     }
 };
-SplitInput.styles = css `div {
+SplitInput.styles = [theme, css `div {
       position: relative;
       display:inline-flex;
     }
@@ -99,7 +99,7 @@ SplitInput.styles = css `div {
     i {
       width: 100%;
       z-index: 1;
-      background-color: rgb(88 149 239 / 0.5);
+      background-color: var(--input-false);
       font-style: normal;
       font-size: .5em;
       text-align: center;
@@ -114,8 +114,8 @@ SplitInput.styles = css `div {
       bottom: 0;
     }
     .focus i {
-      outline: 1px solid red;
-    }`;
+      outline: 1.2em solid var(--input-true);
+    }`];
 __decorate([
     property()
 ], SplitInput.prototype, "value", void 0);
