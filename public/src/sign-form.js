@@ -50,7 +50,7 @@ export class SignForm extends LitElement {
   }
   namevalue() {
     var x = {};
-    each(this._from, (node: any) => {
+    each(this._from, () => {
       if (node.namevalue) {
         var [name, value] = node.namevalue();
         if (name) {

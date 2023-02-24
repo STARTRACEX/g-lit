@@ -1,7 +1,7 @@
 import { html, css, LitElement } from '../core/lit-all.min.js';
-import { name } from './config.js';
+import { name,theme } from './config.js';
 export class SplitInput extends LitElement {
-  static styles = css`div {
+  static styles = [theme,css`div {
       position: relative;
       display:inline-flex;
     }
@@ -15,7 +15,7 @@ export class SplitInput extends LitElement {
     i {
       width: 100%;
       z-index: 1;
-      background-color: rgb(88 149 239 / 0.5);
+      background-color: var(--input-false);
       font-style: normal;
       font-size: .5em;
       text-align: center;
@@ -30,8 +30,8 @@ export class SplitInput extends LitElement {
       bottom: 0;
     }
     .focus i {
-      outline: 1px solid red;
-    }`;
+      outline: .12em solid var(--input-true);
+    }`];
   static properties = {
     value: { type: String },
     max: { type: Number },
@@ -43,6 +43,12 @@ export class SplitInput extends LitElement {
     this.value = "";
     this.current = 0;
     this.currentValue = [];
+  }
+  get spans() {
+    return this.shadowRoot.querySelectorAll("span");
+  }
+  get input() {
+    return this.shadowRoot.querySelector("input");
   }
   render() {
     return html`<main><div>
@@ -89,7 +95,7 @@ export class SplitInput extends LitElement {
     }
     this.focu();
     const spans = this.spans;
-    spans.forEach((span, index) => {
+    spans?.forEach((span, index) => {
       span.querySelector('i').innerText = this.currentValue[index] || ' ';
     });
     this.value = this.currentValue.join('');
@@ -99,7 +105,7 @@ export class SplitInput extends LitElement {
     this.spans.forEach((span) => {
       span.classList.remove('focus');
     });
-    this.spans[i]?.classList.add('focus');
+    this.spans[i].classList.add('focus');
     this.input.value = "      ";
   }
   blur(i = this.current) {
@@ -107,3 +113,4 @@ export class SplitInput extends LitElement {
     this.input.blur();
   }
 }
+customElements.define(name.tag("split-input"), SplitInput);
