@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name } from "../config.js";
 let DivierLine = class DivierLine extends LitElement {
     constructor() {
         super(...arguments);

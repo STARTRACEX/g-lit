@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { name } from "../config";
+import { name } from "../config.js";
 let DetailsGroup = class DetailsGroup extends LitElement {
     constructor() {
         super();
@@ -58,17 +58,15 @@ let DetailsGroup = class DetailsGroup extends LitElement {
         console.log(this.index);
         const opened = this.shadowRoot.querySelector("slot").assignedElements()[this.index];
         if (opened) {
-            if (opened.isopen && !opened.isopen()) {
+            if (!opened.open) {
                 opened.toggle();
             }
             opened.setAttribute("open", "");
         }
         this.shadowRoot.querySelector("slot").assignedElements().forEach((e, i) => {
             if (i != this.index) {
-                if (e.isopen) {
-                    if (e.isopen()) {
-                        e.toggle();
-                    }
+                if (e.open) {
+                    e.toggle();
                 }
                 e.removeAttribute("open");
             }

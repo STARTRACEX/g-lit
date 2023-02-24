@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { name, append } from "../config";
+import { name, append } from "../config.js";
 let AvatarGroup = class AvatarGroup extends LitElement {
     constructor() {
         super(...arguments);

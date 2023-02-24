@@ -1,4 +1,4 @@
-import { LitElement, css, html } from "Lit";
+import { LitElement, css, html } from "lit";
 import { property, customElement } from "lit/decorators.js";
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { name } from '../config';

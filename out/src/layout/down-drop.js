@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { html, css, LitElement } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
-import { name } from '../config';
+import { name } from "../config.js";
 let DownDrop = class DownDrop extends LitElement {
     render() {
         return html `<main>

@@ -8,7 +8,7 @@ import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { name } from "../config";
+import { name } from "../config.js";
 const originstyle = css `
   :host {
     --color: #f0f0f0;

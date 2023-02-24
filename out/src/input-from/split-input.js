@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from 'lit';
 import { customElement, property, query, queryAll } from 'lit/decorators.js';
 1;
-import { name } from '../config';
+import { name } from "../config.js";
 let SplitInput = class SplitInput extends LitElement {
     constructor() {
         super(...arguments);

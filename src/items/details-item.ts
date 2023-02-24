@@ -1,4 +1,4 @@
-import { LitElement, css, html } from "Lit";
+import { LitElement, css, html } from "lit";
 import { property, customElement } from "lit/decorators.js";
 import { name } from '../config';
 @customElement(name.tag("details-item"))

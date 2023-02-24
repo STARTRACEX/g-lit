@@ -1,3 +1,3 @@
-export * from './ov-effect';
-export * from './ro-effect';
-export * from './tw-effect';
+export * from "./ov-effect.js";
+export * from "./ro-effect.js";
+export * from "./tw-effect.js";

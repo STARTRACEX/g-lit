@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name, theme } from '../config';
+import { name, theme } from "../config.js";
 let ExpInput = class ExpInput extends LitElement {
     constructor() {
         super(...arguments);

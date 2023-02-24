@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { ifDefined } from 'lit/directives/if-defined.js';
-import { name } from "../config";
+import { name } from "../config.js";
 let AvatarAnchor = class AvatarAnchor extends LitElement {
     constructor() {
         super();

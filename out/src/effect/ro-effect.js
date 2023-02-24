@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { name } from "../config";
+import { name } from "../config.js";
 let ROPort = class ROPort extends LitElement {
     constructor() {
         super(...arguments);

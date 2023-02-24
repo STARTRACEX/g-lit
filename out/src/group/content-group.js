@@ -9,7 +9,7 @@ import { customElement, property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { name } from "../config";
+import { name } from "../config.js";
 let SectionGroup = class SectionGroup extends LitElement {
     constructor() {
         super();

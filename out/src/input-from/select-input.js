@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { name } from '../config';
+import { name } from "../config.js";
 const selcls = `${name.tag('select-input')}-selected`;
 let SelectInput = class SelectInput extends LitElement {
     constructor() {

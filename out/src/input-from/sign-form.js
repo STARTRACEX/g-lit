@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, query } from 'lit/decorators.js';
-import { name } from '../config';
+import { name } from "../config.js";
 let SignForm = class SignForm extends LitElement {
     render() {
         return html `<form enctype="multipart/form-data"><slot name="pre"></slot>
