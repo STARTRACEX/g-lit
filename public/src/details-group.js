@@ -53,18 +53,17 @@ export class DetailsGroup extends LitElement {
     console.log(this.index);
     const opened = this.shadowRoot.querySelector("slot").assignedElements()[this.index];
     if (opened) {
-      if (opened.isopen && !opened.isopen()) {
+      if (!opened.open) {
         opened.toggle();
       }
       opened.setAttribute("open", "");
     }
     this.shadowRoot.querySelector("slot").assignedElements().forEach((e, i) => {
       if (i != this.index) {
-        if (e.isopen) {
-          if (e.isopen()) {
-            e.toggle();
-          }
+        if (e.open) {
+          e.toggle();
         }
+
         e.removeAttribute("open");
       }
     });
