@@ -1,19 +1,27 @@
-# g-lit (in npm)
+# godown-ui
 
-## install
+## Install
 
-```sh
-yarn install
+```
+npm i godown
 ```
 
-## compile
+## Develop
 
-```sh
-yarn build
+dependencies
+
+```
+npm i
 ```
 
-## develop
+start development server
 
-```sh
-yarn dev
+```
+npm run dev
+```
+
+compile
+
+```
+npm run build
 ```

@@ -1,5 +1,5 @@
 {
-  "name": "g-lit",
+  "name": "godown",
   "version": "1.0.0",
   "main": "./out/index.js",
   "type": "module",
@@ -9,10 +9,13 @@
     "babel": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "godown",
+    "components"
+  ],
+  "author": "startrace",
   "license": "MIT",
-  "description": "",
+  "description": "simple,sylized,semantic components",
   "dependencies": {
     "lit": "^2.6.1",
     "react": "^18.2.0"
