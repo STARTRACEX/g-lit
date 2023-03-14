@@ -1,15 +1,11 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { name, theme } from '../config';
 type inputtype = "hidden" | "text" | "search" | "tel" | "url" | "email" | "password" | "datetime" | "date" | "month" | "week" | "time" | "datetime-local" | "number" | "range" | "color" | "checkbox" | "radio" | "file" | "image";
 @customElement(name.tag('base-input'))
 export class BaseInput extends LitElement {
-  get _input() {
-    return this.shadowRoot.querySelector('input');
-  }
-  get _ranged() {
-    return this.shadowRoot.querySelector('.range i');
-  }
+  @query("input") private _input: HTMLInputElement;
+  @query(".range i") private _ranged: HTMLElement;
   @property() label = '';
   @property() name = '';
   @property() pla = '';
@@ -145,7 +141,6 @@ export class BaseInput extends LitElement {
       this._ranged.style.width = 100 * (this.value as number / (this.max - this.min)) + '%';
     } else {
       this._input.value = this.def.toString();
-
       this.value = this.def;
     }
   }

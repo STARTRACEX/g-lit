@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { name, theme } from "../config.js";
 let BaseInput = class BaseInput extends LitElement {
     constructor() {
@@ -19,12 +19,6 @@ let BaseInput = class BaseInput extends LitElement {
         this.min = 0;
         this.max = 100;
         this.step = 1;
-    }
-    get _input() {
-        return this.shadowRoot.querySelector('input');
-    }
-    get _ranged() {
-        return this.shadowRoot.querySelector('.range i');
     }
     render() {
         if (!this.name)
@@ -174,6 +168,12 @@ BaseInput.styles = [theme, css `
     box-shadow: 0 .1em .1em var(--shadow);
   }
   `];
+__decorate([
+    query("input")
+], BaseInput.prototype, "_input", void 0);
+__decorate([
+    query(".range i")
+], BaseInput.prototype, "_ranged", void 0);
 __decorate([
     property()
 ], BaseInput.prototype, "label", void 0);

@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, css } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { name } from "../config.js";
 const selcls = `${name.tag('select-input')}-selected`;
 let SelectInput = class SelectInput extends LitElement {
@@ -24,13 +24,14 @@ let SelectInput = class SelectInput extends LitElement {
     }
     render() {
         return html `<div>
-  <section>
-    ${this.lists()}
-  </section>
-  <input @focus=${this.focus} @input=${this._handleInput} placeholder=${this.pla} />
-  <svg viewBox="0 0 48 48" fill="none"><path d="M36 19L24 31L12 19H36Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
-  <aside><slot></slot></aside>
-</div>`;
+      <section>
+        ${this.lists()}
+      </section>
+      <input @focus=${this.focus} @input=${this._handleInput} placeholder=${this.pla} />
+    <svg viewBox="0 0 48 48" fill="none"><path d="M36 19L24 31L12 19H36Z" fill="currentColor" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+      <aside><slot></slot></aside>
+    </div>
+    `;
     }
     lists() {
         var itemTemplates = [];
@@ -66,7 +67,7 @@ let SelectInput = class SelectInput extends LitElement {
             }
         });
     }
-    select(value, text) {
+    select(value, text = undefined) {
         if (text === undefined) {
             this.assigned.forEach((option) => {
                 if (option.value) {
@@ -83,25 +84,20 @@ let SelectInput = class SelectInput extends LitElement {
                 }
             });
         }
-        if (this.value.includes(value)) {
-            if (this.m) {
+        if (this.m) {
+            if (this.value.includes(value)) {
                 this.value = this.value.filter(v => v != value);
                 this.text = this.text.filter(v => v != text);
             }
             else {
-                this.value = [];
-                this.text = [];
-            }
-        }
-        else {
-            if (this.m) {
                 this.value.push(value);
                 this.text.push(text);
             }
-            else {
-                this.value = [value];
-                this.text = [text];
-            }
+            this.shadowRoot.querySelector("input").value = this.text.join("; ");
+        }
+        else {
+            this.shadowRoot.querySelector("input").value = text;
+            this.value[0] = value;
         }
         this.assigned.forEach((option) => {
             if (option.value) {
@@ -123,22 +119,21 @@ let SelectInput = class SelectInput extends LitElement {
                 });
             }
         });
-        this._input.value = "";
         this.requestUpdate();
         this.dispatchEvent(new CustomEvent("change", { detail: this.namevalue() }));
     }
     focus() {
-        this._input.focus();
+        this.shadowRoot.querySelector("input").focus();
         this.open();
     }
     close() {
-        this._aside.style.visibility = "hidden";
+        this.shadowRoot.querySelector("aside").style.visibility = "hidden";
     }
     open() {
-        this._aside.style.visibility = "visible";
+        this.shadowRoot.querySelector("aside").style.visibility = "visible";
     }
     _handleInput() {
-        let value = this._input.value.trim();
+        let value = this.shadowRoot.querySelector("input").value.trim();
         if (this.m && value.includes(";")) {
             value = value.split(";").pop().trim();
         }
@@ -156,7 +151,7 @@ let SelectInput = class SelectInput extends LitElement {
         if (value) {
             this.assigned.forEach(option => {
                 if (option.value) {
-                    if (option.value.toLowerCase().includes(value.toLowerCase()) || option.innerText.toLowerCase().includes(value.toLowerCase())) {
+                    if (option.value.toLowerCase().includes(value.toLowerCase())) {
                         option.style.display = "block";
                     }
                     else {
@@ -165,7 +160,7 @@ let SelectInput = class SelectInput extends LitElement {
                 }
                 else if (option.children) {
                     [...option.children].forEach(option => {
-                        if (option.value.toLowerCase().includes(value.toLowerCase()) || option.innerText.toLowerCase().includes(value.toLowerCase())) {
+                        if (option.value.toLowerCase().includes(value.toLowerCase())) {
                             option.style.display = "block";
                         }
                         else {
@@ -181,15 +176,15 @@ let SelectInput = class SelectInput extends LitElement {
         this.dispatchEvent(new CustomEvent("input", { detail: this.namevalue() }));
     }
     namevalue() {
-        if (this.m) {
-            return [this.name, this.value];
+        if (!this.m) {
+            return [this.name, this.value[0]];
         }
-        return [this.name, this.value[0]];
+        return [this.name, this.value];
     }
     reset() {
         this.value = [];
         this.text = [];
-        this._input.value = "";
+        this.shadowRoot.querySelector("input").value = "";
         this.assigned.forEach((option) => {
             if (option.value) {
                 option.classList.remove(selcls);
@@ -217,29 +212,23 @@ let SelectInput = class SelectInput extends LitElement {
 SelectInput.styles = css `
   :host{
     display: inline-flex;
-    outline: 1px solid #08224a;
+    border: 1px solid #192230;
     border-radius: 0.25em;
-    height: 1.36em;
-    width: 12em;
-    z-index: 2;
   }
   input{
     cursor:inherit;
-    height:100%;
     width: 100%;
     box-sizing: border-box;
     padding-right: 1.25em;
     border:inherit;
     outline: none;
     border-radius:inherit;
-    flex:1;
   }
   div{
     display: inline-flex;
     position: relative;
     width: 100%;
     border-radius:inherit;
-    z-index: inherit;
   }
   input+svg{
     position: absolute;
@@ -259,26 +248,20 @@ SelectInput.styles = css `
   section{
     max-width:calc(100% - 1.2em);
     height: 100%;
+    position: absolute;
     overflow: hidden;
     pointer-events: none;
     border-radius:inherit;
-    z-index: inherit;
   }
   i.selected-item{
-    border-radius:inherit;
     height: 100%;
-    float:left;
     display: inline-flex;
-    font-style: normal;
+    font-family: normal;
+    background-color: pink;
     align-items: center;
-    padding-left: .1em;
-    margin-left: 0.1em;
-  }
-  i:first-child{
-    margin-left: 0;
+    border-radius:0;
   }
   i.selected-item svg{
-    padding: 0 .12em;
     height:.8em;
     pointer-events: all;
   }
@@ -301,12 +284,6 @@ __decorate([
 __decorate([
     property()
 ], SelectInput.prototype, "name", void 0);
-__decorate([
-    query('input')
-], SelectInput.prototype, "_input", void 0);
-__decorate([
-    query('aside')
-], SelectInput.prototype, "_aside", void 0);
 SelectInput = __decorate([
     customElement(name.tag('select-input'))
 ], SelectInput);

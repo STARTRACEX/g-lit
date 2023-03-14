@@ -9,12 +9,10 @@ export declare class SelectInput extends LitElement {
     name: string;
     text: Array<string>;
     get assigned(): any;
-    private _input;
-    private _aside;
     render(): import("lit-html").TemplateResult<1>;
     lists(): import("lit-html").TemplateResult<1>;
     firstUpdated(): void;
-    select(value: string, text?: string): void;
+    select(value: string, text?: any): void;
     focus(): void;
     close(): void;
     open(): void;
@@ -27,4 +25,4 @@ declare global {
         "select-input": SelectInput;
     }
 }
-//# sourceMappingURL=select-input.d.ts.map
+//# sourceMappingURL=select-input%20-%20%E5%89%AF%E6%9C%AC.d.ts.map
