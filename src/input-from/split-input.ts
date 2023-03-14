@@ -1,12 +1,12 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property, query, queryAll } from 'lit/decorators.js'; 1;
-import { name,theme } from '../config';
+import { customElement, property, query, queryAll, state } from 'lit/decorators.js'; 1;
+import { name, theme } from '../config';
 @customElement(name.tag('split-input'))
 export class SplitInput extends LitElement {
   static styles = [theme, css`:host{
-    display: inline-block;
-  }
-  div {
+      display: inline-block;
+    }
+    div {
       position: relative;
       display:inline-flex;
     }
@@ -43,8 +43,8 @@ export class SplitInput extends LitElement {
   @property() index = -1;
   @query('input') private _input: HTMLInputElement;
   @queryAll('span') private _spans: NodeListOf<HTMLSpanElement>;
-  current: number = 0;
-  currentValue: Array<string | null> = [];
+  @state() current: number = 0;
+  @state() currentValue: Array<string | null> = [];
   render() {
     return html`<main><div>
   ${Array(this.max).fill(0).map(() => html`<span><i></i></span>`)}
@@ -84,7 +84,7 @@ export class SplitInput extends LitElement {
       this.currentValue[this.current] = e.data;
       if (this.current + 1 >= this.max) {
         this.current = this.currentValue.indexOf(null);
-        if (this.current===-1) {
+        if (this.current === -1) {
           this.blur();
         }
       } else {

@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, css } from 'lit';
-import { customElement, property, query, queryAll } from 'lit/decorators.js';
+import { customElement, property, query, queryAll, state } from 'lit/decorators.js';
 1;
 import { name, theme } from "../config.js";
 let SplitInput = class SplitInput extends LitElement {
@@ -89,9 +89,9 @@ let SplitInput = class SplitInput extends LitElement {
     }
 };
 SplitInput.styles = [theme, css `:host{
-    display: inline-block;
-  }
-  div {
+      display: inline-block;
+    }
+    div {
       position: relative;
       display:inline-flex;
     }
@@ -140,6 +140,12 @@ __decorate([
 __decorate([
     queryAll('span')
 ], SplitInput.prototype, "_spans", void 0);
+__decorate([
+    state()
+], SplitInput.prototype, "current", void 0);
+__decorate([
+    state()
+], SplitInput.prototype, "currentValue", void 0);
 SplitInput = __decorate([
     customElement(name.tag('split-input'))
 ], SplitInput);

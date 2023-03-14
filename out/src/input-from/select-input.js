@@ -5,7 +5,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, css } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { name } from "../config.js";
 const selcls = `${name.tag('select-input')}-selected`;
 let SelectInput = class SelectInput extends LitElement {
@@ -301,6 +301,9 @@ __decorate([
 __decorate([
     property()
 ], SelectInput.prototype, "name", void 0);
+__decorate([
+    state()
+], SelectInput.prototype, "text", void 0);
 __decorate([
     query('input')
 ], SelectInput.prototype, "_input", void 0);

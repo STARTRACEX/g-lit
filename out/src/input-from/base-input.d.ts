@@ -5,7 +5,7 @@ export declare class BaseInput extends LitElement {
     private _ranged;
     label: string;
     name: string;
-    pla: string;
+    pla: any;
     type: inputtype;
     value: string | number;
     def: string | number;

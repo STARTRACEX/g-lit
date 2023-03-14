@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { name } from '../config';
 const selcls = `${name.tag('select-input')}-selected`;
 @customElement(name.tag('select-input'))
@@ -79,7 +79,7 @@ export class SelectInput extends LitElement {
   @property() autofocus = false;
   @property({ type: Array }) value = [];
   @property() name = '';
-  text: Array<string> = [];
+  @state() text: Array<string> = [];
   get assigned(): any {
     return this.shadowRoot.querySelector('slot').assignedElements();
   }

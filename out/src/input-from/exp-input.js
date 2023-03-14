@@ -6,13 +6,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { LitElement, html, css } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { name, theme } from "../config.js";
 let ExpInput = class ExpInput extends LitElement {
     constructor() {
         super(...arguments);
         this.label = "";
         this.name = "";
-        this.pla = "";
+        this.pla = undefined;
         this.type = "text";
         this.value = "";
         this.def = "";
@@ -23,16 +24,15 @@ let ExpInput = class ExpInput extends LitElement {
         if (!this.name)
             this.name = this.label || this.type;
         return html `<div class=${this.base}>
-    ${this.type !== "textarea" ? html `<input class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} type=${this.type} placeholder=${this.pla} name=${this.name}>` : html `<textarea class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} placeholder=${this.pla} name=${this.name}></textarea>`}
+    ${this.type !== "textarea" ? html `<input class="input" required title="" value=${this.value} @input=${this._handleInput} type=${this.type} placeholder=${ifDefined(this.pla)}>` : html `<textarea class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} placeholder=${ifDefined(this.pla)}></textarea>`}
   <fieldset>
     <legend><span>${this.label}<slot></slot></span></legend>
   </fieldset><style>:valid~fieldset legend,:focus~fieldset legend{margin-left: ${this.offset || 0} !important;}</style>
 </div>`;
     }
     firstUpdated() {
-        var _a;
         if (!this.def)
-            this.def = (_a = this.value) !== null && _a !== void 0 ? _a : "";
+            this.def = this.value || "";
         if (!this.value)
             this.value = this.def;
     }

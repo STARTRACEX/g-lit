@@ -4,7 +4,7 @@ export declare class ExpInput extends LitElement {
     static styles: import("lit").CSSResult[];
     label: string;
     name: string;
-    pla: string;
+    pla: any;
     type: inputtype | "textarea";
     value: string;
     def: string;
