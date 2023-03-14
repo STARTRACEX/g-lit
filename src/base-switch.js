@@ -1,4 +1,4 @@
-import { LitElement, html, css } from '../core/lit-core.min.js';
+import { LitElement, html, css } from '../core/lit-all.min.js';
 import { name, theme } from "./config.js";
 export class BaseSwitch extends LitElement {
   static styles = [theme, css`:host,span {

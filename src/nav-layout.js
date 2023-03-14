@@ -1,4 +1,4 @@
-import { html, css, LitElement } from '../core/lit-core.min.js';
+import { html, css, LitElement } from '../core/lit-all.min.js';
 import "./down-drop.js"
 import { name, theme } from './config.js';
 export class AsideNav extends LitElement {

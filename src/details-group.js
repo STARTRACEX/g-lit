@@ -1,4 +1,4 @@
-import { LitElement, html } from "../core/lit-core.min.js";
+import { LitElement, html } from "../core/lit-all.min.js";
 export class DetailsGroup extends LitElement {
   static properties = {
     index: { type: Number },

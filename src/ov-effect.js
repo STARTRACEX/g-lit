@@ -1,4 +1,4 @@
-import { html, css, LitElement } from '../core/lit-core.min.js';
+import { html, css, LitElement } from '../core/lit-all.min.js';
 const styled = css`:host{
    --text:rgb(240,240,240);
    --surface:rgb(20,20,88);

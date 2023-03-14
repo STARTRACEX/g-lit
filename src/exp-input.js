@@ -1,4 +1,4 @@
-import { html, css, LitElement } from '../core/lit-core.min.js';
+import { html, css, LitElement, ifDefined } from '../core/lit-all.min.js';
 import { name, theme } from './config.js';
 export class ExpInput extends LitElement {
   static styles = [theme, css`
@@ -150,14 +150,14 @@ export class ExpInput extends LitElement {
   render() {
     if (!this.name) this.name = this.label || this.type;
     return html`<div class=${this.base}>
-    ${this.type !== "textarea" ? html`<input class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} type=${this.type} placeholder=${this.pla} name=${this.name}>` : html`<textarea class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} placeholder=${this.pla} name=${this.name}></textarea>`}
+    ${this.type !== "textarea" ? html`<input class="input" required title="" value=${this.value} @input=${this._handleInput} type=${this.type} placeholder=${ifDefined(this.pla)} name=${this.name}>` : html`<textarea class="input" required title="" value=${this.value || this.def} @input=${this._handleInput} placeholder=${this.pla} name=${this.name}></textarea>`}
     <fieldset>
       <legend><span>${this.label}<slot></slot></span></legend>
     </fieldset><style>:valid~fieldset legend,:focus~fieldset legend{margin-left: ${this.offset || 0} !important;}</style>
   </div>`;
   }
   firstUpdated() {
-    if (!this.def) this.def = this.value ?? "";
+    if (!this.def) this.def = this.value || "";
     if (!this.value) this.value = this.def;
   }
   _handleInput(i) {

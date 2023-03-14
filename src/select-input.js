@@ -1,4 +1,4 @@
-import { html, css, LitElement } from '../core/lit-core.min.js';
+import { html, css, LitElement } from '../core/lit-all.min.js';
 import { name } from './config.js';
 const selcls = `${name.tag('select-input')}-selected`;
 export class SelectInput extends LitElement {

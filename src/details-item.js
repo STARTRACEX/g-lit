@@ -1,4 +1,4 @@
-import { LitElement, css, html } from "../core/lit-core.min.js";
+import { LitElement, css, html } from "../core/lit-all.min.js";
 export class DetailsItem extends LitElement {
   static properties = {
     summary: {},

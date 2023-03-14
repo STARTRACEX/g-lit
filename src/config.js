@@ -1,4 +1,4 @@
-import { css, html } from "../core/lit-core.min.js";
+import { css } from "../core/lit-all.min.js";
 export const name = {
   host: "Host",
   prefix: "",
