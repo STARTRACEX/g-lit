@@ -1,6 +1,6 @@
 import { css, html } from "../core/lit-core.min.js";
 export const name = {
-  host: html`Host`,
+  host: "Host",
   prefix: "",
   suffix: "",
   tag: (origin) => name.prefix + origin + name.suffix,

@@ -7,41 +7,39 @@ export class SuperAuchor extends LitElement {
     active: {},
     arrow: {},
   };
-  static styles = css`
-  :host{
+  static styles = css`:host{
     color:currentColor;
     text-decoration: none;
     cursor: pointer;
-  }
-  a{
-    display: inline-flex;
-    align-items: center;
-    color:inherit;
-    text-decoration:inherit;
-  }
-  i,::slotted([slot="icon"]){
-    display: inline-flex;
-    border-radius: 20%;
-  }
-  i>*,::slotted([slot="icon"]){
-    width: 1em;
-    height: 1em;
-    border-radius: inherit
-  }
-  i>*:hover, ::slotted([slot="icon"]:hover){
-    background-color: rgb(0 0 0 /.075);
-  }
-  :host(:hover) i>*,:host(:hover) ::slotted([slot="icon"]){
-    animation: arrow .3s linear;
-  }
-  @keyframes arrow{
-    from {transform: translateX(0)}
-    50%{
-      transform:translateX(.05em);
     }
-    to {transform: translateX(0)}
-  }
-    `;
+    a{
+      display: inline-flex;
+      align-items: center;
+      color:inherit;
+      text-decoration:inherit;
+    }
+    i,::slotted([slot="icon"]){
+      display: inline-flex;
+      border-radius: 20%;
+    }
+    i>*,::slotted([slot="icon"]){
+      width: 1em;
+      height: 1em;
+      border-radius: inherit
+    }
+    i>*:hover, ::slotted([slot="icon"]:hover){
+      background-color: rgb(0 0 0 /.075);
+    }
+    :host(:hover) i>*,:host(:hover) ::slotted([slot="icon"]){
+      animation: arrow .3s linear;
+    }
+    @keyframes arrow{
+      from {transform: translateX(0)}
+      50%{
+        transform:translateX(.05em);
+      }
+      to {transform: translateX(0)}
+    }`;
   render() {
     return html`<a href=${ifDefined(this.href)} target=${this.target}>
     <slot name="pre"></slot>

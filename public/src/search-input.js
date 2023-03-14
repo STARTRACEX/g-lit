@@ -11,7 +11,7 @@ export class SearchInput extends LitElement {
     name: {},
     value: {},
     list: { type: Array },
-    submit: { type: Function },
+    useinfer: { type: Function },
   };
   constructor() {
     super();
@@ -19,7 +19,7 @@ export class SearchInput extends LitElement {
     this.action = "./";
     this.name = "q";
     this.value = "";
-    this.submit = (x) => {
+    this.useinfer = (x) => {
       console.table(x);
       console.error("You need to process the acquired data\nuse\nelement.submit=(x)=>{...}\nor\nelement.submit=function(x){...}\nreturn a array or null");
       return ["No function for infer"];
@@ -43,12 +43,12 @@ export class SearchInput extends LitElement {
       <button @click=${this._handleSubmit} type="submit">
         <svg viewBox="0 0 1024 1024" width="100%" height="100%"><path d="M745.429333 655.658667c1.173333 0.746667 2.325333 1.578667 3.413334 2.496l114.410666 96a32 32 0 0 1-41.152 49.024l-114.389333-96a32 32 0 0 1-6.208-6.976A297.429333 297.429333 0 0 1 512 768c-164.949333 0-298.666667-133.717333-298.666667-298.666667S347.050667 170.666667 512 170.666667s298.666667 133.717333 298.666667 298.666666a297.386667 297.386667 0 0 1-65.237334 186.325334zM512 704c129.6 0 234.666667-105.066667 234.666667-234.666667s-105.066667-234.666667-234.666667-234.666666-234.666667 105.066667-234.666667 234.666666 105.066667 234.666667 234.666667 234.666667z"  p-id="9859"></path><path d="M512 298.666667c47.146667 0 89.813333 19.093333 120.682667 49.984l-0.085334 0.085333a21.333333 21.333333 0 1 1-31.210666 28.992A127.573333 127.573333 0 0 0 512 341.333333a21.333333 21.333333 0 0 1 0-42.666666z"  p-id="9860"></path></svg>
       </button>
-      ${this.list ? html`
+      ${this.list?.length ? html`
         <ul>${this.list.map((v, i) => html`
           <li key=${i}>
           ${v}
           </li>`)}
-        </ul>`: ""}
+        </ul>`: undefined}
     </form>`;
   }
   _handleSubmit(e) {
@@ -57,29 +57,27 @@ export class SearchInput extends LitElement {
   }
   _handleInput(e) {
     const value = e.target.value.trim();
-    if (this.remote) {
-      if (value) {
-        const x = { value };
-        this.list = this.submit(x);
-      } else {
-        this.list = null;
-      }
-      return;
+    this.value = value;
+    if (value && this.infer) {
+      this.list = this.useinfer(value);
+    }
+    else {
+      this.list = [];
     }
     if (this.target && this.query) {
       if (!value) {
         document.querySelector(this.target).innerHTML = "";
         return;
       }
-      var query = document.querySelectorAll(this.query);
-      if (query.length) {
-        let target = document.querySelector(this.target);
-        target.innerHTML = "";
-        query.forEach(element => {
-          if (element.innerText.includes(value)) {
-            target.appendChild(element.cloneNode(true));
+      var Equery = document.querySelectorAll(this.query);
+      if (Equery.length) {
+        let Etarget = document.querySelector(this.target);
+        Etarget.innerHTML = "";
+        for (let e of Equery) {
+          if (e.innerText.includes(value)) {
+            Etarget.appendChild(e.cloneNode(true));
           }
-        });
+        }
       }
     }
     this.dispatchEvent(new CustomEvent("input", { detail: { value } }));

@@ -1,4 +1,5 @@
 import { html, css, LitElement } from '../core/lit-core.min.js';
+import "./down-drop.js"
 import { name, theme } from './config.js';
 export class AsideNav extends LitElement {
   static properties = {
@@ -8,7 +9,7 @@ export class AsideNav extends LitElement {
   constructor() {
     super();
     this.m = 0;
-    this.position = "fixed sticky"
+    this.position = "fixed sticky";
   }
   static styles = [theme, css`:host{
     min-height: 3em;
@@ -61,7 +62,6 @@ export class NavLayout extends LitElement {
     box-sizing: border-box;
     margin: auto;
     position: relative;
-
   }
   a {
     text-decoration: none;
@@ -100,7 +100,8 @@ export class NavLayout extends LitElement {
     align-items: center;
   }`];
   static properties = {
-    title: {},
+    host: {},
+    subhead: {},
     set: { type: Number },
     foo: { type: Boolean },
   };
@@ -111,8 +112,8 @@ export class NavLayout extends LitElement {
   render() {
     return html`<nav>
       <h1>
-        <a href="/">${name.host}</a>
-        ${this.subhead()}
+        <a href="/">${this.host || name.host}</a>
+        ${this.subhead && html`<span>|</span><span>${this.subhead}</span>`}
       </h1>
       <div>
         ${this.opt()}
@@ -120,10 +121,6 @@ export class NavLayout extends LitElement {
     </nav>
       <main style="flex: 1;width:95%"><slot></slot></main>      
     ${this.footer()}`;
-  }
-  subhead() {
-    if (!this.title) return;
-    return html`<span>|</span> <span>${this.title}</span>`;
   }
   opt() {
     if (this.set >= 2) {

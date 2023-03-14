@@ -4,26 +4,26 @@ export class TWText extends LitElement {
     autochange: { type: Number },
     max: { type: Number },
     min: { type: Number },
-  };
-  static styles = css`
-  :host{
-    font-family: monospace;
-    white-space: nowrap;
-    color: #1556bd;
-  }
-  i{
-    border-right: 1px solid;
-    margin: 1px;
-    animation: s 1.5s steps(1) infinite;
-  }
-  @keyframes s {
-  0%{
-    border-color: currentColor;
-  }
-  50% {
-    border-color: transparent
-  }
-  }`;
+    };
+    static styles = css`
+    :host{
+      font-family: monospace;
+      white-space: nowrap;
+      color: #1556bd;
+    }
+    i{
+      border-right: 1px solid;
+      margin: 1px;
+      animation: s 1.5s steps(1) infinite;
+    }
+    @keyframes s {
+      0%{
+        border-color: currentColor;
+      }
+      50% {
+        border-color: transparent
+      }
+    }`;
   render() {
     return html`<slot></slot><i></i>`;
   }
